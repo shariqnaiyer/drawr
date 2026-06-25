@@ -8,7 +8,9 @@ import type { Bin } from "../types";
 function uniqueParts(bins: Bin[]) {
   const map = new Map<string, { sample: Bin; qty: number; key: string }>();
   for (const b of bins) {
-    const key = `${b.w}×${b.d} · ${b.heightU}U${b.label ? " · label" : ""}${b.scoop ? " · scoop" : ""}${b.magnetHoles ? " · magnets" : ""}${b.screwHoles ? " · screws" : ""}`;
+    const key = b.solid
+      ? `Lid ${b.w}×${b.d} · ${b.heightU}U${b.magnetHoles ? " · magnets" : ""}`
+      : `${b.w}×${b.d} · ${b.heightU}U${b.label ? " · label" : ""}${b.scoop ? " · scoop" : ""}${b.magnetHoles ? " · magnets" : ""}${b.screwHoles ? " · screws" : ""}`;
     const e = map.get(key);
     if (e) e.qty++;
     else map.set(key, { sample: b, qty: 1, key });

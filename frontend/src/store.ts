@@ -78,6 +78,7 @@ interface State {
   select: (id: string | null) => void;
   addBin: (x: number, y: number, w: number, d: number) => void;
   addModel: (x: number, y: number, w: number, d: number, model: ModelRef, heightU: number) => void;
+  addGeneratedBin: (x: number, y: number, w: number, d: number, source: NonNullable<Bin["source"]>) => void;
   updateBin: (id: string, patch: Partial<Bin>) => void;
   moveBin: (id: string, x: number, y: number) => void;
   resizeBin: (id: string, w: number, d: number) => void;
@@ -127,6 +128,15 @@ export const useStore = create<State>((set, get) => {
       if (!canPlace(grid, bins, x, y, w, d)) return;
       snapshot();
       const b: Bin = { ...makeBin(x, y, w, d), kind: "model", model, heightU };
+      set((s) => ({ bins: [...s.bins, b], selectedId: b.id }));
+    },
+
+    // A permissive generator -> a REAL, editable, watertight bin from our engine.
+    addGeneratedBin: (x, y, w, d, source) => {
+      const { grid, bins } = get();
+      if (!canPlace(grid, bins, x, y, w, d)) return;
+      snapshot();
+      const b: Bin = { ...makeBin(x, y, w, d), source };
       set((s) => ({ bins: [...s.bins, b], selectedId: b.id }));
     },
 

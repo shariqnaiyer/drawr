@@ -43,6 +43,7 @@ describe("api client", () => {
       compartments: { cols: 3, rows: 1 },
       label: true, scoop: true,
       magnet_holes: true, screw_holes: false,
+      solid_lid: false,
     });
   });
 

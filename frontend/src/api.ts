@@ -16,6 +16,7 @@ function binToSpec(b: Bin) {
     compartments: { cols: b.comp.cols, rows: b.comp.rows },
     label: b.label, scoop: b.scoop,
     magnet_holes: b.magnetHoles, screw_holes: b.screwHoles,
+    solid_lid: !!b.solid,
   };
 }
 

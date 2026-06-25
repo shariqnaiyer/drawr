@@ -129,6 +129,17 @@ describe("store mutations", () => {
     expect(s().bins).toHaveLength(1);
   });
 
+  it("addGeneratedBin creates a real editable bin with provenance", () => {
+    s().addGeneratedBin(0, 0, 2, 2, { title: "Gridfinity Rebuilt", url: "https://example.com", license: "MIT" });
+    const b = s().bins[0];
+    expect(b.kind ?? "bin").toBe("bin"); // a real bin, not a model placeholder
+    expect(b.source?.title).toBe("Gridfinity Rebuilt");
+    expect(b).toMatchObject({ w: 2, d: 2 });
+    // it's a normal bin: editable
+    s().updateBin(b.id, { solid: true, heightU: 3 });
+    expect(s().bins[0]).toMatchObject({ solid: true, heightU: 3 });
+  });
+
   it("undo/redo restore prior layouts", () => {
     s().addBin(0, 0, 1, 1);
     s().addBin(2, 0, 1, 1);

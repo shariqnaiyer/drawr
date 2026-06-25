@@ -36,6 +36,29 @@ test.describe("Community model library", () => {
     await expect(credits).toContainText("CC0-1.0");
   });
 
+  test("generating a permissive generator yields a real, editable bin", async ({ page }) => {
+    await page.getByTestId("open-library").click();
+    await page.getByTestId("cat-generators").click();
+
+    // the canonical OpenSCAD generator is permissive -> "Generate bin"
+    const genBtn = page.getByTestId("generate-gridfinity-rebuilt-openscad");
+    await expect(genBtn).toBeVisible();
+    await genBtn.click();
+    await expect(genBtn).toContainText("Added");
+    await page.getByRole("button", { name: "Close" }).click();
+
+    // it's a real editable bin (shows full bin inspector + a solid toggle + provenance)
+    await expect(page.getByTestId("bin-count")).toHaveText("1");
+    await page.getByTestId("bin").click();
+    await expect(page.getByTestId("bin-source")).toBeVisible();
+    await expect(page.getByTestId("toggle-solid")).toBeVisible();
+
+    // toggling solid keeps it a real exportable part (no export-credits section)
+    await page.getByTestId("toggle-solid").click();
+    await page.getByTestId("step-export").click();
+    await expect(page.getByText(/Lid 2×2/)).toBeVisible();
+  });
+
   test("category filter narrows results", async ({ page }) => {
     await page.getByTestId("open-library").click();
     await page.getByTestId("cat-generators").click();

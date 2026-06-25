@@ -28,7 +28,8 @@
     "redistributable": true,
     "attributionRequired": true,
     "notes": "Canonical OpenSCAD generator for bins and baseplates. LICENSE file confirms MIT (Kenneth Hodson; based on Gridfinity by Zachary Freedman / Voidstar Lab LLC, also MIT).",
-    "parametric": true
+    "parametric": true,
+    "generator": "bin"
   },
   {
     "id": "gridfinity-extended-openscad",
@@ -61,7 +62,8 @@
     "redistributable": true,
     "attributionRequired": true,
     "notes": "Extends Zack Freedman's bins with extra features. LICENSE file confirms GNU GPL v3.",
-    "parametric": true
+    "parametric": true,
+    "generator": "bin"
   },
   {
     "id": "cq-gridfinity",
@@ -93,7 +95,8 @@
     "redistributable": true,
     "attributionRequired": true,
     "notes": "Python/CadQuery library for parametric Gridfinity objects. LICENSE file confirms MIT (Michael Gale, 2023).",
-    "parametric": true
+    "parametric": true,
+    "generator": "bin"
   },
   {
     "id": "gridfinity-openscad-vector76",
@@ -123,7 +126,8 @@
     "redistributable": true,
     "attributionRequired": true,
     "notes": "Early/popular OpenSCAD recreation of Zack Freedman's Gridfinity. Repo sidebar reports MIT.",
-    "parametric": true
+    "parametric": true,
+    "generator": "bin"
   },
   {
     "id": "gridfinity-build123d",
@@ -153,7 +157,8 @@
     "redistributable": true,
     "attributionRequired": true,
     "notes": "Python build123d library generating Gridfinity bins/baseplates. Repo sidebar reports MIT.",
-    "parametric": true
+    "parametric": true,
+    "generator": "bin"
   },
   {
     "id": "gridfinity-documentation-stu142",
@@ -914,7 +919,8 @@
     "redistributable": true,
     "attributionRequired": true,
     "notes": "License confirmed via MakerWorld API (license code 'BY-SA').",
-    "parametric": true
+    "parametric": true,
+    "generator": "bin"
   },
   {
     "id": "makerworld-parametric-base-plate-layercake",
@@ -973,7 +979,8 @@
     "redistributable": true,
     "attributionRequired": true,
     "notes": "License confirmed via MakerWorld API (license code 'BY-SA').",
-    "parametric": true
+    "parametric": true,
+    "generator": "bin"
   },
   {
     "id": "makerworld-cullenect-swappable-labels",

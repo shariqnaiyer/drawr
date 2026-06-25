@@ -1,4 +1,4 @@
-import { Copy, Trash2, Tag, Utensils, Magnet, CircleDot, MousePointerClick, ExternalLink, Package } from "lucide-react";
+import { Copy, Trash2, Tag, Utensils, Magnet, CircleDot, MousePointerClick, ExternalLink, Package, Square, Sparkles } from "lucide-react";
 import { useStore } from "../store";
 import { GRID_UNIT, HEIGHT_UNIT } from "../types";
 import type { Bin } from "../types";
@@ -54,6 +54,15 @@ export function Inspector() {
       </div>
 
       <div style={{ flex: 1, overflow: "auto", padding: "4px 0" }}>
+        {/* generator provenance — this is a real bin we generated, attributed
+            to the community generator it was discovered from */}
+        {bin.source && (
+          <div style={{ margin: "8px 16px 0", padding: "8px 10px", background: "#e6f3ec", border: "1px solid #bfe3cf", borderRadius: 8, fontSize: 12, color: "#1f7a4d", display: "flex", alignItems: "center", gap: 7 }}>
+            <Sparkles size={14} />
+            <span style={{ flex: 1 }}>Generated · inspired by {bin.source.title}</span>
+            <a href={bin.source.url} target="_blank" rel="noreferrer" data-testid="bin-source" style={{ color: "#1f7a4d" }}><ExternalLink size={13} /></a>
+          </div>
+        )}
         {/* footprint */}
         <Section title="Footprint" right={`${bin.w * GRID_UNIT - 0.5} × ${bin.d * GRID_UNIT - 0.5} mm`}>
           <div style={{ display: "flex", gap: 8 }}>
@@ -105,6 +114,7 @@ export function Inspector() {
         {/* features */}
         <div style={{ padding: "13px 16px" }}>
           <div className="section-label" style={{ marginBottom: 10 }}>Features</div>
+          <Toggle testid="toggle-solid" icon={<Square size={16} />} label="Solid (lid / spacer)" value={!!bin.solid} onChange={(v) => updateBin(bin.id, { solid: v })} />
           <Toggle testid="toggle-label" icon={<Tag size={16} />} label="Label tab" value={bin.label} onChange={(v) => updateBin(bin.id, { label: v })} />
           <Toggle testid="toggle-scoop" icon={<Utensils size={16} />} label="Scoop ramp" value={bin.scoop} onChange={(v) => updateBin(bin.id, { scoop: v })} />
           <Toggle testid="toggle-magnet" icon={<Magnet size={16} />} label="Magnet holes" value={bin.magnetHoles} onChange={(v) => updateBin(bin.id, { magnetHoles: v })} />

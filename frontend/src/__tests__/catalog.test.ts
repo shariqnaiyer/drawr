@@ -10,7 +10,15 @@ describe("catalog data", () => {
       // redistributable must be consistent with the license
       const permissive = ["CC0-1.0", "CC-BY-4.0", "CC-BY-SA-4.0", "MIT", "GPL-3.0", "BSD-3-Clause", "CERN-OHL-S-2.0"];
       expect(m.redistributable).toBe(permissive.includes(m.license));
+      // only permissive generators are marked generatable
+      if (m.generator) expect(m.redistributable).toBe(true);
     }
+  });
+
+  it("tags some permissive generators as generatable bins", () => {
+    const gen = MODELS.filter((m) => m.generator === "bin");
+    expect(gen.length).toBeGreaterThanOrEqual(5);
+    expect(gen.every((m) => m.redistributable)).toBe(true);
   });
 });
 

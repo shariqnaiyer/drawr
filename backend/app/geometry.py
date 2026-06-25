@@ -119,11 +119,15 @@ def build_bin(
     scoop: bool = True,
     magnet_holes: bool = True,
     screw_holes: bool = False,
+    solid_lid: bool = False,
 ) -> Part:
     """Build a watertight Gridfinity bin.
 
     Args mirror the design spec: ``w`` x ``d`` grid units, ``height_u`` in U,
     a ``comp_cols`` x ``comp_rows`` divider layout, and feature toggles.
+
+    ``solid_lid`` produces a solid block (no cavity/dividers/scoop/label) — a
+    Gridfinity lid / spacer / weight that still seats and stacks.
     """
     cell = C.BIN_OUTER_PER_UNIT                 # 41.5mm foot per unit
     fp_x = w * C.GRID_UNIT - C.GRID_CLEARANCE   # full footprint, X
@@ -153,7 +157,7 @@ def build_bin(
     inner_x = fp_x - 2 * C.WALL_THICKNESS
     inner_y = fp_y - 2 * C.WALL_THICKNESS
     cavity_h = total_h - floor_z
-    if cavity_h > C.EPS and inner_x > 0 and inner_y > 0:
+    if not solid_lid and cavity_h > C.EPS and inner_x > 0 and inner_y > 0:
         cavity = extrude(
             _rrect(Plane((0, 0, floor_z)), inner_x, inner_y, max(0.5, r - C.WALL_THICKNESS)),
             amount=cavity_h + C.EPS,

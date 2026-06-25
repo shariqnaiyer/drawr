@@ -311,20 +311,24 @@ function BinView({
         {/* ---- bin (generated) visuals ---- */}
         {!isModel && (
           <>
-            {bin.label && (
+            {bin.label && !bin.solid && (
               <div style={{ position: "absolute", top: -1, left: 9, width: 30, height: 11, background: "#3d4651", border: "1px solid #4b5662", borderBottom: "none", borderRadius: "4px 4px 0 0", clipPath: "polygon(0 0,100% 0,86% 100%,14% 100%)", pointerEvents: "none" }} />
             )}
-            {bin.scoop && (
+            {bin.scoop && !bin.solid && (
               <div style={{ position: "absolute", left: 3, right: 3, bottom: 3, height: "42%", borderRadius: "0 0 6px 6px", background: "linear-gradient(to top,rgba(255,255,255,.085),rgba(255,255,255,0))", pointerEvents: "none" }} />
             )}
-            {Array.from({ length: lines }).map((_, i) => (
+            {!bin.solid && Array.from({ length: lines }).map((_, i) => (
               <div key={i} style={{ position: "absolute", top: 6, bottom: 6, left: `${((i + 1) / bin.comp.cols) * 100}%`, width: 1, background: "rgba(255,255,255,.13)", pointerEvents: "none" }} />
             ))}
-            {Array.from({ length: bin.comp.rows - 1 }).map((_, i) => (
+            {!bin.solid && Array.from({ length: bin.comp.rows - 1 }).map((_, i) => (
               <div key={`h${i}`} style={{ position: "absolute", left: 6, right: 6, top: `${((i + 1) / bin.comp.rows) * 100}%`, height: 1, background: "rgba(255,255,255,.13)", pointerEvents: "none" }} />
             ))}
+            {/* solid lids read as a filled block */}
+            {bin.solid && (
+              <div style={{ position: "absolute", inset: 2, borderRadius: 6, background: "repeating-linear-gradient(45deg,rgba(255,255,255,.05),rgba(255,255,255,.05) 4px,transparent 4px,transparent 8px)", pointerEvents: "none" }} />
+            )}
             <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 500, color: "rgba(214,220,226,.5)", letterSpacing: ".04em", pointerEvents: "none" }}>
-              {bin.w}×{bin.d}
+              {bin.w}×{bin.d}{bin.solid ? " ·lid" : ""}
             </div>
           </>
         )}

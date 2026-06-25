@@ -117,6 +117,15 @@ Gridfinity models (screwdriver holders, battery dispensers, baseplates, generato
 the source); on export those models are listed in a **CREDITS.md** rather than
 generated — you download each file from its source and follow its license.
 
+**Permissive *generators* become real geometry.** For permissively-licensed generator
+entries (MIT/GPL/CC-BY-SA — kennetek's OpenSCAD, cq-gridfinity, etc.), the catalog marks
+them `generator: "bin"` and the card shows **Generate bin** instead of Import. That
+produces an actual editable, watertight bin from our own build123d engine (dimensions
+verified against kennetek), shown with real geometry in 3D and exported as a real STL —
+with a provenance note crediting the source. Generated bins also support a new **Solid
+(lid/spacer)** option. Bespoke non-generator models (a specific holder) can't be
+reproduced and stay link-only.
+
 **We index, we don't rehost.** The catalog is metadata only — title, author,
 **verified license**, source link, thumbnail, footprint — because most community
 models carry CC licenses (many NonCommercial / ShareAlike) or platform terms that

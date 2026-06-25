@@ -52,13 +52,15 @@ class BinSpec(BaseModel):
     scoop: bool = Field(True, description="Add the curved scoop ramp at the front")
     magnet_holes: bool = Field(True, description="Add 6x2mm magnet holes in the feet")
     screw_holes: bool = Field(False, description="Add M3 screw holes in the feet")
+    solid_lid: bool = Field(False, description="Solid block (lid/spacer) — no cavity")
 
     def footprint_key(self) -> str:
         """Identity for de-duplication: two bins with the same key are identical
         parts and only need to be exported once."""
         c = self.compartments
+        kind = "lid" if self.solid_lid else "bin"
         return (
-            f"bin_{self.w}x{self.d}x{self.height_u}u"
+            f"{kind}_{self.w}x{self.d}x{self.height_u}u"
             f"_c{c.cols}x{c.rows}"
             f"_lab{int(self.label)}_sco{int(self.scoop)}"
             f"_mag{int(self.magnet_holes)}_scr{int(self.screw_holes)}"

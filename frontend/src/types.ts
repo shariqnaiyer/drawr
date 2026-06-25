@@ -32,6 +32,9 @@ export interface Bin {
   scoop: boolean;
   magnetHoles: boolean;
   screwHoles: boolean;
+  solid?: boolean; // solid lid/spacer — no cavity
+  // when a real bin was generated from a community generator entry, remember it
+  source?: { title: string; url: string; license: string };
 }
 
 export interface Grid {

@@ -24,4 +24,7 @@ export interface CatalogModel {
   // True for generators / multi-size collections with no single footprint —
   // the user picks the size on import.
   parametric?: boolean;
+  // Permissively-licensed generators we can reproduce with our own engine:
+  // "bin" => importing generates a real, editable, exportable bin.
+  generator?: "bin";
 }

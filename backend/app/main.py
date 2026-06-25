@@ -91,6 +91,7 @@ def _bin_to_stl_bytes(b: BinSpec) -> bytes:
         comp_rows=b.compartments.rows,
         label=b.label, scoop=b.scoop,
         magnet_holes=b.magnet_holes, screw_holes=b.screw_holes,
+        solid_lid=b.solid_lid,
     )
     return _export_bytes(part)
 

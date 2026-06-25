@@ -97,6 +97,16 @@ def test_export_writes_credits_for_imported_models():
     assert not any("screwdriver" in n.lower() and n.endswith(".stl") for n in zf.namelist())
 
 
+def test_export_solid_lid_named_distinctly():
+    spec = {
+        "baseplate": {"cols": 2, "rows": 2},
+        "bins": [{"id": "a", "x": 0, "y": 0, "w": 2, "d": 2, "height_u": 6, "solid_lid": True}],
+        "include_baseplate": False,
+    }
+    names = zipfile.ZipFile(io.BytesIO(client.post("/api/export", json=spec).content)).namelist()
+    assert any(n.startswith("lid_2x2") for n in names)
+
+
 def test_single_bin_stl_endpoint():
     r = client.post("/api/stl/bin", json={"id": "x", "x": 0, "y": 0, "w": 1, "d": 1, "height_u": 3})
     assert r.status_code == 200

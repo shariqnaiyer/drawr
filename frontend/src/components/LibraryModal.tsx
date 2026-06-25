@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { X, Search, ExternalLink, Plus, Package, AlertTriangle, ShieldCheck } from "lucide-react";
+import { X, Search, ExternalLink, Plus, Package, AlertTriangle, ShieldCheck, Sparkles } from "lucide-react";
 import { useStore, canPlace } from "../store";
 import { searchCatalog, licenseInfo, CATEGORIES, type Category, type CatalogModel } from "../catalog";
 import type { Grid, Bin, ModelRef } from "../types";
@@ -22,7 +22,7 @@ const TONE: Record<string, { bg: string; fg: string; bd: string }> = {
 };
 
 export function LibraryModal({ onClose }: { onClose: () => void }) {
-  const { grid, bins, addModel } = useStore();
+  const { grid, bins, addModel, addGeneratedBin } = useStore();
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<Category>("all");
   const [fitsOnly, setFitsOnly] = useState(false);
@@ -46,6 +46,19 @@ export function LibraryModal({ onClose }: { onClose: () => void }) {
       source: m.source, sourceUrl: m.sourceUrl, license: m.license, thumbnail: m.thumbnail,
     };
     addModel(spot.x, spot.y, w, d, ref, m.footprint.heightU ?? 6);
+    setImported(m.id);
+  };
+
+  // Permissive generator -> generate a REAL editable bin with our own engine.
+  const doGenerate = (m: CatalogModel) => {
+    const w = m.footprint.widthU ?? 2;
+    const d = m.footprint.depthU ?? 2;
+    const spot = firstFreeSpot(grid, bins, w, d);
+    if (!spot) {
+      setImported("__full__");
+      return;
+    }
+    addGeneratedBin(spot.x, spot.y, w, d, { title: m.title, url: m.sourceUrl, license: m.license });
     setImported(m.id);
   };
 
@@ -123,7 +136,8 @@ export function LibraryModal({ onClose }: { onClose: () => void }) {
           ) : (
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: 14 }}>
               {results.map((m) => (
-                <ModelCard key={m.id} model={m} justImported={imported === m.id} onImport={() => doImport(m)} />
+                <ModelCard key={m.id} model={m} justImported={imported === m.id}
+                  onImport={() => doImport(m)} onGenerate={() => doGenerate(m)} />
               ))}
             </div>
           )}
@@ -138,10 +152,11 @@ export function LibraryModal({ onClose }: { onClose: () => void }) {
   );
 }
 
-function ModelCard({ model: m, onImport, justImported }: { model: CatalogModel; onImport: () => void; justImported: boolean }) {
+function ModelCard({ model: m, onImport, onGenerate, justImported }: { model: CatalogModel; onImport: () => void; onGenerate: () => void; justImported: boolean }) {
   const lic = licenseInfo(m.license);
   const tone = TONE[lic.tone];
   const fp = m.footprint;
+  const canGenerate = m.generator === "bin";
   return (
     <div style={{ border: "1px solid var(--hairline)", borderRadius: 12, overflow: "hidden", display: "flex", flexDirection: "column", background: "#fff" }}>
       <div style={{ height: 120, background: "var(--surface)", display: "flex", alignItems: "center", justifyContent: "center", borderBottom: "1px solid var(--hairline-2)" }}>
@@ -171,16 +186,34 @@ function ModelCard({ model: m, onImport, justImported }: { model: CatalogModel; 
               {m.parametric ? "any size" : "set size"}
             </span>
           )}
+          {canGenerate && (
+            <span title="We generate this as a real, editable, watertight bin"
+              style={{ display: "inline-flex", alignItems: "center", gap: 4, fontSize: 11, fontWeight: 600, padding: "2px 7px", borderRadius: 5, background: "#e6f3ec", color: "#1f7a4d", border: "1px solid #bfe3cf" }}>
+              <Sparkles size={11} /> real geometry
+            </span>
+          )}
         </div>
         <div style={{ marginTop: "auto", display: "flex", gap: 8 }}>
-          <button
-            onClick={onImport}
-            data-testid={`import-${m.id}`}
-            className="btn-primary"
-            style={{ flex: 1, height: 32, justifyContent: "center", fontSize: 13 }}
-          >
-            {justImported ? "Added ✓" : <><Plus size={15} /> Import</>}
-          </button>
+          {canGenerate ? (
+            <button
+              onClick={onGenerate}
+              data-testid={`generate-${m.id}`}
+              className="btn-primary"
+              title="Generate a real bin you can edit and export"
+              style={{ flex: 1, height: 32, justifyContent: "center", fontSize: 13 }}
+            >
+              {justImported ? "Added ✓" : <><Sparkles size={15} /> Generate bin</>}
+            </button>
+          ) : (
+            <button
+              onClick={onImport}
+              data-testid={`import-${m.id}`}
+              className="btn-primary"
+              style={{ flex: 1, height: 32, justifyContent: "center", fontSize: 13 }}
+            >
+              {justImported ? "Added ✓" : <><Plus size={15} /> Import</>}
+            </button>
+          )}
           <a href={m.sourceUrl} target="_blank" rel="noreferrer" className="btn-ghost" title="Open source page" style={{ width: 36, padding: 0, justifyContent: "center" }}>
             <ExternalLink size={15} />
           </a>

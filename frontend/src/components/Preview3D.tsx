@@ -73,6 +73,17 @@ function BinMesh({ grid, bin, selected, labels }: { grid: Grid; bin: Bin; select
     );
   }
 
+  // Solid lid/spacer: a full block, no cavity.
+  if (bin.solid) {
+    return (
+      <group position={[cx, 0, cz]}>
+        <RoundedBox args={[w, h, d]} radius={3.2} smoothness={3} position={[0, yBase + h / 2, 0]}>
+          <meshStandardMaterial color={bodyColor} {...mat} />
+        </RoundedBox>
+      </group>
+    );
+  }
+
   // perimeter walls (front/back along Z, left/right along X)
   const walls: { pos: [number, number, number]; size: [number, number, number] }[] = [
     { pos: [0, wallCY, -d / 2 + VWALL / 2], size: [w, wallH, VWALL] }, // front

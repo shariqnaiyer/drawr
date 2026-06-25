@@ -31,7 +31,17 @@ BIN_CASES = [
     dict(w=2, d=1, height_u=3, label=False, scoop=False, magnet_holes=False),
     dict(w=3, d=2, height_u=6, comp_cols=3, comp_rows=2, magnet_holes=True, screw_holes=True),
     dict(w=2, d=2, height_u=12, comp_cols=2, comp_rows=1),
+    dict(w=2, d=2, height_u=6, solid_lid=True),
+    dict(w=1, d=1, height_u=3, solid_lid=True, magnet_holes=True),
 ]
+
+
+def test_solid_lid_has_no_cavity():
+    """A solid lid must be denser (more volume) than the equivalent hollow bin."""
+    solid = _mesh(geo.build_bin(2, 2, 6, solid_lid=True))
+    hollow = _mesh(geo.build_bin(2, 2, 6, solid_lid=False))
+    assert solid.is_watertight
+    assert solid.volume > hollow.volume * 2
 
 
 @pytest.mark.parametrize("kw", BIN_CASES)
