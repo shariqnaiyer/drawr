@@ -162,9 +162,13 @@ function ModelCard({ model: m, onImport, justImported }: { model: CatalogModel; 
             {lic.tone === "ok" ? <ShieldCheck size={11} /> : lic.tone === "restricted" || lic.tone === "noncommercial" ? <AlertTriangle size={11} /> : null}
             {lic.label}
           </span>
-          {fp.widthU && fp.depthU && (
+          {fp.widthU && fp.depthU ? (
             <span className="mono" style={{ fontSize: 11, fontWeight: 600, padding: "2px 7px", borderRadius: 5, background: "var(--surface)", color: "var(--muted)", border: "1px solid var(--hairline)" }}>
               {fp.widthU}×{fp.depthU}{fp.heightU ? `×${fp.heightU}` : ""}
+            </span>
+          ) : (
+            <span className="mono" style={{ fontSize: 11, fontWeight: 600, padding: "2px 7px", borderRadius: 5, background: "var(--surface)", color: "var(--muted-2)", border: "1px solid var(--hairline)" }}>
+              {m.parametric ? "any size" : "set size"}
             </span>
           )}
         </div>

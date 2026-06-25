@@ -9,12 +9,26 @@
     "license": "MIT",
     "licenseUrl": "https://github.com/kennetek/gridfinity-rebuilt-openscad/blob/main/LICENSE",
     "thumbnail": null,
-    "tags": ["gridfinity", "generator", "openscad", "parametric", "bins", "baseplates"],
+    "tags": [
+      "gridfinity",
+      "generator",
+      "openscad",
+      "parametric",
+      "bins",
+      "baseplates"
+    ],
     "category": "generators",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": null,
+      "confidence": "none"
+    },
     "redistributable": true,
     "attributionRequired": true,
-    "notes": "Canonical OpenSCAD generator for bins and baseplates. LICENSE file confirms MIT (Kenneth Hodson; based on Gridfinity by Zachary Freedman / Voidstar Lab LLC, also MIT)."
+    "notes": "Canonical OpenSCAD generator for bins and baseplates. LICENSE file confirms MIT (Kenneth Hodson; based on Gridfinity by Zachary Freedman / Voidstar Lab LLC, also MIT).",
+    "parametric": true
   },
   {
     "id": "gridfinity-extended-openscad",
@@ -26,12 +40,28 @@
     "license": "GPL-3.0",
     "licenseUrl": "https://github.com/ostat/gridfinity_extended_openscad/blob/main/LICENSE",
     "thumbnail": null,
-    "tags": ["gridfinity", "generator", "openscad", "parametric", "bins", "baseplates", "trays", "drawers"],
+    "tags": [
+      "gridfinity",
+      "generator",
+      "openscad",
+      "parametric",
+      "bins",
+      "baseplates",
+      "trays",
+      "drawers"
+    ],
     "category": "generators",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": null,
+      "confidence": "none"
+    },
     "redistributable": true,
     "attributionRequired": true,
-    "notes": "Extends Zack Freedman's bins with extra features. LICENSE file confirms GNU GPL v3."
+    "notes": "Extends Zack Freedman's bins with extra features. LICENSE file confirms GNU GPL v3.",
+    "parametric": true
   },
   {
     "id": "cq-gridfinity",
@@ -43,12 +73,27 @@
     "license": "MIT",
     "licenseUrl": "https://github.com/michaelgale/cq-gridfinity/blob/master/LICENSE",
     "thumbnail": null,
-    "tags": ["gridfinity", "generator", "python", "cadquery", "parametric", "baseplates", "boxes"],
+    "tags": [
+      "gridfinity",
+      "generator",
+      "python",
+      "cadquery",
+      "parametric",
+      "baseplates",
+      "boxes"
+    ],
     "category": "generators",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": null,
+      "confidence": "none"
+    },
     "redistributable": true,
     "attributionRequired": true,
-    "notes": "Python/CadQuery library for parametric Gridfinity objects. LICENSE file confirms MIT (Michael Gale, 2023)."
+    "notes": "Python/CadQuery library for parametric Gridfinity objects. LICENSE file confirms MIT (Michael Gale, 2023).",
+    "parametric": true
   },
   {
     "id": "gridfinity-openscad-vector76",
@@ -60,12 +105,25 @@
     "license": "MIT",
     "licenseUrl": "https://github.com/vector76/gridfinity_openscad/blob/master/LICENSE",
     "thumbnail": null,
-    "tags": ["gridfinity", "generator", "openscad", "parametric", "bins"],
+    "tags": [
+      "gridfinity",
+      "generator",
+      "openscad",
+      "parametric",
+      "bins"
+    ],
     "category": "generators",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": null,
+      "confidence": "none"
+    },
     "redistributable": true,
     "attributionRequired": true,
-    "notes": "Early/popular OpenSCAD recreation of Zack Freedman's Gridfinity. Repo sidebar reports MIT."
+    "notes": "Early/popular OpenSCAD recreation of Zack Freedman's Gridfinity. Repo sidebar reports MIT.",
+    "parametric": true
   },
   {
     "id": "gridfinity-build123d",
@@ -77,12 +135,25 @@
     "license": "MIT",
     "licenseUrl": "https://github.com/Ruudjhuu/gridfinity_build123d/blob/main/LICENSE",
     "thumbnail": null,
-    "tags": ["gridfinity", "generator", "python", "build123d", "parametric"],
+    "tags": [
+      "gridfinity",
+      "generator",
+      "python",
+      "build123d",
+      "parametric"
+    ],
     "category": "generators",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": null,
+      "confidence": "none"
+    },
     "redistributable": true,
     "attributionRequired": true,
-    "notes": "Python build123d library generating Gridfinity bins/baseplates. Repo sidebar reports MIT."
+    "notes": "Python build123d library generating Gridfinity bins/baseplates. Repo sidebar reports MIT.",
+    "parametric": true
   },
   {
     "id": "gridfinity-documentation-stu142",
@@ -94,12 +165,24 @@
     "license": "CC-BY-NC-SA-4.0",
     "licenseUrl": "https://github.com/Stu142/Gridfinity-Documentation/blob/main/LICENSE",
     "thumbnail": null,
-    "tags": ["gridfinity", "documentation", "specification", "drawings"],
+    "tags": [
+      "gridfinity",
+      "documentation",
+      "specification",
+      "drawings"
+    ],
     "category": "misc",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": null,
+      "confidence": "none"
+    },
     "redistributable": false,
     "attributionRequired": true,
-    "notes": "Community documentation of the Gridfinity standard (not Zack Freedman's official files). LICENSE file confirms CC BY-NC-SA 4.0, so NC => not redistributable."
+    "notes": "Community documentation of the Gridfinity standard (not Zack Freedman's official files). LICENSE file confirms CC BY-NC-SA 4.0, so NC => not redistributable.",
+    "parametric": false
   },
   {
     "id": "printables-storage-box-pred",
@@ -111,12 +194,25 @@
     "license": "CC-BY-NC-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/543553/images/4458653_d5337ae3-6bdd-4001-ad56-ae21b014991e/20230817_171603.jpg",
-    "tags": ["gridfinity", "box", "storage", "baseplate", "parametric"],
+    "tags": [
+      "gridfinity",
+      "box",
+      "storage",
+      "baseplate",
+      "parametric"
+    ],
     "category": "organization",
-    "footprint": { "widthU": 5, "depthU": 4, "heightU": null, "raw": "5x4 baseplate in a box", "confidence": "low" },
+    "footprint": {
+      "widthU": 5,
+      "depthU": 4,
+      "heightU": null,
+      "raw": "5x4 baseplate in a box",
+      "confidence": "low"
+    },
     "redistributable": false,
     "attributionRequired": true,
-    "notes": "License confirmed via Printables API: Creative Commons - Attribution - Noncommercial (CC-BY-NC). Footprint (5x4) from description, not title."
+    "notes": "License confirmed via Printables API: Creative Commons - Attribution - Noncommercial (CC-BY-NC). Footprint (5x4) from description, not title.",
+    "parametric": true
   },
   {
     "id": "printables-clickfinity-baseplate",
@@ -128,12 +224,24 @@
     "license": "CC-BY-NC-SA-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/452675/images/3931733_6ed1997f-6036-467d-be6c-3de443f7b6bb/signal-2023-05-14-144749.jpeg",
-    "tags": ["gridfinity", "baseplate", "no-magnets", "modular"],
+    "tags": [
+      "gridfinity",
+      "baseplate",
+      "no-magnets",
+      "modular"
+    ],
     "category": "baseplates",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "1x1 through 7x7 tiles plus joins/hubs",
+      "confidence": "none"
+    },
     "redistributable": false,
     "attributionRequired": true,
-    "notes": "License confirmed via Printables API: CC BY-NC-SA. NC => not redistributable."
+    "notes": "License confirmed via Printables API: CC BY-NC-SA. NC => not redistributable.",
+    "parametric": true
   },
   {
     "id": "printables-baseplate-lite-glennovits",
@@ -145,12 +253,24 @@
     "license": "CC-BY-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/fcdc3bb4-bb83-4a20-b4e2-a6192594cf23/images/10595864_6dac47bd-1fa8-4b76-b9f2-0c062c8fa79d_22a201b2-d3bb-4d44-bfd3-1c1390b43a4d/4x3-thumbnail2x.png",
-    "tags": ["gridfinity", "baseplate", "lite", "fast-print"],
+    "tags": [
+      "gridfinity",
+      "baseplate",
+      "lite",
+      "fast-print"
+    ],
     "category": "baseplates",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "Baseplates 1x2 through 6x6",
+      "confidence": "none"
+    },
     "redistributable": true,
     "attributionRequired": true,
-    "notes": "License confirmed via Printables API: Creative Commons - Attribution (CC-BY)."
+    "notes": "License confirmed via Printables API: Creative Commons - Attribution (CC-BY).",
+    "parametric": true
   },
   {
     "id": "printables-stackable-baseplates-akio",
@@ -162,12 +282,24 @@
     "license": "CC-BY-NC-SA-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/373752/images/3266888_a320e8b9-ca07-4e42-9797-13df84b60dd0/img_7741-large.jpeg",
-    "tags": ["gridfinity", "baseplate", "stackable", "modular"],
+    "tags": [
+      "gridfinity",
+      "baseplate",
+      "stackable",
+      "modular"
+    ],
     "category": "baseplates",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "Modular baseplates 1x1 through 7x7",
+      "confidence": "none"
+    },
     "redistributable": false,
     "attributionRequired": true,
-    "notes": "License confirmed via Printables API: CC BY-NC-SA. NC => not redistributable."
+    "notes": "License confirmed via Printables API: CC BY-NC-SA. NC => not redistributable.",
+    "parametric": true
   },
   {
     "id": "printables-screwable-baseplate-kbb3",
@@ -179,12 +311,24 @@
     "license": "CC-BY-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/698939/images/5488835_319addaf-cc2a-4574-819d-b9cede17a4be_c25cfe25-ffd5-46bc-ae70-50b0e49bdb3b/gf_baseplate_disassembled.webp",
-    "tags": ["gridfinity", "baseplate", "screwable", "magnets"],
+    "tags": [
+      "gridfinity",
+      "baseplate",
+      "screwable",
+      "magnets"
+    ],
     "category": "baseplates",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "All sizes between 1x1 and 5x5",
+      "confidence": "none"
+    },
     "redistributable": true,
     "attributionRequired": true,
-    "notes": "License confirmed via Printables API: Creative Commons - Attribution (CC-BY)."
+    "notes": "License confirmed via Printables API: Creative Commons - Attribution (CC-BY).",
+    "parametric": true
   },
   {
     "id": "printables-printer-mounted-baseplates-zackfreedman",
@@ -196,12 +340,24 @@
     "license": "CC-BY-NC-SA-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/174386/images/1638005_1dd21518-3363-4bd1-9efc-06d6fedb2de9/screenshot-2022-04-19-at-11-45-49-16-gridfinity-y.png",
-    "tags": ["gridfinity", "baseplate", "printer-mount", "zack-freedman"],
+    "tags": [
+      "gridfinity",
+      "baseplate",
+      "printer-mount",
+      "zack-freedman"
+    ],
     "category": "baseplates",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "Printer-specific bracket baseplates",
+      "confidence": "none"
+    },
     "redistributable": false,
     "attributionRequired": true,
-    "notes": "Re-upload of Zack Freedman's printer-mounted baseplates by _cybermouse_. License confirmed via Printables API: CC BY-NC-SA. NC => not redistributable."
+    "notes": "Re-upload of Zack Freedman's printer-mounted baseplates by _cybermouse_. License confirmed via Printables API: CC BY-NC-SA. NC => not redistributable.",
+    "parametric": false
   },
   {
     "id": "printables-divided-vase-bins-labels-cyron52",
@@ -213,12 +369,25 @@
     "license": "CC-BY-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/389300/images/3257852_365057b3-5afc-4985-a6f8-8c64856efec7/img_4716.jpg",
-    "tags": ["gridfinity", "bins", "vase-mode", "dividers", "labels"],
+    "tags": [
+      "gridfinity",
+      "bins",
+      "vase-mode",
+      "dividers",
+      "labels"
+    ],
     "category": "bins",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "120 models; 1x1..1x5, 3u-8u",
+      "confidence": "none"
+    },
     "redistributable": true,
     "attributionRequired": true,
-    "notes": "License confirmed via Printables API: Creative Commons - Attribution (CC-BY)."
+    "notes": "License confirmed via Printables API: Creative Commons - Attribution (CC-BY).",
+    "parametric": true
   },
   {
     "id": "printables-divided-vase-bins-nolabel-cyron52",
@@ -230,12 +399,24 @@
     "license": "CC-BY-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/389513/images/3257826_5791fa5f-8f42-43aa-9be1-865b48f1c987/img_4715.jpg",
-    "tags": ["gridfinity", "bins", "vase-mode", "dividers"],
+    "tags": [
+      "gridfinity",
+      "bins",
+      "vase-mode",
+      "dividers"
+    ],
     "category": "bins",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "120 models; 1x1..1x5, 3u-8u",
+      "confidence": "none"
+    },
     "redistributable": true,
     "attributionRequired": true,
-    "notes": "License confirmed via Printables API: Creative Commons - Attribution (CC-BY)."
+    "notes": "License confirmed via Printables API: Creative Commons - Attribution (CC-BY).",
+    "parametric": true
   },
   {
     "id": "printables-vase-mode-divider-fingerslide-mcvolta",
@@ -247,12 +428,25 @@
     "license": "CC-BY-SA-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/686450/images/5391770_b58fab2b-d0c7-4b83-bc1a-f9815e802516_2671dbbb-2d9f-40cb-8c09-b0a84a30cc48/img20231219174618.jpg",
-    "tags": ["gridfinity", "bins", "vase-mode", "divider", "fingerslide"],
+    "tags": [
+      "gridfinity",
+      "bins",
+      "vase-mode",
+      "divider",
+      "fingerslide"
+    ],
     "category": "bins",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": 1,
+      "depthU": 1,
+      "heightU": null,
+      "raw": "files 1x1x6U.stl and 1x1x3U.stl",
+      "confidence": "high"
+    },
     "redistributable": true,
     "attributionRequired": true,
-    "notes": "License confirmed via Printables API: Creative Commons - Attribution - Share Alike (CC-BY-SA)."
+    "notes": "License confirmed via Printables API: Creative Commons - Attribution - Share Alike (CC-BY-SA).",
+    "parametric": false
   },
   {
     "id": "printables-ultra-light-bins-divider-huma",
@@ -264,12 +458,24 @@
     "license": "CC-BY-NC-SA-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/640799/images/5936220_cec5e604-19d0-4575-aa59-6b6e39fc9d5f_593f6910-b278-44cf-a86b-36bd506da8d0/gridfinity_divider_1_final.png",
-    "tags": ["gridfinity", "bins", "ultra-light", "divider"],
+    "tags": [
+      "gridfinity",
+      "bins",
+      "ultra-light",
+      "divider"
+    ],
     "category": "bins",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "Generator; 1x1x2 through 3x4x10",
+      "confidence": "none"
+    },
     "redistributable": false,
     "attributionRequired": true,
-    "notes": "License confirmed via Printables API: CC BY-NC-SA. NC => not redistributable."
+    "notes": "License confirmed via Printables API: CC BY-NC-SA. NC => not redistributable.",
+    "parametric": true
   },
   {
     "id": "printables-printable-models-bins-baseplates-mathias",
@@ -281,12 +487,24 @@
     "license": "CC-BY-NC-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/1146902/images/8657664_d566c772-4277-442d-a1d1-65f7cee3f6f7_dfce3922-e209-4120-9767-4667f1cfec93/20250113_115008.jpg",
-    "tags": ["gridfinity", "bins", "baseplates", "lids"],
+    "tags": [
+      "gridfinity",
+      "bins",
+      "baseplates",
+      "lids"
+    ],
     "category": "bins",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "Bins/baseplates/solid bins in many sizes",
+      "confidence": "none"
+    },
     "redistributable": false,
     "attributionRequired": true,
-    "notes": "License confirmed via Printables API: CC BY-NC. NC => not redistributable."
+    "notes": "License confirmed via Printables API: CC BY-NC. NC => not redistributable.",
+    "parametric": true
   },
   {
     "id": "printables-bin-printable-label-pred",
@@ -298,12 +516,24 @@
     "license": "CC-BY-NC-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/592545/images/4722182_3fce47bc-401f-437f-9b65-ec63d379c2d3_688df2c2-d171-42da-b2ff-d5838bc7bcd8/gridfinitybin_parametric_1.png",
-    "tags": ["gridfinity", "bins", "label", "parametric"],
+    "tags": [
+      "gridfinity",
+      "bins",
+      "label",
+      "parametric"
+    ],
     "category": "bins",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "Parametric; 1x1x6 and larger",
+      "confidence": "none"
+    },
     "redistributable": false,
     "attributionRequired": true,
-    "notes": "License confirmed via Printables API: CC BY-NC. NC => not redistributable."
+    "notes": "License confirmed via Printables API: CC BY-NC. NC => not redistributable.",
+    "parametric": true
   },
   {
     "id": "printables-standard-bins-with-label-akio",
@@ -315,12 +545,24 @@
     "license": "CC-BY-NC-SA-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/366532/images/3127566_19044d8d-a620-4093-a694-acfd0296adfb/binswithlabel.jpeg",
-    "tags": ["gridfinity", "bins", "label", "parametric"],
+    "tags": [
+      "gridfinity",
+      "bins",
+      "label",
+      "parametric"
+    ],
     "category": "bins",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "STL bins 1x1 to 7x7, 3U-6U + parametric",
+      "confidence": "none"
+    },
     "redistributable": false,
     "attributionRequired": true,
-    "notes": "License confirmed via Printables API: CC BY-NC-SA. NC => not redistributable."
+    "notes": "License confirmed via Printables API: CC BY-NC-SA. NC => not redistributable.",
+    "parametric": true
   },
   {
     "id": "printables-tool-holder-collection-barebaric",
@@ -332,12 +574,24 @@
     "license": "CC-BY-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/301673/images/2645002_04683021-7c53-43a0-a9a4-50f2592a6d64/pxl_20221025_174514759.jpg",
-    "tags": ["gridfinity", "tools", "holder", "collection"],
+    "tags": [
+      "gridfinity",
+      "tools",
+      "holder",
+      "collection"
+    ],
     "category": "holders",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "Collection of various tool holders",
+      "confidence": "none"
+    },
     "redistributable": true,
     "attributionRequired": true,
-    "notes": "License confirmed via Printables API: Creative Commons - Attribution (CC-BY)."
+    "notes": "License confirmed via Printables API: Creative Commons - Attribution (CC-BY).",
+    "parametric": true
   },
   {
     "id": "printables-screwdriver-organizers-pltaylor3",
@@ -349,12 +603,24 @@
     "license": "CC-BY-NC-SA-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/429639/images/3559482_5e2dc75d-1e3c-46c8-ad93-0c5cc88a9106/67f23ce4-7824-4a1a-b781-7e059cdad615.jpeg",
-    "tags": ["gridfinity", "tools", "screwdriver", "holder"],
+    "tags": [
+      "gridfinity",
+      "tools",
+      "screwdriver",
+      "holder"
+    ],
     "category": "holders",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "Modular end + middle pieces",
+      "confidence": "none"
+    },
     "redistributable": false,
     "attributionRequired": true,
-    "notes": "License confirmed via Printables API: CC BY-NC-SA. NC => not redistributable."
+    "notes": "License confirmed via Printables API: CC BY-NC-SA. NC => not redistributable.",
+    "parametric": false
   },
   {
     "id": "printables-universal-screwdriver-holder-audacity",
@@ -366,12 +632,24 @@
     "license": "CC0-1.0",
     "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
     "thumbnail": "https://media.printables.com/media/prints/1071118/images/8104553_2831613a-05b4-4ed6-bd14-e860e590c7f7_448aaee6-07c2-4ff9-912b-17e28ad97abd/pxl_20241112_161315156.jpg",
-    "tags": ["gridfinity", "tools", "screwdriver", "holder"],
+    "tags": [
+      "gridfinity",
+      "tools",
+      "screwdriver",
+      "holder"
+    ],
     "category": "holders",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": null,
+      "confidence": "none"
+    },
     "redistributable": true,
     "attributionRequired": false,
-    "notes": "License confirmed via Printables API: Creative Commons - Public Domain (CC0)."
+    "notes": "License confirmed via Printables API: Creative Commons - Public Domain (CC0).",
+    "parametric": false
   },
   {
     "id": "printables-craftsman-screwdriver-holders-mitaccio",
@@ -383,12 +661,25 @@
     "license": "CC-BY-NC-SA-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/779648/images/6055713_91fcfbd5-f3d5-47e8-b74f-51cb10dd0c2b_6221da9e-646d-4918-9b92-0f1a6c1bbe36/img_6615.jpg",
-    "tags": ["gridfinity", "tools", "screwdriver", "craftsman", "holder"],
+    "tags": [
+      "gridfinity",
+      "tools",
+      "screwdriver",
+      "craftsman",
+      "holder"
+    ],
     "category": "holders",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "Per-screwdriver holders",
+      "confidence": "none"
+    },
     "redistributable": false,
     "attributionRequired": true,
-    "notes": "License confirmed via Printables API: CC BY-NC-SA. NC => not redistributable."
+    "notes": "License confirmed via Printables API: CC BY-NC-SA. NC => not redistributable.",
+    "parametric": false
   },
   {
     "id": "printables-screwdriver-organizer-angry-sasquatch",
@@ -400,12 +691,24 @@
     "license": "CC-BY-NC-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/280277/images/2482187_e97e4d96-1901-4523-a368-a0adea3a7a09/gf_screwdriver.jpg",
-    "tags": ["gridfinity", "tools", "screwdriver", "holder"],
+    "tags": [
+      "gridfinity",
+      "tools",
+      "screwdriver",
+      "holder"
+    ],
     "category": "holders",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "Universal screwdriver organizer + handle holders",
+      "confidence": "none"
+    },
     "redistributable": false,
     "attributionRequired": true,
-    "notes": "License confirmed via Printables API: CC BY-NC. NC => not redistributable."
+    "notes": "License confirmed via Printables API: CC BY-NC. NC => not redistributable.",
+    "parametric": false
   },
   {
     "id": "printables-battery-holders-tactical-grizzly",
@@ -417,12 +720,24 @@
     "license": "CC-BY-NC-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/236985/images/2147866_9ce150b4-b26b-4296-844d-4b5d70f3b10d/pxl_20220706_005215981.jpg",
-    "tags": ["gridfinity", "battery", "holder", "dispenser"],
+    "tags": [
+      "gridfinity",
+      "battery",
+      "holder",
+      "dispenser"
+    ],
     "category": "holders",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "Battery holders (AAA/AA/C/D...)",
+      "confidence": "none"
+    },
     "redistributable": false,
     "attributionRequired": true,
-    "notes": "License confirmed via Printables API: CC BY-NC. NC => not redistributable. Covers AAA/AA/C/D/18650/21700/etc."
+    "notes": "License confirmed via Printables API: CC BY-NC. NC => not redistributable. Covers AAA/AA/C/D/18650/21700/etc.",
+    "parametric": false
   },
   {
     "id": "printables-removable-label-holders-johannesreidick",
@@ -434,12 +749,24 @@
     "license": "CC-BY-NC-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/290631/images/2556936_72d78ce2-033e-4e7d-964a-f4bb7db3247a/2022-10-07-192350.jpg",
-    "tags": ["gridfinity", "label", "holder", "removable"],
+    "tags": [
+      "gridfinity",
+      "label",
+      "holder",
+      "removable"
+    ],
     "category": "holders",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "Label holders for Xx1 or Xx2 bins",
+      "confidence": "none"
+    },
     "redistributable": false,
     "attributionRequired": true,
-    "notes": "License confirmed via Printables API: CC BY-NC. NC => not redistributable."
+    "notes": "License confirmed via Printables API: CC BY-NC. NC => not redistributable.",
+    "parametric": true
   },
   {
     "id": "printables-magnetic-baseplate-jig-owar",
@@ -451,12 +778,24 @@
     "license": "CC-BY-SA-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/329110/images/2830308_497cbd83-9601-4203-b43b-43b2c6ed1ecb/img_20221130_201006.jpg",
-    "tags": ["gridfinity", "jig", "magnet", "tool"],
+    "tags": [
+      "gridfinity",
+      "jig",
+      "magnet",
+      "tool"
+    ],
     "category": "tools",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "Magnet glue-up jig (a tool)",
+      "confidence": "none"
+    },
     "redistributable": true,
     "attributionRequired": true,
-    "notes": "License confirmed via Printables API: Creative Commons - Attribution - Share Alike (CC-BY-SA)."
+    "notes": "License confirmed via Printables API: Creative Commons - Attribution - Share Alike (CC-BY-SA).",
+    "parametric": false
   },
   {
     "id": "printables-magnetic-baseplate-jig-pip-schneems",
@@ -468,12 +807,25 @@
     "license": "CC-BY-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/485526/images/3965044_cff76510-3e35-4f2e-b495-58cfa061f0c1/2023-05-19-152743.jpg",
-    "tags": ["gridfinity", "jig", "magnet", "tool", "print-in-place"],
+    "tags": [
+      "gridfinity",
+      "jig",
+      "magnet",
+      "tool",
+      "print-in-place"
+    ],
     "category": "tools",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "Print-in-place magnet jig (a tool)",
+      "confidence": "none"
+    },
     "redistributable": true,
     "attributionRequired": true,
-    "notes": "License confirmed via Printables API: Creative Commons - Attribution (CC-BY)."
+    "notes": "License confirmed via Printables API: Creative Commons - Attribution (CC-BY).",
+    "parametric": false
   },
   {
     "id": "printables-gridfinity-specification-grizzie17",
@@ -485,12 +837,24 @@
     "license": "CC-BY-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
     "thumbnail": "https://media.printables.com/media/prints/417152/images/3586064_00c4fccc-ceff-430f-a5f5-9827c1d2756d/gridspec-baseplate-profile.png",
-    "tags": ["gridfinity", "specification", "reference", "documentation"],
+    "tags": [
+      "gridfinity",
+      "specification",
+      "reference",
+      "documentation"
+    ],
     "category": "misc",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "Reference + sample files of various sizes",
+      "confidence": "none"
+    },
     "redistributable": true,
     "attributionRequired": true,
-    "notes": "License confirmed via Printables API: Creative Commons - Attribution (CC-BY)."
+    "notes": "License confirmed via Printables API: Creative Commons - Attribution (CC-BY).",
+    "parametric": true
   },
   {
     "id": "makerworld-parametric-gridfinity-generator-cullen",
@@ -502,12 +866,25 @@
     "license": "CC-BY-NC-SA-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
     "thumbnail": "https://makerworld.bblmw.com/makerworld/model/US4083b2721159cb/design/2024-05-16_d233079b80c458.jpg",
-    "tags": ["gridfinity", "generator", "parametric", "makerworld", "model-maker"],
+    "tags": [
+      "gridfinity",
+      "generator",
+      "parametric",
+      "makerworld",
+      "model-maker"
+    ],
     "category": "generators",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": null,
+      "confidence": "none"
+    },
     "redistributable": false,
     "attributionRequired": true,
-    "notes": "License confirmed via MakerWorld API (license code 'BY-NC-SA'). NC => not redistributable. In-browser Model Maker generator."
+    "notes": "License confirmed via MakerWorld API (license code 'BY-NC-SA'). NC => not redistributable. In-browser Model Maker generator.",
+    "parametric": true
   },
   {
     "id": "makerworld-ultimate-gridfinity-bins-abdelat",
@@ -519,12 +896,25 @@
     "license": "CC-BY-SA-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
     "thumbnail": "https://makerworld.bblmw.com/makerworld/model/USd2da6c53f14d3c/design/2024-05-10_2248a5197d557.jpg",
-    "tags": ["gridfinity", "bins", "collection", "parametric", "makerworld"],
+    "tags": [
+      "gridfinity",
+      "bins",
+      "collection",
+      "parametric",
+      "makerworld"
+    ],
     "category": "bins",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "All bins 1x1x1 up to 6x6x12 + customize",
+      "confidence": "none"
+    },
     "redistributable": true,
     "attributionRequired": true,
-    "notes": "License confirmed via MakerWorld API (license code 'BY-SA')."
+    "notes": "License confirmed via MakerWorld API (license code 'BY-SA').",
+    "parametric": true
   },
   {
     "id": "makerworld-parametric-base-plate-layercake",
@@ -536,12 +926,24 @@
     "license": "CC-BY-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
     "thumbnail": "https://makerworld.bblmw.com/makerworld/model/USd15732b715698d/design/2024-05-27_14ea7dc4669a1.jpg",
-    "tags": ["gridfinity", "baseplate", "parametric", "makerworld"],
+    "tags": [
+      "gridfinity",
+      "baseplate",
+      "parametric",
+      "makerworld"
+    ],
     "category": "baseplates",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": null,
+      "confidence": "none"
+    },
     "redistributable": true,
     "attributionRequired": true,
-    "notes": "License confirmed via MakerWorld API (license code 'BY')."
+    "notes": "License confirmed via MakerWorld API (license code 'BY').",
+    "parametric": true
   },
   {
     "id": "makerworld-actually-parametric-gridfinity-pdxcnc",
@@ -553,12 +955,25 @@
     "license": "CC-BY-SA-4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
     "thumbnail": "https://makerworld.bblmw.com/makerworld/model/USc516df61ecc691/design/2023-10-15_zga3x6k9o7cd.jpg",
-    "tags": ["gridfinity", "baseplate", "bins", "parametric", "makerworld"],
+    "tags": [
+      "gridfinity",
+      "baseplate",
+      "bins",
+      "parametric",
+      "makerworld"
+    ],
     "category": "generators",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": null,
+      "confidence": "none"
+    },
     "redistributable": true,
     "attributionRequired": true,
-    "notes": "License confirmed via MakerWorld API (license code 'BY-SA')."
+    "notes": "License confirmed via MakerWorld API (license code 'BY-SA').",
+    "parametric": true
   },
   {
     "id": "makerworld-cullenect-swappable-labels",
@@ -570,12 +985,24 @@
     "license": "CC0-1.0",
     "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
     "thumbnail": "https://makerworld.bblmw.com/makerworld/model/USd8f711df63d859/design/2024-04-28_e20c3d00e21cb8.png",
-    "tags": ["gridfinity", "labels", "swappable", "makerworld"],
+    "tags": [
+      "gridfinity",
+      "labels",
+      "swappable",
+      "makerworld"
+    ],
     "category": "holders",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": "Swappable labels + assorted bins",
+      "confidence": "none"
+    },
     "redistributable": true,
     "attributionRequired": false,
-    "notes": "License confirmed via MakerWorld API (license code 'CC0')."
+    "notes": "License confirmed via MakerWorld API (license code 'CC0').",
+    "parametric": true
   },
   {
     "id": "makerworld-parametric-baseplate-generator-grdesigns3d",
@@ -587,11 +1014,24 @@
     "license": "Proprietary",
     "licenseUrl": "https://makerworld.com/en/terms-of-use",
     "thumbnail": "https://makerworld.bblmw.com/makerworld/model/US8c62e1166ced56/design/2025-08-16_dafa30a1c09ec.jpg",
-    "tags": ["gridfinity", "baseplate", "generator", "parametric", "makerworld"],
+    "tags": [
+      "gridfinity",
+      "baseplate",
+      "generator",
+      "parametric",
+      "makerworld"
+    ],
     "category": "generators",
-    "footprint": { "widthU": null, "depthU": null, "heightU": null, "raw": null, "confidence": "none" },
+    "footprint": {
+      "widthU": null,
+      "depthU": null,
+      "heightU": null,
+      "raw": null,
+      "confidence": "none"
+    },
     "redistributable": false,
     "attributionRequired": true,
-    "notes": "License confirmed via MakerWorld API: 'Standard Digital File License' (MakerWorld's restrictive proprietary license, no redistribution)."
+    "notes": "License confirmed via MakerWorld API: 'Standard Digital File License' (MakerWorld's restrictive proprietary license, no redistribution).",
+    "parametric": true
   }
 ]

@@ -21,4 +21,7 @@ export interface CatalogModel {
   redistributable: boolean;
   attributionRequired: boolean;
   notes: string | null;
+  // True for generators / multi-size collections with no single footprint —
+  // the user picks the size on import.
+  parametric?: boolean;
 }

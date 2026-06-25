@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, RoundedBox } from "@react-three/drei";
+import { OrbitControls, RoundedBox, Html } from "@react-three/drei";
 import { Box, Maximize2 } from "lucide-react";
 import { useStore } from "../store";
 import type { Bin, Grid } from "../types";
@@ -25,7 +25,7 @@ function binCentre(grid: Grid, b: Bin): [number, number, number] {
   return [x, 0, z];
 }
 
-function BinMesh({ grid, bin, selected }: { grid: Grid; bin: Bin; selected: boolean }) {
+function BinMesh({ grid, bin, selected, labels }: { grid: Grid; bin: Bin; selected: boolean; labels: boolean }) {
   const w = bin.w * GRID_UNIT - CLEARANCE;
   const d = bin.d * GRID_UNIT - CLEARANCE;
   const h = bin.heightU * HEIGHT_UNIT;
@@ -48,11 +48,27 @@ function BinMesh({ grid, bin, selected }: { grid: Grid; bin: Bin; selected: bool
   // Imported community models aren't generated here — show a solid accent block
   // occupying the footprint so the reserved space reads clearly.
   if (bin.kind === "model") {
+    const m = bin.model;
     return (
       <group position={[cx, 0, cz]}>
         <RoundedBox args={[w, h, d]} radius={3} smoothness={3} position={[0, yBase + h / 2, 0]}>
           <meshStandardMaterial color={selected ? "#4d7fe6" : "#3f72d8"} metalness={0.15} roughness={0.5} />
         </RoundedBox>
+        {/* float the model's thumbnail/title above its footprint so you can see
+            what's placed (we can't render the actual STL — it lives at the source) */}
+        {labels && m && (
+          <Html position={[0, yBase + h + 6, 0]} center distanceFactor={520} occlude={false} zIndexRange={[10, 0]}>
+            <div style={{ width: 96, transform: "translateY(-50%)", pointerEvents: "none", textAlign: "center", fontFamily: "'IBM Plex Sans',sans-serif" }}>
+              {m.thumbnail ? (
+                <img src={m.thumbnail} alt="" referrerPolicy="no-referrer"
+                  style={{ width: 90, height: 68, objectFit: "cover", borderRadius: 8, border: "2px solid #4d7fe6", boxShadow: "0 6px 18px rgba(0,0,0,.5)", background: "#1b2027" }} />
+              ) : null}
+              <div style={{ marginTop: 4, fontSize: 11, fontWeight: 600, color: "#fff", lineHeight: 1.15, textShadow: "0 1px 3px rgba(0,0,0,.8)" }}>
+                {m.title.length > 36 ? m.title.slice(0, 34) + "…" : m.title}
+              </div>
+            </div>
+          </Html>
+        )}
       </group>
     );
   }
@@ -166,7 +182,7 @@ export function Preview3D({ compact = false }: { compact?: boolean }) {
         <group>
           <PlateMesh grid={grid} />
           {bins.map((b) => (
-            <BinMesh key={b.id} grid={grid} bin={b} selected={b.id === selectedId} />
+            <BinMesh key={b.id} grid={grid} bin={b} selected={b.id === selectedId} labels={!compact} />
           ))}
         </group>
 

@@ -1,7 +1,7 @@
 import { Copy, Trash2, Tag, Utensils, Magnet, CircleDot, MousePointerClick, ExternalLink, Package } from "lucide-react";
 import { useStore } from "../store";
 import { GRID_UNIT, HEIGHT_UNIT } from "../types";
-import type { ModelRef } from "../types";
+import type { Bin } from "../types";
 import { licenseInfo } from "../catalog";
 
 const HEIGHT_PRESETS = [3, 6, 12];
@@ -11,14 +11,7 @@ export function Inspector() {
   const bin = bins.find((b) => b.id === selectedId) || null;
 
   if (bin && bin.kind === "model" && bin.model) {
-    return <ModelInspector
-      key={bin.id}
-      model={bin.model}
-      w={bin.w}
-      d={bin.d}
-      onDuplicate={() => duplicateBin(bin.id)}
-      onDelete={() => deleteBin(bin.id)}
-    />;
+    return <ModelInspector key={bin.id} bin={bin} />;
   }
 
   if (!bin) {
@@ -134,9 +127,9 @@ const MODEL_TONE: Record<string, string> = {
   ok: "#1f7a4d", attribution: "var(--accent-ink)", noncommercial: "#9a6a16", restricted: "#b4322f",
 };
 
-function ModelInspector({ model, w, d, onDuplicate, onDelete }: {
-  model: ModelRef; w: number; d: number; onDuplicate: () => void; onDelete: () => void;
-}) {
+function ModelInspector({ bin }: { bin: Bin }) {
+  const { resizeBin, updateBin, duplicateBin, deleteBin } = useStore();
+  const model = bin.model!;
   const lic = licenseInfo(model.license);
   return (
     <Panel>
@@ -150,14 +143,29 @@ function ModelInspector({ model, w, d, onDuplicate, onDelete }: {
             <div style={{ fontSize: 11, color: "var(--muted-2)" }}>by {model.author}</div>
           </div>
           <div style={{ display: "flex", gap: 4 }}>
-            <IconBtn testid="inspector-duplicate" onClick={onDuplicate}><Copy size={15} /></IconBtn>
-            <IconBtn testid="inspector-delete" danger onClick={onDelete}><Trash2 size={15} /></IconBtn>
+            <IconBtn testid="inspector-duplicate" onClick={() => duplicateBin(bin.id)}><Copy size={15} /></IconBtn>
+            <IconBtn testid="inspector-delete" danger onClick={() => deleteBin(bin.id)}><Trash2 size={15} /></IconBtn>
           </div>
         </div>
       </div>
 
       <div style={{ flex: 1, overflow: "auto", padding: "4px 0" }}>
-        <Section title="Imported model" right={`${w}×${d} U`}>
+        {/* editable footprint — community models rarely publish their exact grid
+            size, so set it to match the part you'll print */}
+        <Section title="Footprint" right={`${bin.w * GRID_UNIT - 0.5} × ${bin.d * GRID_UNIT - 0.5} mm`}>
+          <div style={{ display: "flex", gap: 8 }}>
+            <Stepper testid="footprint-w" label="Width (U)" value={bin.w} onChange={(v) => resizeBin(bin.id, v, bin.d)} />
+            <Stepper testid="footprint-d" label="Depth (U)" value={bin.d} onChange={(v) => resizeBin(bin.id, bin.w, v)} />
+          </div>
+        </Section>
+        <Section title="Height" right={`${bin.heightU * HEIGHT_UNIT} mm · ${bin.heightU} U`}>
+          <input
+            type="range" min={2} max={20} value={bin.heightU} data-testid="height-slider"
+            onChange={(e) => updateBin(bin.id, { heightU: Number(e.target.value) })}
+            style={{ width: "100%", accentColor: "var(--accent)" }}
+          />
+        </Section>
+        <Section title="License">
           <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
             <span style={{ fontSize: 12, fontWeight: 600, padding: "3px 9px", borderRadius: 6, background: "var(--surface)", border: "1px solid var(--hairline)", color: MODEL_TONE[lic.tone] }}>
               {lic.label}
