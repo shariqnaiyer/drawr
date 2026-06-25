@@ -64,14 +64,28 @@ export async function exportZip(
   bins: Bin[],
   includeBaseplate: boolean,
 ): Promise<Blob> {
+  // Generated bins are built into STLs; imported community models are credited
+  // only (CREDITS.md) — never rehosted.
+  const realBins = bins.filter((b) => b.kind !== "model");
+  const models = bins
+    .filter((b) => b.kind === "model" && b.model)
+    .map((b) => ({
+      title: b.model!.title,
+      author: b.model!.author,
+      source_url: b.model!.sourceUrl,
+      license: b.model!.license,
+      width_u: b.w,
+      depth_u: b.d,
+    }));
   const res = await fetch(`${BASE}/export`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       name,
       baseplate: { cols: grid.cols, rows: grid.rows },
-      bins: bins.map(binToSpec),
+      bins: realBins.map(binToSpec),
       include_baseplate: includeBaseplate,
+      models,
     }),
   });
   if (!res.ok) {

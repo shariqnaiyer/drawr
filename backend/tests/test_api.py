@@ -75,6 +75,28 @@ def test_invalid_layouts_are_rejected(bins):
     assert client.post("/api/export", json=spec).status_code == 422
 
 
+def test_export_writes_credits_for_imported_models():
+    spec = {
+        "baseplate": {"cols": 3, "rows": 2},
+        "bins": [{"id": "a", "x": 0, "y": 0, "w": 1, "d": 1, "height_u": 3}],
+        "models": [
+            {"title": "Universal Screwdriver holder", "author": "Audacity Micro",
+             "source_url": "https://www.printables.com/model/1071118", "license": "CC0-1.0",
+             "width_u": 2, "depth_u": 1},
+        ],
+    }
+    r = client.post("/api/export", json=spec)
+    assert r.status_code == 200
+    zf = zipfile.ZipFile(io.BytesIO(r.content))
+    assert "CREDITS.md" in zf.namelist()
+    credits = zf.read("CREDITS.md").decode()
+    assert "Universal Screwdriver holder" in credits
+    assert "CC0-1.0" in credits
+    assert "printables.com/model/1071118" in credits
+    # the model is NOT built as an STL
+    assert not any("screwdriver" in n.lower() and n.endswith(".stl") for n in zf.namelist())
+
+
 def test_single_bin_stl_endpoint():
     r = client.post("/api/stl/bin", json={"id": "x", "x": 0, "y": 0, "w": 1, "d": 1, "height_u": 3})
     assert r.status_code == 200

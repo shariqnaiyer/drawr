@@ -45,6 +45,18 @@ function BinMesh({ grid, bin, selected }: { grid: Grid; bin: Bin; selected: bool
   const innerColor = selected ? "#3a5fae" : "#444c57"; // walls' interior faces
   const mat = { metalness: 0.1, roughness: 0.62 };
 
+  // Imported community models aren't generated here — show a solid accent block
+  // occupying the footprint so the reserved space reads clearly.
+  if (bin.kind === "model") {
+    return (
+      <group position={[cx, 0, cz]}>
+        <RoundedBox args={[w, h, d]} radius={3} smoothness={3} position={[0, yBase + h / 2, 0]}>
+          <meshStandardMaterial color={selected ? "#4d7fe6" : "#3f72d8"} metalness={0.15} roughness={0.5} />
+        </RoundedBox>
+      </group>
+    );
+  }
+
   // perimeter walls (front/back along Z, left/right along X)
   const walls: { pos: [number, number, number]; size: [number, number, number] }[] = [
     { pos: [0, wallCY, -d / 2 + VWALL / 2], size: [w, wallH, VWALL] }, // front

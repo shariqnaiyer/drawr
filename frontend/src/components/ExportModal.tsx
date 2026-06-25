@@ -20,7 +20,10 @@ export function ExportModal({ onClose }: { onClose: () => void }) {
   const { grid, bins } = useStore();
   const [includeBaseplate, setIncludeBaseplate] = useState(true);
   const [busy, setBusy] = useState(false);
-  const parts = useMemo(() => uniqueParts(bins), [bins]);
+  // Generated bins become STLs; imported community models are credited only.
+  const realBins = useMemo(() => bins.filter((b) => b.kind !== "model"), [bins]);
+  const modelItems = useMemo(() => bins.filter((b) => b.kind === "model" && b.model), [bins]);
+  const parts = useMemo(() => uniqueParts(realBins), [realBins]);
 
   const download = async () => {
     setBusy(true);
@@ -40,7 +43,7 @@ export function ExportModal({ onClose }: { onClose: () => void }) {
     }
   };
 
-  const total = (includeBaseplate ? 1 : 0) + parts.length;
+  const total = (includeBaseplate ? 1 : 0) + parts.length + (modelItems.length ? 1 : 0);
 
   return (
     <div
@@ -75,8 +78,28 @@ export function ExportModal({ onClose }: { onClose: () => void }) {
           {parts.map((p) => (
             <Row key={p.key} name={p.key} qty={p.qty} />
           ))}
-          {parts.length === 0 && !includeBaseplate && (
+          {parts.length === 0 && !includeBaseplate && modelItems.length === 0 && (
             <div style={{ padding: 24, textAlign: "center", color: "var(--muted-2)", fontSize: 13 }}>Nothing to export.</div>
+          )}
+
+          {/* imported community models — credited, downloaded from source */}
+          {modelItems.length > 0 && (
+            <div style={{ marginTop: 14 }} data-testid="export-credits">
+              <div style={{ fontSize: 11, fontWeight: 600, color: "var(--muted-2)", textTransform: "uppercase", letterSpacing: ".05em", marginBottom: 6 }}>
+                Community models · credited in CREDITS.md
+              </div>
+              <div style={{ fontSize: 12, color: "var(--muted)", marginBottom: 8 }}>
+                Not included in the ZIP — download each from its source and follow its license.
+              </div>
+              {modelItems.map((b) => (
+                <div key={b.id} style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 4px", borderBottom: "1px solid var(--hairline-2)", fontSize: 13 }}>
+                  <Package size={15} style={{ color: "var(--muted-2)" }} />
+                  <span style={{ flex: 1 }}>{b.model!.title}</span>
+                  <span className="mono" style={{ fontSize: 11, color: "var(--muted)" }}>{b.model!.license}</span>
+                  <a href={b.model!.sourceUrl} target="_blank" rel="noreferrer" style={{ fontSize: 12, color: "var(--accent)", textDecoration: "none" }}>source ↗</a>
+                </div>
+              ))}
+            </div>
           )}
         </div>
 

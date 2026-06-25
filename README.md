@@ -109,6 +109,27 @@ same-origin in dev (no CORS fuss).
 
 ---
 
+## Community model library
+
+The left rail's **Browse community models** opens a searchable catalog of community
+Gridfinity models (screwdriver holders, battery dispensers, baseplates, generators…).
+"Import" drops a model's footprint onto your grid (it reserves the space and links to
+the source); on export those models are listed in a **CREDITS.md** rather than
+generated — you download each file from its source and follow its license.
+
+**We index, we don't rehost.** The catalog is metadata only — title, author,
+**verified license**, source link, thumbnail, footprint — because most community
+models carry CC licenses (many NonCommercial / ShareAlike) or platform terms that
+forbid redistribution. License badges (and a "Non-commercial" flag) are shown on
+every card and in the inspector.
+
+The dataset is a standalone, contributable repo —
+[**gridfinity-model-catalog**](https://github.com/shariqnaiyer/gridfinity-model-catalog) —
+bundled into the app at `frontend/src/catalog/models.json` and refreshable via
+`npm run sync:catalog`.
+
+---
+
 ## Dimensional decisions & the mating profile
 
 Every dimension lives in **`backend/app/constants.py`**, each with a source citation:

@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Plus, AlertTriangle, X } from "lucide-react";
+import { Plus, AlertTriangle, X, Package, ExternalLink } from "lucide-react";
 import { useStore, canPlace } from "../store";
 import type { Bin } from "../types";
 import { GRID_UNIT, HEIGHT_UNIT } from "../types";
@@ -273,6 +273,7 @@ function BinView({
   const w = bin.w * cell;
   const h = bin.d * cell;
   const lines = bin.comp.cols - 1;
+  const isModel = bin.kind === "model";
   return (
     <div
       data-testid="bin"
@@ -297,36 +298,52 @@ function BinView({
           width: "100%",
           height: "100%",
           borderRadius: 8,
-          background: "linear-gradient(157deg,var(--bin-face-a) 0%,var(--bin-face-b) 100%)",
-          border: "1px solid var(--bin-edge)",
+          background: isModel
+            ? "linear-gradient(157deg,#324063 0%,#28324d 100%)"
+            : "linear-gradient(157deg,var(--bin-face-a) 0%,var(--bin-face-b) 100%)",
+          border: `1px solid ${isModel ? "#4a5f8c" : "var(--bin-edge)"}`,
           boxShadow: selected ? "0 12px 26px rgba(0,0,0,.45)" : "0 6px 16px rgba(0,0,0,.34)",
         }}
       >
         {/* top sheen */}
         <div style={{ position: "absolute", inset: "1px 1px auto 1px", height: 9, borderRadius: "7px 7px 0 0", background: "linear-gradient(rgba(255,255,255,.11),rgba(255,255,255,0))", pointerEvents: "none" }} />
 
-        {/* label tab */}
-        {bin.label && (
-          <div style={{ position: "absolute", top: -1, left: 9, width: 30, height: 11, background: "#3d4651", border: "1px solid #4b5662", borderBottom: "none", borderRadius: "4px 4px 0 0", clipPath: "polygon(0 0,100% 0,86% 100%,14% 100%)", pointerEvents: "none" }} />
+        {/* ---- bin (generated) visuals ---- */}
+        {!isModel && (
+          <>
+            {bin.label && (
+              <div style={{ position: "absolute", top: -1, left: 9, width: 30, height: 11, background: "#3d4651", border: "1px solid #4b5662", borderBottom: "none", borderRadius: "4px 4px 0 0", clipPath: "polygon(0 0,100% 0,86% 100%,14% 100%)", pointerEvents: "none" }} />
+            )}
+            {bin.scoop && (
+              <div style={{ position: "absolute", left: 3, right: 3, bottom: 3, height: "42%", borderRadius: "0 0 6px 6px", background: "linear-gradient(to top,rgba(255,255,255,.085),rgba(255,255,255,0))", pointerEvents: "none" }} />
+            )}
+            {Array.from({ length: lines }).map((_, i) => (
+              <div key={i} style={{ position: "absolute", top: 6, bottom: 6, left: `${((i + 1) / bin.comp.cols) * 100}%`, width: 1, background: "rgba(255,255,255,.13)", pointerEvents: "none" }} />
+            ))}
+            {Array.from({ length: bin.comp.rows - 1 }).map((_, i) => (
+              <div key={`h${i}`} style={{ position: "absolute", left: 6, right: 6, top: `${((i + 1) / bin.comp.rows) * 100}%`, height: 1, background: "rgba(255,255,255,.13)", pointerEvents: "none" }} />
+            ))}
+            <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 500, color: "rgba(214,220,226,.5)", letterSpacing: ".04em", pointerEvents: "none" }}>
+              {bin.w}×{bin.d}
+            </div>
+          </>
         )}
 
-        {/* scoop hint */}
-        {bin.scoop && (
-          <div style={{ position: "absolute", left: 3, right: 3, bottom: 3, height: "42%", borderRadius: "0 0 6px 6px", background: "linear-gradient(to top,rgba(255,255,255,.085),rgba(255,255,255,0))", pointerEvents: "none" }} />
+        {/* ---- imported community model ---- */}
+        {isModel && bin.model && (
+          <div style={{ position: "absolute", inset: 0, padding: "7px 8px", display: "flex", flexDirection: "column", gap: 4, pointerEvents: "none", overflow: "hidden" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <Package size={13} style={{ color: "#8fa6d6" }} />
+              <ExternalLink size={11} style={{ color: "#7f93bd" }} />
+            </div>
+            <div style={{ fontSize: 11, fontWeight: 600, color: "#dfe6f1", lineHeight: 1.2, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+              {bin.model.title}
+            </div>
+            <div style={{ marginTop: "auto", fontSize: 9, color: "#9fb0cf", fontFamily: "'IBM Plex Mono',monospace" }}>
+              {bin.model.license}
+            </div>
+          </div>
         )}
-
-        {/* divider lines */}
-        {Array.from({ length: lines }).map((_, i) => (
-          <div key={i} style={{ position: "absolute", top: 6, bottom: 6, left: `${((i + 1) / bin.comp.cols) * 100}%`, width: 1, background: "rgba(255,255,255,.13)", pointerEvents: "none" }} />
-        ))}
-        {Array.from({ length: bin.comp.rows - 1 }).map((_, i) => (
-          <div key={`h${i}`} style={{ position: "absolute", left: 6, right: 6, top: `${((i + 1) / bin.comp.rows) * 100}%`, height: 1, background: "rgba(255,255,255,.13)", pointerEvents: "none" }} />
-        ))}
-
-        {/* footprint label */}
-        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 500, color: "rgba(214,220,226,.5)", letterSpacing: ".04em", pointerEvents: "none" }}>
-          {bin.w}×{bin.d}
-        </div>
 
         {/* height badge */}
         <div className="mono" style={{ position: "absolute", left: 5, bottom: 4, fontSize: 10, fontWeight: 500, color: "#aeb6bf", background: "rgba(0,0,0,.32)", padding: "1px 5px", borderRadius: 4, pointerEvents: "none" }}>

@@ -5,8 +5,23 @@ export interface Compartments {
   rows: number;
 }
 
+// A lightweight reference to a community model placed on the grid (imported
+// from the catalog). We never rehost the STL — this just reserves the footprint
+// and links back to the source for download, respecting its license.
+export interface ModelRef {
+  catalogId: string;
+  title: string;
+  author: string;
+  source: string;
+  sourceUrl: string;
+  license: string;
+  thumbnail: string | null;
+}
+
 export interface Bin {
   id: string;
+  kind?: "bin" | "model"; // default "bin"; "model" = imported community model
+  model?: ModelRef; // present when kind === "model"
   x: number; // top-left cell column (0-based)
   y: number; // top-left cell row (0-based)
   w: number; // width in units

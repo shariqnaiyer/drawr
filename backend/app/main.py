@@ -193,6 +193,29 @@ def stl_baseplate(request: Request, p: BaseplateOnly):
 # ---------------------------------------------------------------------------
 # Export: ZIP of all unique parts
 # ---------------------------------------------------------------------------
+def _build_credits(spec: DesignSpec) -> str:
+    """Markdown crediting each imported community model with its license + link."""
+    lines = [
+        f"# {spec.name} — community models",
+        "",
+        "These models were placed from the community library. They are **not**",
+        "included in this download — download each from its source and follow its",
+        "license (attribution, non-commercial, share-alike, etc.).",
+        "",
+    ]
+    for m in spec.models:
+        fp = f" ({m.width_u}×{m.depth_u})" if m.width_u and m.depth_u else ""
+        lines.append(f"## {m.title}{fp}")
+        if m.author:
+            lines.append(f"- Author: {m.author}")
+        if m.license:
+            lines.append(f"- License: {m.license}")
+        if m.source_url:
+            lines.append(f"- Source: {m.source_url}")
+        lines.append("")
+    return "\n".join(lines)
+
+
 @app.post("/api/export")
 @limiter.limit("20/minute")
 def export(request: Request, spec: DesignSpec):
@@ -223,6 +246,11 @@ def export(request: Request, spec: DesignSpec):
             qty = counts[key]
             name = f"{key}{'_x' + str(qty) if qty > 1 else ''}.stl"
             zf.writestr(name, _bin_to_stl_bytes(b))
+
+        # Imported community models: we don't generate their STLs, but we credit
+        # them and link to the source so the user downloads them legally.
+        if spec.models:
+            zf.writestr("CREDITS.md", _build_credits(spec))
 
     safe = "".join(c if c.isalnum() or c in "-_" else "_" for c in spec.name) or "gridfinity"
     return Response(

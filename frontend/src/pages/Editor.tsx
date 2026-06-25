@@ -9,6 +9,7 @@ import { Palette } from "../components/Palette";
 import { Inspector } from "../components/Inspector";
 import { Preview3D, Pip3D } from "../components/Preview3D";
 import { ExportModal } from "../components/ExportModal";
+import { LibraryModal } from "../components/LibraryModal";
 
 function ZoomControl() {
   const { zoom, setZoom } = useStore();
@@ -87,6 +88,7 @@ function Stat({ label, children }: { label: string; children: React.ReactNode })
 export default function Editor() {
   const { step, view, selectedId, deleteBin, undo, redo, select, setTool, setStep } = useStore();
   const [showExport, setShowExport] = useState(false);
+  const [showLibrary, setShowLibrary] = useState(false);
 
   // The "Export" step in the top bar (and the Export STL button) open the export
   // modal; closing it returns to the Design step. Driving this off `step` keeps
@@ -131,7 +133,7 @@ export default function Editor() {
         <Setup />
       ) : (
         <div style={{ flex: 1, display: "flex", minHeight: 0 }}>
-          <LeftRail />
+          <LeftRail onOpenLibrary={() => setShowLibrary(true)} />
           {view === "2d" ? (
             <div style={{ flex: 1, position: "relative", display: "flex", minWidth: 0 }}>
               <Canvas2D />
@@ -151,6 +153,7 @@ export default function Editor() {
       {step !== "setup" && <StatusBar />}
 
       {showExport && <ExportModal onClose={() => setStep("design")} />}
+      {showLibrary && <LibraryModal onClose={() => setShowLibrary(false)} />}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import {
-  MousePointer2, SquarePlus, Hand, Undo2, Redo2, Trash2, Settings2,
+  MousePointer2, SquarePlus, Hand, Undo2, Redo2, Trash2, Settings2, PackageSearch,
 } from "lucide-react";
 import { useStore } from "../store";
 import type { Tool } from "../types";
@@ -31,7 +31,7 @@ function RailBtn({
   );
 }
 
-export function LeftRail() {
+export function LeftRail({ onOpenLibrary }: { onOpenLibrary: () => void }) {
   const { tool, setTool, undo, redo, deleteBin, selectedId, past, future } = useStore();
   const pick = (t: Tool) => setTool(t);
 
@@ -57,6 +57,12 @@ export function LeftRail() {
       </RailBtn>
       <RailBtn testid="tool-pan" active={tool === "pan"} onClick={() => pick("pan")} title="Pan">
         <Hand size={18} />
+      </RailBtn>
+
+      <div style={{ width: 24, height: 1, background: "#e1e4e8", margin: "5px 0" }} />
+
+      <RailBtn testid="open-library" onClick={onOpenLibrary} title="Browse community models">
+        <PackageSearch size={18} />
       </RailBtn>
 
       <div style={{ width: 24, height: 1, background: "#e1e4e8", margin: "5px 0" }} />

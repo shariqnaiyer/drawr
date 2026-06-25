@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { Bin, Grid, Step, Tool, ViewMode } from "./types";
+import type { Bin, Grid, ModelRef, Step, Tool, ViewMode } from "./types";
 
 let _id = 0;
 const newId = () => `bin_${Date.now().toString(36)}_${_id++}`;
@@ -77,6 +77,7 @@ interface State {
   setZoom: (z: number) => void;
   select: (id: string | null) => void;
   addBin: (x: number, y: number, w: number, d: number) => void;
+  addModel: (x: number, y: number, w: number, d: number, model: ModelRef, heightU: number) => void;
   updateBin: (id: string, patch: Partial<Bin>) => void;
   moveBin: (id: string, x: number, y: number) => void;
   resizeBin: (id: string, w: number, d: number) => void;
@@ -118,6 +119,14 @@ export const useStore = create<State>((set, get) => {
       if (!canPlace(grid, bins, x, y, w, d)) return;
       snapshot();
       const b = makeBin(x, y, w, d);
+      set((s) => ({ bins: [...s.bins, b], selectedId: b.id }));
+    },
+
+    addModel: (x, y, w, d, model, heightU) => {
+      const { grid, bins } = get();
+      if (!canPlace(grid, bins, x, y, w, d)) return;
+      snapshot();
+      const b: Bin = { ...makeBin(x, y, w, d), kind: "model", model, heightU };
       set((s) => ({ bins: [...s.bins, b], selectedId: b.id }));
     },
 

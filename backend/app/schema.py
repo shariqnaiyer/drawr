@@ -74,6 +74,19 @@ class BaseplateSpec(BaseModel):
     screw_holes: bool = Field(False, description="Add screw holes to the baseplate")
 
 
+class CreditModel(BaseModel):
+    """An imported community model placed on the grid. We don't generate its STL
+    (it lives on its source host); on export we record it in CREDITS.md so the
+    user can download it and honour its license."""
+
+    title: str
+    author: str = ""
+    source_url: str = ""
+    license: str = ""
+    width_u: int | None = None
+    depth_u: int | None = None
+
+
 class DesignSpec(BaseModel):
     """A complete drawer design: one baseplate + its bins."""
 
@@ -81,6 +94,7 @@ class DesignSpec(BaseModel):
     baseplate: BaseplateSpec
     bins: list[BinSpec] = Field(default_factory=list)
     include_baseplate: bool = Field(True, description="Export the baseplate STL")
+    models: list[CreditModel] = Field(default_factory=list, description="Imported community models (credits only)")
 
     @model_validator(mode="after")
     def _within_build_limits(self):

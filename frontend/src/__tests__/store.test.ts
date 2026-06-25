@@ -114,6 +114,21 @@ describe("store mutations", () => {
     expect(other.w).toBe(3); // footprint untouched
   });
 
+  it("addModel places a model-kind placement that reserves space", () => {
+    const ref = {
+      catalogId: "x", title: "Battery holder", author: "someone",
+      source: "printables", sourceUrl: "https://example.com", license: "CC-BY-4.0", thumbnail: null,
+    };
+    s().addModel(0, 0, 2, 1, ref, 6);
+    const m = s().bins[0];
+    expect(m.kind).toBe("model");
+    expect(m.model?.title).toBe("Battery holder");
+    expect(m).toMatchObject({ w: 2, d: 1 });
+    // it blocks overlapping bins like any placement
+    s().addBin(0, 0, 1, 1);
+    expect(s().bins).toHaveLength(1);
+  });
+
   it("undo/redo restore prior layouts", () => {
     s().addBin(0, 0, 1, 1);
     s().addBin(2, 0, 1, 1);
