@@ -20,4 +20,17 @@ test.describe("Export", () => {
     ]);
     expect(download.suggestedFilename()).toContain(".zip");
   });
+
+  test("the Export step in the top bar opens the export modal", async ({ page }) => {
+    await stubBackend(page);
+    await generateGrid(page);
+
+    await page.getByTestId("step-export").click();
+    await expect(page.getByText("Export STL files")).toBeVisible();
+
+    // closing the modal returns to the Design step
+    await page.getByRole("button", { name: "Cancel" }).click();
+    await expect(page.getByText("Export STL files")).toBeHidden();
+    await expect(page.getByTestId("canvas-stage")).toBeVisible();
+  });
 });

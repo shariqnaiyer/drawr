@@ -85,8 +85,15 @@ function Stat({ label, children }: { label: string; children: React.ReactNode })
 }
 
 export default function Editor() {
-  const { step, view, selectedId, deleteBin, undo, redo, select, setTool } = useStore();
+  const { step, view, selectedId, deleteBin, undo, redo, select, setTool, setStep } = useStore();
   const [showExport, setShowExport] = useState(false);
+
+  // The "Export" step in the top bar (and the Export STL button) open the export
+  // modal; closing it returns to the Design step. Driving this off `step` keeps
+  // the top-bar nav highlight in sync with what's on screen.
+  useEffect(() => {
+    setShowExport(step === "export");
+  }, [step]);
 
   // keyboard shortcuts (ignored while typing in an input)
   useEffect(() => {
@@ -118,7 +125,7 @@ export default function Editor() {
 
   return (
     <div style={{ height: "100%", display: "flex", flexDirection: "column", background: "var(--panel)" }}>
-      {step !== "setup" && <TopBar onExport={() => setShowExport(true)} />}
+      {step !== "setup" && <TopBar onExport={() => setStep("export")} />}
 
       {step === "setup" ? (
         <Setup />
@@ -143,7 +150,7 @@ export default function Editor() {
 
       {step !== "setup" && <StatusBar />}
 
-      {showExport && <ExportModal onClose={() => setShowExport(false)} />}
+      {showExport && <ExportModal onClose={() => setStep("design")} />}
     </div>
   );
 }
