@@ -1,0 +1,153 @@
+/* Gridfinity Studio design system — tokens lifted from the design doc.
+   "Clean, precise, slightly technical — CAD clarity with an approachable surface." */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+:root {
+  /* accent (themeable) */
+  --accent: #2f6be0;
+  --accent-hover: #235bc8;
+  --accent-soft: #e7eefd;
+  --accent-ink: #1b49a6;
+  --accent-glow: rgba(47, 107, 224, 0.4);
+
+  /* chrome — light UI */
+  --ink: #15181c;
+  --muted: #6b727a;
+  --muted-2: #8a9099;
+  --surface: #f7f8fa;
+  --panel: #ffffff;
+  --hairline: #e7eaed;
+  --hairline-2: #eef0f2;
+
+  /* canvas — dark editor */
+  --canvas: #15181d;
+  --plate: #1c212a;
+  --gridline: #2e343d;
+  --bin-face-a: #333b45;
+  --bin-face-b: #272d35;
+  --bin-edge: #3c4651;
+
+  /* semantic */
+  --valid: #25a06a;
+  --invalid: #e5484d;
+  --warning: #e0a032;
+
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 12px;
+
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  color: var(--ink);
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  background: var(--surface);
+}
+.mono {
+  font-family: "IBM Plex Mono", monospace;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* shared atoms ----------------------------------------------------------- */
+.btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 32px;
+  padding: 0 14px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--r-md);
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn-ghost {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  background: var(--panel);
+  color: var(--muted);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  font-size: 13px;
+  font-weight: 500;
+}
+.btn-ghost:hover {
+  border-color: #cfd4d9;
+  color: var(--ink);
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted-2);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* the 9-dot brand mark */
+.brand-mark {
+  display: grid;
+  grid-template-columns: repeat(3, 3px);
+  grid-template-rows: repeat(3, 3px);
+  gap: 2px;
+}
+.brand-mark span {
+  width: 3px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spin {
+  animation: spin 0.9s linear infinite;
+}
+
+/* strip number-input spinners for a cleaner CAD look */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* scrollbars */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-thumb {
+  background: #d3d8dd;
+  border-radius: 5px;
+}

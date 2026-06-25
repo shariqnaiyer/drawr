@@ -1,0 +1,27 @@
+# Python
+backend/.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+backend/.coverage
+
+# Node
+frontend/node_modules/
+frontend/dist/
+frontend/coverage/
+frontend/test-results/
+frontend/playwright-report/
+frontend/.vercel/
+
+# env / secrets
+.env
+.env.*
+!.env.example
+
+# generated artifacts
+*.stl
+*.zip
+
+# misc
+.DS_Store
+/tmp/

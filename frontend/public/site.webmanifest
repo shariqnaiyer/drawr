@@ -1,0 +1,17 @@
+{
+  "name": "Gridfinity Studio",
+  "short_name": "Gridfinity",
+  "description": "Design Gridfinity storage visually and export watertight, print-ready STL files.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#15181d",
+  "theme_color": "#2F6BE0",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
