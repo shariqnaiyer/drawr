@@ -18,7 +18,7 @@ manifold** — and dimensionally compatible with printed Gridfinity parts.
 ## Architecture
 
 ```
-drawr/                       # (the repo folder may still be named gridfinity-studio)
+drawr/
 ├── backend/                 # FastAPI + build123d CAD kernel (deploys to Render via Docker)
 │   ├── app/
 │   │   ├── constants.py     # ★ ALL Gridfinity dimensions, cited & commented

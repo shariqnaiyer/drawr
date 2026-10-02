@@ -7,7 +7,7 @@ import { MODELS, licenseInfo } from "../catalog";
 import "./landing.css";
 
 const TITLE = "drawr — design Gridfinity drawers, export print-ready STLs";
-const REPO = "https://github.com/shariqnaiyer/gridfinity-studio";
+const REPO = "https://github.com/shariqnaiyer/drawr";
 
 // lucide dropped brand glyphs, so the GitHub mark is inline.
 function Github({ size = 16 }: { size?: number }) {
