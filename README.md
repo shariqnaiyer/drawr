@@ -1,4 +1,7 @@
-# Gridfinity Studio
+# drawr
+
+> Renamed from **Gridfinity Studio**. Same app and API contract, new name and a fresh
+> interface design.
 
 A web app to **design Gridfinity storage systems visually and export print-ready STL
 files**. You set up a grid (from a drawer size or a unit count), lay out bins on a
@@ -15,7 +18,7 @@ manifold** — and dimensionally compatible with printed Gridfinity parts.
 ## Architecture
 
 ```
-gridfinity-studio/
+drawr/                       # (the repo folder may still be named gridfinity-studio)
 ├── backend/                 # FastAPI + build123d CAD kernel (deploys to Render via Docker)
 │   ├── app/
 │   │   ├── constants.py     # ★ ALL Gridfinity dimensions, cited & commented
@@ -92,26 +95,59 @@ same-origin in dev (no CORS fuss).
 
 ## Using it
 
-1. **Setup** — enter your drawer's inner W×D in mm *or* a column×row count. The app
-   shows the complementary value, the resulting baseplate size, and the margin.
-2. **Design** — pick a footprint from the floating palette (toggles the *Add* tool),
-   click the grid to drop a bin. Switch to the *Select* tool to move bins (drag) and
-   edit the selected bin in the right inspector: footprint, height (U), compartments
-   (cols×rows dividers), and label / scoop / magnet / screw toggles. Overlaps and
-   out-of-bounds placements are blocked with red feedback. Undo/redo supported.
-3. **3D** — toggle 2D/3D in the top bar (or use the picture-in-picture preview) to
-   orbit the assembled baseplate + bins. This is a **live three.js preview** built
-   from primitives client-side, so it updates instantly with no backend round-trip.
-   The watertight CAD geometry is the source of truth for *export* only.
-4. **Export** — *Export STL* opens a part list (with quantities); *Download ZIP* pulls
-   every unique STL, sensibly named (e.g. `bin_3x2x6u_c3x1_lab1_sco1_mag1_scr0.stl`,
+1. **Setup**: enter your drawer's inner W×D in mm, *or* switch the segmented control
+   to a column×row count. A to-scale diagram shows the drawer, the resulting baseplate
+   and the margins. *Create grid* opens the editor.
+2. **Design**: the toolbar shows a **Setup › Design › Export** breadcrumb, a **2D / 3D**
+   segmented control, undo/redo, a **Library** button and the **Export** button. A
+   floating tool dock at the bottom of the canvas holds **Select (V)**, **Draw (B)** and
+   **Pan (H)**, the footprint presets, and delete. Click the grid to drop the chosen
+   preset, or drag across cells to draw any size. Drag bins to move them. Overlaps and
+   out-of-bounds placements are blocked with red feedback. The **inspector** on the
+   right edits the selected bin: footprint, height (U), compartments (cols×rows), and the
+   solid / label / scoop / magnet / screw toggles. On iPad it slides over the canvas.
+   Undo/redo supported (⌘Z / ⇧⌘Z).
+3. **3D**: switch to 3D (or use the picture-in-picture preview) to orbit the assembled
+   baseplate + bins. This is a **live three.js preview** built client-side from
+   primitives, so it updates instantly. **Preview filament colors** let you see the
+   layout in different plastics. They're preview-only and don't affect the export. The
+   watertight CAD geometry is the source of truth for *export* only.
+4. **Export**: *Export* opens a part list (with quantities); *Download ZIP* pulls every
+   unique STL, sensibly named (e.g. `bin_3x2x6u_c3x1_lab1_sco1_mag1_scr0.stl`,
    `baseplate_7x5.stl`).
+
+**Devices.** The editor works on desktop and iPad (touch: tap to place, drag to draw or
+move). On phones the landing page works, and the editor asks for a bigger screen.
 
 ---
 
+## Common drawer presets
+
+Setup's **Choose a common drawer** picker fills in the inside width, depth and height of
+popular drawers and cases: IKEA, MUJI, Husky, Milwaukee, U.S. General, L-BOXX,
+Systainer³, T-Loc, MakPac, DeWalt TSTAK/ToughSystem, Bisley and more (98 entries in
+`frontend/src/drawers/drawers.json`).
+
+- **Every entry cites its source** (`source_url`, `source_kind`: manufacturer / retailer /
+  community-measured) and a `confidence`. Medium-confidence entries are shown in amber, and
+  the UI always asks you to confirm with a tape measure.
+- **Validated on load and in CI.** `validateDrawer` rejects implausible values (anything under
+  42 mm or over 1500 mm, which usually means outer dimensions or unconverted inches), bad
+  ids and non-https sources. `src/__tests__/drawers.test.ts` fails the build if a shipped
+  row is invalid or duplicated.
+- **Height-aware.** When the inside height is known, drawr computes the tallest bin that
+  clears the drawer (baseplate floor 1.2 mm + 7 mm/U + 1 mm headroom, `src/lib/fit.ts`).
+  New bins default to a height that fits, and the inspector, status bar and export sheet
+  warn about bins that are too tall.
+- **Inches.** The Setup fields accept mm or inches, including fractions like `11 3/4`.
+- **Recent sizes.** The last five sizes you used are remembered in this browser.
+
+To add a drawer, append an entry to `drawers.json` with interior dimensions and a source,
+then run `npm test`.
+
 ## Community model library
 
-The left rail's **Browse community models** opens a searchable catalog of community
+The toolbar's **Library** button opens a searchable catalog of community
 Gridfinity models (screwdriver holders, battery dispensers, baseplates, generators…).
 "Import" drops a model's footprint onto your grid (it reserves the space and links to
 the source); on export those models are listed in a **CREDITS.md** rather than
@@ -212,31 +248,35 @@ Both run in GitHub Actions on every push/PR (`.github/workflows/`).
 
 ## Deployment
 
-Frontend → **Vercel**, backend → **Render** (Docker). They're separate origins; the
-frontend reaches the backend via `VITE_API_BASE`, and the backend's CORS is locked to
-your Vercel origin (any `*.vercel.app` preview is allowed automatically).
+drawr runs as **one Vercel project with two [Services](https://vercel.com/docs/services)**
+(root `vercel.json`), live at **https://drawr.ca**:
 
-**Backend (Render)**
-1. Push this repo to GitHub.
-2. Render → New → **Blueprint**, pick the repo (`render.yaml` is detected).
-3. Set env vars on the service: `ALLOWED_ORIGINS=https://<your-app>.vercel.app`
-   (comma-separate multiple), and optionally `SENTRY_DSN`.
-4. Deploy. Note the service URL, e.g. `https://gridfinity-studio-api.onrender.com`.
-   *(Free tier cold-starts after ~15 min idle; the first export then takes ~30s.)*
+- `web`: the Vite frontend (`frontend/`), served as static files with an SPA fallback.
+- `api`: the FastAPI + build123d backend (`backend/`), built from `backend/Dockerfile.vercel`
+  as a container image and routed at `/api/*`.
 
-**Frontend (Vercel)**
-1. Vercel → New Project → import the repo; set **Root Directory = `frontend`**.
-2. Env vars: `VITE_API_BASE=https://<your-render-service>/api` and optionally
-   `VITE_SENTRY_DSN`.
-3. Deploy. `vercel.json` handles the SPA rewrite so deep links like `/app` work.
+The two share one origin, so there's no CORS configuration and no `VITE_API_BASE`. The
+container scales to zero after about 5 minutes idle, so the first request after a quiet
+period takes about 7 s while it starts. `TRUST_PROXY_HEADERS=1` (set in
+`Dockerfile.vercel`) makes rate limiting key on the visitor's real IP, which Vercel
+reports in `x-real-ip` / `x-forwarded-for`.
 
-Env templates are in `frontend/.env.example` and `backend/.env.example`. To verify the
-container locally: `docker build -t gridfinity-api backend && docker run -p 8000:8000 gridfinity-api`.
+```bash
+vercel deploy          # preview
+vercel deploy --prod   # production (drawr.ca)
+```
 
----
+**DNS** is on Cloudflare: `drawr.ca` has an `A` record to Vercel (`76.76.21.21`) and
+`www.drawr.ca` has a `CNAME` to Vercel. Both are **DNS only** (grey cloud), so Vercel
+issues and renews the TLS certificate. `www` 308-redirects to the apex.
+
+**Alternative:** `render.yaml` still describes a standalone Render deployment of the
+backend. If you use it, set `VITE_API_BASE` on the frontend and `ALLOWED_ORIGINS` on
+the backend.
 
 ## Tech
 
 - **Backend**: Python, build123d (OpenCascade/OCP), FastAPI, Uvicorn.
 - **Frontend**: React + TypeScript, Vite, Zustand, three.js / @react-three/fiber +
-  drei (3D), lucide-react (icons), IBM Plex Sans/Mono.
+  drei (3D), lucide-react (icons). Type is the system SF stack (SF Pro / SF Mono on
+  Apple devices) with Inter as the fallback elsewhere — no web font loads on Apple hardware.

@@ -1,0 +1,33 @@
+# drawr backend for Vercel (container image behind /api, same origin as the app).
+FROM python:3.12-slim
+
+# System libraries required by OCP / OpenCascade at import + render time.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgl1 \
+    libglu1-mesa \
+    libxext6 \
+    libxrender1 \
+    libsm6 \
+    libice6 \
+    libx11-6 \
+    libxi6 \
+    libfontconfig1 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Install Python deps first so they cache across code changes.
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY app ./app
+
+# Vercel routes container traffic to port 80 unless PORT is set in project settings.
+ENV PORT=80
+# Vercel overwrites x-forwarded-for / x-real-ip, so they identify the real client.
+ENV TRUST_PROXY_HEADERS=1
+EXPOSE 80
+
+# Single worker: each CAD build is CPU-bound and memory-heavy. Scale with
+# replicas rather than workers on small instances.
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT} --workers 1"]

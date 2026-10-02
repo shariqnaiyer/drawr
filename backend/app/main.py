@@ -37,7 +37,7 @@ logging.basicConfig(
     level=os.getenv("LOG_LEVEL", "INFO"),
     format="%(asctime)s %(levelname)s %(name)s %(message)s",
 )
-log = logging.getLogger("gridfinity")
+log = logging.getLogger("drawr")
 
 # Sentry (no-op unless SENTRY_DSN is set in the environment).
 _SENTRY_DSN = os.getenv("SENTRY_DSN")
@@ -47,10 +47,28 @@ if _SENTRY_DSN:
     sentry_sdk.init(dsn=_SENTRY_DSN, traces_sample_rate=0.1,
                     environment=os.getenv("ENVIRONMENT", "production"))
 
-app = FastAPI(title="Gridfinity Studio API", version="1.0.0")
+app = FastAPI(title="drawr API", version="1.0.0")
 
 # Per-IP rate limiting for the expensive CAD endpoints.
-limiter = Limiter(key_func=get_remote_address)
+# Behind a proxy (Vercel, Render) the TCP peer is the proxy, so every visitor
+# would share one bucket. When TRUST_PROXY_HEADERS=1 — set only where the
+# platform overwrites these headers, so clients can't spoof them — key on the
+# real client IP the proxy reports instead.
+_TRUST_PROXY = os.getenv("TRUST_PROXY_HEADERS") == "1"
+
+
+def client_ip(request: Request) -> str:
+    if _TRUST_PROXY:
+        real = request.headers.get("x-real-ip")
+        if real:
+            return real.strip()
+        fwd = request.headers.get("x-forwarded-for")
+        if fwd:
+            return fwd.split(",")[0].strip()
+    return get_remote_address(request)
+
+
+limiter = Limiter(key_func=client_ip)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
@@ -253,7 +271,7 @@ def export(request: Request, spec: DesignSpec):
         if spec.models:
             zf.writestr("CREDITS.md", _build_credits(spec))
 
-    safe = "".join(c if c.isalnum() or c in "-_" else "_" for c in spec.name) or "gridfinity"
+    safe = "".join(c if c.isalnum() or c in "-_" else "_" for c in spec.name) or "drawr"
     return Response(
         content=buf.getvalue(),
         media_type="application/zip",

@@ -112,3 +112,21 @@ def test_single_bin_stl_endpoint():
     assert r.status_code == 200
     assert r.headers["content-type"] == "model/stl"
     assert len(r.content) > 1000  # a real mesh
+
+
+def test_client_ip_ignores_proxy_headers_unless_trusted(monkeypatch):
+    from starlette.requests import Request
+
+    import app.main as m
+
+    scope = {
+        "type": "http",
+        "headers": [(b"x-forwarded-for", b"203.0.113.7, 10.0.0.1"), (b"x-real-ip", b"203.0.113.9")],
+        "client": ("10.0.0.1", 1234),
+    }
+    monkeypatch.setattr(m, "_TRUST_PROXY", False)
+    assert m.client_ip(Request(scope)) == "10.0.0.1"
+    monkeypatch.setattr(m, "_TRUST_PROXY", True)
+    assert m.client_ip(Request(scope)) == "203.0.113.9"
+    scope["headers"] = [(b"x-forwarded-for", b"203.0.113.7, 10.0.0.1")]
+    assert m.client_ip(Request(scope)) == "203.0.113.7"
