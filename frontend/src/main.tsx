@@ -10,9 +10,10 @@ initSentry();
 
 function Fallback() {
   return (
-    <div style={{ padding: 40, fontFamily: "system-ui", color: "#15181c" }}>
-      <h2>Something went wrong.</h2>
-      <p style={{ color: "#6b727a" }}>The error has been reported. Try reloading the page.</p>
+    <div style={{ minHeight: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 10, padding: 40, background: "var(--bg)", color: "var(--ink)", textAlign: "center" }}>
+      <h2 style={{ fontSize: 24, fontWeight: 700, letterSpacing: "-0.03em" }}>Something went wrong.</h2>
+      <p style={{ color: "var(--ink-3)" }}>The error has been reported. Reload the page to keep working.</p>
+      <button className="btn btn-primary" style={{ marginTop: 8 }} onClick={() => window.location.reload()}>Reload</button>
     </div>
   );
 }

@@ -1,11 +1,11 @@
 {
-  "name": "Gridfinity Studio",
-  "short_name": "Gridfinity",
-  "description": "Design Gridfinity storage visually and export watertight, print-ready STL files.",
+  "name": "drawr",
+  "short_name": "drawr",
+  "description": "Design Gridfinity drawers visually and export watertight, print-ready STL files.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#15181d",
-  "theme_color": "#2F6BE0",
+  "background_color": "#f5f5f7",
+  "theme_color": "#f5f5f7",
   "icons": [
     {
       "src": "/favicon.svg",

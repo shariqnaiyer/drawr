@@ -1,113 +1,68 @@
 import { useEffect, useState } from "react";
-import { Minus, Plus } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Monitor } from "lucide-react";
 import { useStore } from "../store";
-import { TopBar } from "../components/TopBar";
+import { Toolbar } from "../components/Toolbar";
 import { Setup } from "../components/Setup";
-import { LeftRail } from "../components/LeftRail";
 import { Canvas2D } from "../components/Canvas2D";
-import { Palette } from "../components/Palette";
+import { Dock, ZoomControl, FilamentSwatches } from "../components/Dock";
 import { Inspector } from "../components/Inspector";
 import { Preview3D, Pip3D } from "../components/Preview3D";
 import { ExportModal } from "../components/ExportModal";
 import { LibraryModal } from "../components/LibraryModal";
-
-function ZoomControl() {
-  const { zoom, setZoom } = useStore();
-  return (
-    <div
-      data-testid="zoom-control"
-      style={{
-        position: "absolute",
-        bottom: 14,
-        left: 14,
-        display: "flex",
-        alignItems: "center",
-        gap: 2,
-        height: 30,
-        padding: 2,
-        background: "rgba(26,30,37,.82)",
-        border: "1px solid rgba(255,255,255,.08)",
-        borderRadius: 8,
-        backdropFilter: "blur(6px)",
-        zIndex: 9,
-      }}
-    >
-      <button aria-label="Zoom out" onClick={() => setZoom(zoom - 0.1)} style={zBtn}><Minus size={15} /></button>
-      <span className="mono" style={{ fontSize: 11, fontWeight: 500, color: "#c8ced5", minWidth: 38, textAlign: "center" }}>
-        {Math.round(zoom * 100)}%
-      </span>
-      <button aria-label="Zoom in" onClick={() => setZoom(zoom + 0.1)} style={zBtn}><Plus size={15} /></button>
-    </div>
-  );
-}
-const zBtn: React.CSSProperties = {
-  display: "flex", alignItems: "center", justifyContent: "center", width: 26, height: 26,
-  borderRadius: 6, color: "#9aa3ad", background: "transparent", border: "none",
-};
+import { Wordmark } from "../components/ui";
+import { GRID_UNIT } from "../types";
+import { maxBinU } from "../lib/fit";
+import "../components/editor.css";
 
 function StatusBar() {
-  const { grid, bins } = useStore();
+  const { grid, bins, drawer } = useStore();
   const filled = bins.reduce((n, b) => n + b.w * b.d, 0);
   const cells = grid.cols * grid.rows;
+  const ready = bins.length > 0;
+  const maxU = maxBinU(drawer?.heightMm);
+  const tooTall = maxU === null ? 0 : bins.filter((b) => b.heightU > maxU).length;
   return (
-    <div
-      className="mono"
-      data-testid="status-bar"
-      style={{
-        height: 30,
-        flexShrink: 0,
-        display: "flex",
-        alignItems: "center",
-        gap: 18,
-        padding: "0 14px",
-        borderTop: "1px solid var(--hairline)",
-        background: "var(--surface)",
-        fontSize: 11,
-        color: "var(--muted)",
-      }}
-    >
-      <Stat label="grid">{grid.cols} × {grid.rows}</Stat>
-      <Stat label="filled">{filled} / {cells}</Stat>
-      <Stat label="bins"><span data-testid="bin-count">{bins.length}</span></Stat>
-      <span style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 6 }}>
-        <span style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--valid)" }} />
-        Valid layout · ready to export
+    <footer className="status" data-testid="status-bar">
+      <span>Grid <b className="num">{grid.cols} × {grid.rows}</b></span>
+      <span className="hide-md">Baseplate <b className="num">{grid.cols * GRID_UNIT} × {grid.rows * GRID_UNIT} mm</b></span>
+      <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        Filled <b className="num">{filled}/{cells}</b>
+        <span className="status-meter" aria-hidden><i style={{ transform: `scaleX(${filled / cells})` }} /></span>
       </span>
-    </div>
-  );
-}
-function Stat({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
-      <span style={{ color: "#9097a0" }}>{label}</span>
-      {children}
-    </span>
+      <span>Bins <b className="num" data-testid="bin-count">{bins.length}</b></span>
+      <span className={`status-state${tooTall ? " warn" : ready ? " ok" : ""}`} data-testid="status-state">
+        <i aria-hidden />
+        {tooTall
+          ? `${tooTall} bin${tooTall !== 1 ? "s" : ""} too tall for the drawer`
+          : ready ? "Ready to export" : "Add a bin to export"}
+      </span>
+    </footer>
   );
 }
 
 export default function Editor() {
   const { step, view, selectedId, deleteBin, undo, redo, select, setTool, setStep } = useStore();
-  const [showExport, setShowExport] = useState(false);
   const [showLibrary, setShowLibrary] = useState(false);
+  const showExport = step === "export";
 
-  // The "Export" step in the top bar (and the Export STL button) open the export
-  // modal; closing it returns to the Design step. Driving this off `step` keeps
-  // the top-bar nav highlight in sync with what's on screen.
   useEffect(() => {
-    setShowExport(step === "export");
+    document.title = step === "setup" ? "New drawer — drawr" : "drawr";
   }, [step]);
 
-  // keyboard shortcuts (ignored while typing in an input)
+  // keyboard shortcuts (ignored while typing or while a sheet is open)
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const t = e.target as HTMLElement;
       if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
+      if (showLibrary || showExport || step === "setup") return;
       const mod = e.metaKey || e.ctrlKey;
-      if (mod && e.key.toLowerCase() === "z") {
+      const k = e.key.toLowerCase();
+      if (mod && k === "z") {
         e.preventDefault();
         if (e.shiftKey) redo();
         else undo();
-      } else if (mod && e.key.toLowerCase() === "y") {
+      } else if (mod && k === "y") {
         e.preventDefault();
         redo();
       } else if ((e.key === "Delete" || e.key === "Backspace") && selectedId) {
@@ -115,45 +70,58 @@ export default function Editor() {
         deleteBin(selectedId);
       } else if (e.key === "Escape") {
         select(null);
-      } else if (e.key === "v" || e.key === "V") {
+      } else if (!mod && k === "v") {
         setTool("select");
-      } else if (e.key === "b" || e.key === "B") {
+      } else if (!mod && k === "b") {
         setTool("add");
+      } else if (!mod && k === "h") {
+        setTool("pan");
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [selectedId, deleteBin, undo, redo, select, setTool]);
+  }, [selectedId, deleteBin, undo, redo, select, setTool, showLibrary, showExport, step]);
 
   return (
-    <div style={{ height: "100%", display: "flex", flexDirection: "column", background: "var(--panel)" }}>
-      {step !== "setup" && <TopBar onExport={() => setStep("export")} />}
-
+    <div className="app">
       {step === "setup" ? (
         <Setup />
       ) : (
-        <div style={{ flex: 1, display: "flex", minHeight: 0 }}>
-          <LeftRail onOpenLibrary={() => setShowLibrary(true)} />
-          {view === "2d" ? (
-            <div style={{ flex: 1, position: "relative", display: "flex", minWidth: 0 }}>
-              <Canvas2D />
-              <Palette />
-              <ZoomControl />
-              <Pip3D />
-            </div>
-          ) : (
-            <div style={{ flex: 1, position: "relative", minWidth: 0 }}>
-              <Preview3D />
-            </div>
-          )}
-          <Inspector />
-        </div>
+        <>
+          <Toolbar onExport={() => setStep("export")} onOpenLibrary={() => setShowLibrary(true)} />
+          <div className="workspace">
+            <main className="stage-area" aria-label={view === "2d" ? "Layout canvas" : "3D preview"}>
+              {view === "2d" ? (
+                <>
+                  <Canvas2D />
+                  <Dock />
+                  <ZoomControl />
+                  <FilamentSwatches />
+                  <Pip3D />
+                </>
+              ) : (
+                <>
+                  <Preview3D />
+                  <FilamentSwatches />
+                </>
+              )}
+            </main>
+            <Inspector />
+          </div>
+          <StatusBar />
+        </>
       )}
-
-      {step !== "setup" && <StatusBar />}
 
       {showExport && <ExportModal onClose={() => setStep("design")} />}
       {showLibrary && <LibraryModal onClose={() => setShowLibrary(false)} />}
+
+      <div className="small-screen">
+        <Wordmark size={20} />
+        <Monitor size={40} strokeWidth={1.4} style={{ color: "var(--ink-4)", marginTop: 18 }} />
+        <h1>Open drawr on a bigger screen.</h1>
+        <p>The layout editor needs room to draw. Use an iPad, laptop, or desktop.</p>
+        <Link to="/" className="btn btn-secondary" style={{ marginTop: 6 }}>Back to home</Link>
+      </div>
     </div>
   );
 }

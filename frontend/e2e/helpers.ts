@@ -35,7 +35,7 @@ export async function stubBackend(page: Page) {
     await route.fulfill({
       status: 200,
       contentType: "application/zip",
-      headers: { "Content-Disposition": 'attachment; filename="gridfinity-design.zip"' },
+      headers: { "Content-Disposition": 'attachment; filename="drawr-7x5.zip"' },
       body: Buffer.from([0x50, 0x4b, 0x05, 0x06, ...new Array(18).fill(0)]),
     });
   });

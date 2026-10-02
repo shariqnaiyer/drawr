@@ -1,0 +1,634 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-02T04:29:39.470156+00:00",
+  "title": "Design System: drawr",
+  "extensions": {
+    "colorMeta": {
+      "accent": {
+        "role": "primary",
+        "displayName": "Signal Action Blue",
+        "canonical": "oklch(55.4% 0.200 258.0)",
+        "tonalRamp": [
+          "#00003c",
+          "#002357",
+          "#01408f",
+          "#0860cc",
+          "#2d84ff",
+          "#7daffa",
+          "#b6d3fe",
+          "#e5effe"
+        ],
+        "darkValue": "#2b8bff"
+      },
+      "deep": {
+        "role": "secondary",
+        "displayName": "Spec Navy",
+        "canonical": "oklch(19.6% 0.038 260.5)",
+        "tonalRamp": [
+          "#030b1b",
+          "#1c2739",
+          "#394559",
+          "#5a677c",
+          "#7c8aa0",
+          "#a1afc6",
+          "#c3d2ea",
+          "#e6effe"
+        ]
+      },
+      "on-deep-2": {
+        "role": "secondary",
+        "displayName": "Navy Slate Text",
+        "canonical": "oklch(77.3% 0.035 261.0)",
+        "tonalRamp": [
+          "#040b1a",
+          "#1d2737",
+          "#3b4558",
+          "#5b677a",
+          "#7d8a9f",
+          "#a2afc5",
+          "#c4d2e8",
+          "#e6effe"
+        ]
+      },
+      "filament-graphite": {
+        "role": "tertiary",
+        "displayName": "Graphite (filament)",
+        "canonical": "oklch(41.1% 0.010 286.0)",
+        "tonalRamp": [
+          "#0b0b0f",
+          "#26262b",
+          "#44444a",
+          "#65656c",
+          "#88888f",
+          "#adadb4",
+          "#d0d0d7",
+          "#eeeef5"
+        ],
+        "filamentShades": {
+          "side": "#38383d",
+          "deep": "#2b2b2f",
+          "ink": "#f2f2f5"
+        }
+      },
+      "filament-cloud": {
+        "role": "tertiary",
+        "displayName": "Cloud (filament)",
+        "canonical": "oklch(96.8% 0.003 286.4)",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#262628",
+          "#454546",
+          "#666667",
+          "#89898b",
+          "#aeaeaf",
+          "#d1d1d3",
+          "#eeeef0"
+        ],
+        "filamentShades": {
+          "side": "#dcdce2",
+          "deep": "#c9c9d1",
+          "ink": "#2c2c30"
+        }
+      },
+      "filament-signal": {
+        "role": "tertiary",
+        "displayName": "Signal (filament)",
+        "canonical": "oklch(59.5% 0.204 263.6)",
+        "tonalRamp": [
+          "#00003a",
+          "#000080",
+          "#0230af",
+          "#2359d8",
+          "#4b81f9",
+          "#85adfd",
+          "#bcd1fc",
+          "#e6efff"
+        ],
+        "filamentShades": {
+          "side": "#2a5cd6",
+          "deep": "#1f47ad",
+          "ink": "#ffffff"
+        }
+      },
+      "filament-mint": {
+        "role": "tertiary",
+        "displayName": "Mint (filament)",
+        "canonical": "oklch(73.4% 0.138 164.9)",
+        "tonalRamp": [
+          "#001007",
+          "#022f1f",
+          "#0b523a",
+          "#007956",
+          "#19a176",
+          "#3fc998",
+          "#6aeeba",
+          "#c2fee3"
+        ],
+        "filamentShades": {
+          "side": "#26a578",
+          "deep": "#1b845f",
+          "ink": "#08321f"
+        }
+      },
+      "filament-sun": {
+        "role": "tertiary",
+        "displayName": "Sun (filament)",
+        "canonical": "oklch(85.4% 0.157 84.1)",
+        "tonalRamp": [
+          "#140900",
+          "#342300",
+          "#594000",
+          "#826003",
+          "#ac8219",
+          "#d9a525",
+          "#fdc853",
+          "#feedca"
+        ],
+        "filamentShades": {
+          "side": "#eda90f",
+          "deep": "#c98b00",
+          "ink": "#3d2a00"
+        }
+      },
+      "filament-coral": {
+        "role": "tertiary",
+        "displayName": "Coral (filament)",
+        "canonical": "oklch(70.7% 0.186 30.4)",
+        "tonalRamp": [
+          "#220000",
+          "#500000",
+          "#850500",
+          "#b92415",
+          "#e3503d",
+          "#fc8875",
+          "#fec0b4",
+          "#ffe9e5"
+        ],
+        "filamentShades": {
+          "side": "#e94e39",
+          "deep": "#c23a28",
+          "ink": "#ffffff"
+        }
+      },
+      "filament-lilac": {
+        "role": "tertiary",
+        "displayName": "Lilac (filament)",
+        "canonical": "oklch(71.0% 0.166 291.9)",
+        "tonalRamp": [
+          "#0f002d",
+          "#2d0068",
+          "#4b2894",
+          "#6b4dbb",
+          "#8d72e3",
+          "#b09cff",
+          "#d1c9fd",
+          "#eeecfe"
+        ],
+        "filamentShades": {
+          "side": "#8a6cf0",
+          "deep": "#6d51d0",
+          "ink": "#ffffff"
+        }
+      },
+      "bg": {
+        "role": "neutral",
+        "displayName": "Studio Ground",
+        "canonical": "oklch(97.1% 0.003 286.4)",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#262628",
+          "#454546",
+          "#666667",
+          "#89898b",
+          "#aeaeaf",
+          "#d1d1d3",
+          "#eeeef0"
+        ],
+        "darkValue": "#000000"
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ],
+        "darkValue": "#1c1c1e"
+      },
+      "fill": {
+        "role": "neutral",
+        "displayName": "Quiet Fill",
+        "canonical": "oklch(95.6% 0.004 286.3)",
+        "tonalRamp": [
+          "#0b0b0d",
+          "#262628",
+          "#454547",
+          "#666668",
+          "#89898b",
+          "#adadb0",
+          "#d1d0d3",
+          "#eeeef1"
+        ],
+        "darkValue": "#2c2c2e"
+      },
+      "canvas": {
+        "role": "neutral",
+        "displayName": "Workbench",
+        "canonical": "oklch(94.1% 0.005 286.3)",
+        "tonalRamp": [
+          "#0b0b0d",
+          "#262629",
+          "#454548",
+          "#666669",
+          "#89898c",
+          "#adadb1",
+          "#d0d0d4",
+          "#eeeef2"
+        ],
+        "darkValue": "#121214"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(23.2% 0.004 286.1)",
+        "tonalRamp": [
+          "#0b0b0d",
+          "#262628",
+          "#454547",
+          "#666668",
+          "#89898b",
+          "#adadb0",
+          "#d1d1d3",
+          "#eeeef1"
+        ],
+        "darkValue": "#f5f5f7"
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Ink Tertiary",
+        "canonical": "oklch(54.0% 0.008 286.1)",
+        "tonalRamp": [
+          "#0b0b0e",
+          "#26262a",
+          "#444449",
+          "#65656a",
+          "#88888e",
+          "#adadb3",
+          "#d0d0d6",
+          "#eeeef4"
+        ],
+        "darkValue": "#a1a1a6"
+      },
+      "ok": {
+        "role": "semantic",
+        "displayName": "Fit Green",
+        "canonical": "oklch(61.4% 0.150 152.3)",
+        "tonalRamp": [
+          "#001102",
+          "#003014",
+          "#055329",
+          "#117a40",
+          "#27a25a",
+          "#56c97e",
+          "#7ceda0",
+          "#c8fed6"
+        ],
+        "darkValue": "#34c06a"
+      },
+      "warn": {
+        "role": "semantic",
+        "displayName": "Caution Amber",
+        "canonical": "oklch(59.1% 0.132 65.1)",
+        "tonalRamp": [
+          "#180600",
+          "#3b1f00",
+          "#643900",
+          "#915606",
+          "#bf761b",
+          "#e79b49",
+          "#fdc58e",
+          "#feebd9"
+        ],
+        "darkValue": "#ffb340"
+      },
+      "bad": {
+        "role": "semantic",
+        "displayName": "Collision Red",
+        "canonical": "oklch(59.6% 0.208 28.6)",
+        "tonalRamp": [
+          "#210000",
+          "#4e0302",
+          "#870001",
+          "#c10308",
+          "#ec4337",
+          "#fe8677",
+          "#fcc0b7",
+          "#fee9e6"
+        ],
+        "darkValue": "#ff5147"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Landing hero headline only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Landing section heads."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Sheet titles, bento tile heads, timeline steps."
+      },
+      "title-sm": {
+        "displayName": "Title Sm",
+        "purpose": "Inspector and empty-state headings."
+      },
+      "readout": {
+        "displayName": "Readout",
+        "purpose": "Hero measurement in an inspector section; tabular."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "Text under a headline, ink-3."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Root app text size."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Buttons, segmented items, crumbs."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Meta lines, status bar, badges."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "Literal filenames and code only."
+      }
+    },
+    "shadows": [
+      {
+        "name": "shadow-1",
+        "value": "0 1px 1px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.06)",
+        "purpose": "Resting cards, big Setup fields, dimension chips."
+      },
+      {
+        "name": "shadow-2",
+        "value": "0 1px 2px rgba(0,0,0,0.05), 0 6px 16px -4px rgba(0,0,0,0.1)",
+        "purpose": "Tooltips, timeline glyphs, small floating marks."
+      },
+      {
+        "name": "shadow-3",
+        "value": "0 2px 6px rgba(0,0,0,0.05), 0 24px 48px -16px rgba(20,24,40,0.22)",
+        "purpose": "Floating editor chrome, canvas toasts, card hover, Setup diagram."
+      },
+      {
+        "name": "shadow-4",
+        "value": "0 4px 12px rgba(0,0,0,0.06), 0 50px 100px -20px rgba(30,36,70,0.28), 0 30px 60px -30px rgba(0,0,0,0.3)",
+        "purpose": "Sheets, tablet inspector slide-over, landing editor mock."
+      },
+      {
+        "name": "plate",
+        "value": "0 0 0 1px var(--plate-edge), 0 1px 2px rgba(0,0,0,0.05), 0 24px 60px -24px rgba(20,24,40,0.25)",
+        "purpose": "The baseplate on the canvas."
+      },
+      {
+        "name": "material",
+        "value": "background: var(--chrome); backdrop-filter: saturate(180%) blur(20px)",
+        "purpose": "Translucent toolbar, nav, dock, floating chrome."
+      },
+      {
+        "name": "focus-ring",
+        "value": "outline: 2px solid var(--accent); outline-offset: 2px",
+        "purpose": "Keyboard focus (focus-visible only)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Default for state transitions, sheets, slide-overs."
+      },
+      {
+        "name": "ease-spring",
+        "value": "cubic-bezier(0.3, 1.18, 0.5, 1)",
+        "purpose": "Gentle Apple-style settle: bin seat, switch thumb, isometric drop."
+      },
+      {
+        "name": "t-fast",
+        "value": "140ms",
+        "purpose": "Hover, press, color changes."
+      },
+      {
+        "name": "t-med",
+        "value": "260ms",
+        "purpose": "Switches, card lift, fades, tooltips."
+      },
+      {
+        "name": "t-slow",
+        "value": "520ms",
+        "purpose": "Sheet entry, inspector slide-over."
+      },
+      {
+        "name": "seat",
+        "value": "420ms ease-spring; from translateY(-6px) scale(1.04) opacity .4",
+        "purpose": "A bin seating into the grid."
+      },
+      {
+        "name": "iso-drop",
+        "value": "900ms ease-spring; from translateZ(180px)",
+        "purpose": "Landing hero bins dropping into the plate."
+      },
+      {
+        "name": "sheet-in",
+        "value": "t-slow ease-out; from translateY(14px) scale(0.985) opacity 0",
+        "purpose": "Modal sheet entry."
+      },
+      {
+        "name": "press",
+        "value": "transform: scale(0.97)",
+        "purpose": "Button press feedback."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone",
+        "value": "699px",
+        "purpose": "Editor replaced by bigger-screen notice."
+      },
+      {
+        "name": "compact",
+        "value": "860px",
+        "purpose": "Crumbs and PiP hide."
+      },
+      {
+        "name": "bento-2",
+        "value": "960px",
+        "purpose": "Setup and landing grids collapse."
+      },
+      {
+        "name": "tablet",
+        "value": "1099px",
+        "purpose": "Inspector becomes slide-over."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one filled blue action per view (Export, Open drawr).",
+      "html": "<button class=\"ds-btn ds-btn-primary\"><svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 17V3M6 11l6 6 6-6M19 21H5\"/></svg> Export</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;padding:0 14px;border:0;border-radius:999px;font:500 13px/1 -apple-system,BlinkMacSystemFont,Inter,sans-serif;letter-spacing:-0.005em;cursor:pointer;transition:background 140ms cubic-bezier(0.22,1,0.36,1),transform 140ms cubic-bezier(0.22,1,0.36,1)}.ds-btn:active{transform:scale(0.97)}.ds-btn:focus-visible{outline:2px solid var(--accent,#0a6ce4);outline-offset:2px}.ds-btn-primary{background:var(--accent,#0a6ce4);color:var(--on-accent,#fff)}.ds-btn-primary:hover{background:var(--accent-hover,#0860c9)}.ds-btn-primary:active{background:var(--accent-press,#07539f);transform:scale(0.97)}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Quiet fill pill for supporting actions (Library, Cancel).",
+      "html": "<button class=\"ds-btn ds-btn-secondary\">Library</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;padding:0 14px;border:0;border-radius:999px;font:500 13px/1 -apple-system,BlinkMacSystemFont,Inter,sans-serif;letter-spacing:-0.005em;cursor:pointer;transition:background 140ms cubic-bezier(0.22,1,0.36,1),transform 140ms cubic-bezier(0.22,1,0.36,1)}.ds-btn:active{transform:scale(0.97)}.ds-btn:focus-visible{outline:2px solid var(--accent,#0a6ce4);outline-offset:2px}.ds-btn-secondary{background:var(--fill,#f0f0f3);color:var(--ink,#1d1d1f)}.ds-btn-secondary:hover{background:var(--fill-2,#e8e8ed)}"
+    },
+    {
+      "name": "Icon Button",
+      "kind": "button",
+      "refersTo": "button-icon",
+      "description": "32px rounded-square tool button (undo, redo, delete).",
+      "html": "<button class=\"ds-btn-icon\" aria-label=\"Undo\"><svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 14 4 9l5-5\"/><path d=\"M4 9h10.5a5.5 5.5 0 0 1 0 11H11\"/></svg></button>",
+      "css": ".ds-btn-icon{display:inline-grid;place-items:center;width:32px;height:32px;padding:0;border:0;border-radius:8px;background:transparent;color:var(--ink-2,#515154);cursor:pointer;transition:background 140ms,color 140ms}.ds-btn-icon:hover{background:var(--fill,#f0f0f3);color:var(--ink,#1d1d1f)}.ds-btn-icon:active{transform:scale(0.97)}.ds-btn-icon:focus-visible{outline:2px solid var(--accent,#0a6ce4);outline-offset:2px}"
+    },
+    {
+      "name": "Segmented Control",
+      "kind": "nav",
+      "refersTo": "segmented",
+      "description": "iOS segmented control for 2D/3D, mm/units.",
+      "html": "<div class=\"ds-seg\" role=\"group\"><button aria-pressed=\"true\">2D</button><button aria-pressed=\"false\">3D</button></div>",
+      "css": ".ds-seg{display:inline-flex;gap:2px;padding:2px;border-radius:9px;background:var(--fill,#f0f0f3)}.ds-seg button{height:28px;padding:0 12px;border:0;border-radius:7px;background:transparent;color:var(--ink-2,#515154);font:500 13px -apple-system,BlinkMacSystemFont,Inter,sans-serif;cursor:pointer;transition:color 140ms,background 140ms,box-shadow 140ms}.ds-seg button:hover{color:var(--ink,#1d1d1f)}.ds-seg button[aria-pressed=true]{background:var(--chrome-solid,#fff);color:var(--ink,#1d1d1f);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.1),0 0 0 .5px rgba(0,0,0,.04)}.ds-seg button:focus-visible{outline:2px solid var(--accent,#0a6ce4);outline-offset:2px}"
+    },
+    {
+      "name": "Switch",
+      "kind": "custom",
+      "refersTo": "switch",
+      "description": "iOS switch; on-state is system green.",
+      "html": "<button class=\"ds-switch\" role=\"switch\" aria-checked=\"true\" aria-label=\"Magnet holes\"></button> <button class=\"ds-switch\" role=\"switch\" aria-checked=\"false\" aria-label=\"Scoop\"></button>",
+      "css": ".ds-switch{position:relative;width:38px;height:23px;padding:0;border:0;border-radius:999px;background:var(--fill-2,#e8e8ed);cursor:pointer;transition:background 260ms cubic-bezier(0.22,1,0.36,1);vertical-align:middle}.ds-switch::after{content:'';position:absolute;top:2px;left:2px;width:19px;height:19px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.18),0 0 0 .5px rgba(0,0,0,.04);transition:transform 260ms cubic-bezier(0.3,1.18,0.5,1)}.ds-switch[aria-checked=true]{background:var(--ok,#1f9d55)}.ds-switch[aria-checked=true]::after{transform:translateX(15px)}.ds-switch:focus-visible{outline:2px solid var(--accent,#0a6ce4);outline-offset:2px}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Filled search/text field; focus lifts to paper with a blue ring.",
+      "html": "<label class=\"ds-field\"><input placeholder=\"Search models\"></label>",
+      "css": ".ds-field{display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;border-radius:10px;background:var(--fill,#f0f0f3);border:1px solid transparent;transition:border-color 140ms,box-shadow 140ms,background 140ms}.ds-field:focus-within{background:var(--paper,#fff);border-color:var(--accent,#0a6ce4);box-shadow:0 0 0 3px var(--accent-ring,rgba(10,108,228,.32))}.ds-field input{flex:1;min-width:0;border:0;outline:none;background:transparent;font:14px -apple-system,BlinkMacSystemFont,Inter,sans-serif;color:var(--ink,#1d1d1f)}.ds-field input::placeholder{color:var(--ink-4,#8e8e93)}"
+    },
+    {
+      "name": "Badge",
+      "kind": "chip",
+      "refersTo": "badge",
+      "description": "Meaning-tinted license and status badges.",
+      "html": "<span class=\"ds-badge ds-ok\">MIT</span> <span class=\"ds-badge ds-warn\">CC BY-NC</span> <span class=\"ds-badge\">3×2</span>",
+      "css": ".ds-badge{display:inline-flex;align-items:center;height:20px;padding:0 7px;border-radius:6px;font:600 11px -apple-system,BlinkMacSystemFont,Inter,sans-serif;font-variant-numeric:tabular-nums;background:var(--fill,#f0f0f3);color:var(--ink-2,#515154)}.ds-badge.ds-ok{background:var(--ok-soft,rgba(31,157,85,.1));color:var(--ok-ink,#187a42)}.ds-badge.ds-warn{background:var(--warn-soft,rgba(230,150,20,.12));color:var(--warn,#b26a00)}"
+    },
+    {
+      "name": "Floating Dock",
+      "kind": "nav",
+      "refersTo": "dock",
+      "description": "Translucent material tool dock floating over the canvas.",
+      "html": "<div class=\"ds-dock\"><button aria-pressed=\"true\"><span class=\"ds-g\"></span><span>Draw</span></button><button><span class=\"ds-g\"></span><span>1×1</span></button><button><span class=\"ds-g\"></span><span>2×1</span></button></div>",
+      "css": ".ds-dock{display:inline-flex;gap:2px;padding:5px;border-radius:16px;background:var(--chrome,rgba(255,255,255,.78));backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);box-shadow:0 2px 6px rgba(0,0,0,.05),0 24px 48px -16px rgba(20,24,40,.22),0 0 0 .5px rgba(0,0,0,.16)}.ds-dock button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:42px;height:46px;padding:0 7px;border:0;border-radius:11px;background:transparent;color:var(--ink-2,#515154);font:600 10px -apple-system,BlinkMacSystemFont,Inter,sans-serif;letter-spacing:.01em;cursor:pointer;transition:background 140ms,color 140ms}.ds-dock button:hover{background:var(--fill,#f0f0f3);color:var(--ink,#1d1d1f)}.ds-dock button[aria-pressed=true]{background:var(--accent-soft,rgba(10,108,228,.09));color:var(--accent-ink,#0a5bc0)}.ds-dock button:focus-visible{outline:2px solid var(--accent,#0a6ce4);outline-offset:2px}.ds-g{width:14px;height:14px;border-radius:3px;background:currentColor;opacity:.85}"
+    },
+    {
+      "name": "Bin",
+      "kind": "custom",
+      "refersTo": "bin",
+      "description": "A printed part drawn as a lit solid from its filament; selected state shown.",
+      "html": "<div class=\"ds-plate\"><div class=\"ds-bin\"><div class=\"ds-bin-body\"><div class=\"ds-cav\"></div><span>2×1</span></div></div><div class=\"ds-bin ds-sel\"><div class=\"ds-bin-body ds-sun\"><div class=\"ds-cav\"></div><span>1×1</span></div></div></div>",
+      "css": ".ds-plate{display:inline-flex;gap:0;padding:12px;border-radius:16px;background:var(--plate,#fdfdfe);box-shadow:0 0 0 1px rgba(0,0,0,.08),0 24px 60px -24px rgba(20,24,40,.25)}.ds-bin{padding:3px;width:120px;height:60px}.ds-bin.ds-sel{width:60px}.ds-bin-body{position:relative;height:100%;border-radius:9px;background:linear-gradient(170deg,#4a4a50,#4a4a50 55%,#38383d);display:grid;place-items:center;color:#f2f2f5;font:600 12px -apple-system,BlinkMacSystemFont,Inter,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.01em;transition:transform 260ms cubic-bezier(0.22,1,0.36,1),box-shadow 260ms;animation:ds-seat 420ms cubic-bezier(0.3,1.18,0.5,1) both}.ds-bin:hover .ds-bin-body{transform:translateY(-1px)}.ds-cav{position:absolute;inset:5px;border-radius:6px;background:linear-gradient(180deg,#2b2b2f,#38383d)}.ds-bin-body span{position:relative}.ds-sun{background:linear-gradient(170deg,#ffc53d,#ffc53d 55%,#eda90f);color:#3d2a00}.ds-sun .ds-cav{background:linear-gradient(180deg,#c98b00,#eda90f)}.ds-sel .ds-bin-body{box-shadow:0 0 0 2px var(--plate,#fdfdfe),0 0 0 4px var(--accent,#0a6ce4),0 10px 24px -6px rgba(10,60,140,.35)}@keyframes ds-seat{0%{transform:translateY(-6px) scale(1.04);opacity:.4}60%{opacity:1}100%{transform:none;opacity:1}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Drawer Is the Product Shot",
+    "overview": "**Creative North Star: \"The Drawer Is the Product Shot\"**\n\ndrawr is built the way Apple renders a product and Stripe annotates a number. The interface is a quiet greyscale room (cool off-white ground, white paper, translucent chrome) whose only job is to present one object: a baseplate full of printed bins, lit like a studio render and labelled like an engineering drawing. Everything that is not the drawer recedes; everything that is a measurement is set precisely, in the UI face, with tabular figures.\n\nColor is a material property, not a decoration. Only printed parts carry saturated color, and they draw it from a fixed seven-colour filament lineup (`frontend/src/lib/filament.ts`), each filament defined as face, side, deep and ink shades so a bin reads as a lit solid in 2D, in the isometric landing render, and in the 3D preview alike. The interface itself owns exactly one chromatic voice: an interactive blue that marks what you can press and what is selected. Brand moments borrow two Stripe devices: a deep navy band for the specification, and a skewed, slowly drifting field of blurred filament colours behind the hero drawer.\n\nDensity follows the surface. The landing page is spacious and centred, with large tightly-tracked headlines. The editor is a dense, calm workbench: a 52px translucent toolbar, a dotted canvas, a floating dock, and a 320px inspector of iOS-style grouped rows, switches, steppers and segmented controls. Motion has one grammar: things drop and seat into the grid with a gentle spring, and chrome slides or fades with a long ease-out. Light and dark themes are both first-class; dark maps the same roles onto Apple's black/graphite system greys.",
+    "keyCharacteristics": [
+      "Greyscale chrome, one interactive blue, colour only on printed parts.",
+      "SF system type (Inter fallback) with tabular numerals for every measurement; mono only for literal filenames.",
+      "Pill buttons, iOS switches and segmented controls, translucent blurred toolbars and docks, modal sheets.",
+      "Hairline rings (0.5 to 1px translucent black) instead of hard borders; layered soft shadows for lift.",
+      "Stripe-style dimension annotations and line-item tables; a navy spec band for brand moments.",
+      "Motion = drop, seat, settle (spring `cubic-bezier(0.3, 1.18, 0.5, 1)`)."
+    ],
+    "rules": [
+      {
+        "name": "The Filament Rule",
+        "body": "Saturated colour belongs to printed parts only. Bins, model footprints and their swatches wear the filament lineup; toolbars, panels, buttons and text never do. If a new surface wants colour, it must be showing a part.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Blue Rule",
+        "body": "`accent` is the only interactive hue, and a view shows at most one primary (filled blue) button. Selection, focus and \"pressed tool\" all speak blue. The sole exception is the iOS switch, whose on-state is system green (`ok`), as on Apple platforms.",
+        "section": "colors"
+      },
+      {
+        "name": "The Navy Band Rule",
+        "body": "`deep` appears as a full-bleed band carrying specification content, nowhere else. It is a brand moment, not a theme.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tabular Rule",
+        "body": "Every measurement (mm, U, counts, zoom %) is set in the UI face with `font-variant-numeric: tabular-nums` (`.num`). Monospace is reserved for literal filenames and code, such as the STL names inside the export ZIP.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tightening Rule",
+        "body": "Tracking tightens as size grows: about -0.01em at 14px, -0.025em at 22px, -0.038em at 52px, -0.04em at 84px. Small text (10 to 11px labels) stays at 0 to +0.01em. No uppercase labels; hierarchy comes from weight and ink step.",
+        "section": "typography"
+      },
+      {
+        "name": "The Float Rule",
+        "body": "Anything floating over the canvas or page is translucent material: `chrome` background, `backdrop-filter: saturate(180%) blur(20px)`, `shadow-3`, and a 0.5px `line-strong` ring. Toolbars and the landing nav use the same material without the shadow.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Hairline Rule",
+        "body": "Containers are defined by 0.5 to 1px translucent rings (`box-shadow: 0 0 0 1px var(--line)`) or `line-2` dividers, not opaque borders. Grouped rows divide with `line-2` between items, never around the outside of each.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Pill Rule",
+        "body": "Text buttons, chips, tooltips, toasts and the zoom control are full pills (`rounded.pill`). Icon-only buttons are 32px squares at `rounded.sm`. Never mix the two shapes on one control.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "**Do** let the drawer be the largest, most lit object on any surface; chrome sits in greyscale around it.",
+      "**Do** colour parts from `FILAMENTS` in `frontend/src/lib/filament.ts` using all four shades (face, side, deep, ink) so a part reads as a solid.",
+      "**Do** set every measurement with `.num` (tabular figures in the UI face) and show units (mm, U) beside the value in `ink-3`.",
+      "**Do** use pills for text actions, 32px rounded squares for icon tools, iOS switches for booleans, segmented controls for 2 to 4 exclusive choices, and sheets for modal tasks.",
+      "**Do** float over-canvas chrome as translucent material: `chrome` + `saturate(180%) blur(20px)` + `shadow-3` + 0.5px `line-strong` ring.",
+      "**Do** animate placement with drop-and-seat on `--ease-spring`, and everything else with `--ease-out` at `--t-fast` (140ms), `--t-med` (260ms) or `--t-slow` (520ms). Respect `prefers-reduced-motion`.",
+      "**Do** define every new colour as a token on `:root` with a dark-theme value in the `prefers-color-scheme: dark` block.",
+      "**Do** write the product name as lowercase **drawr**, always."
+    ],
+    "donts": [
+      "**Don't** put filament colours (or any saturated hue besides `accent` and the semantic set) on interface chrome, text or icons.",
+      "**Don't** show more than one filled `accent` button in a view, or use blue for anything that is not interactive or selected.",
+      "**Don't** use monospace for numbers or measurements; mono is for filenames and code only.",
+      "**Don't** use opaque 1px grey borders around containers; use translucent hairline rings and `line-2` dividers.",
+      "**Don't** add uppercase eyebrow or kicker labels above headings; hierarchy comes from size, weight and ink.",
+      "**Don't** use the navy `deep` band inside the editor or as a general dark theme.",
+      "**Don't** hard-code hex values in components; reference the `:root` tokens or the filament table."
+    ]
+  }
+}

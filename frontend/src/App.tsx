@@ -9,18 +9,18 @@ const Editor = lazy(() => import("./pages/Editor"));
 function RouteFallback() {
   return (
     <div
+      role="status"
       style={{
         height: "100%",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "var(--canvas)",
-        color: "#9aa3ad",
-        fontFamily: "'IBM Plex Mono', monospace",
+        background: "var(--bg)",
+        color: "var(--ink-3)",
         fontSize: 13,
       }}
     >
-      Loading editor…
+      Loading drawr…
     </div>
   );
 }

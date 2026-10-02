@@ -68,7 +68,7 @@ test.describe("Editor", () => {
 
     await page.getByTestId("height-slider").fill("12");
     await expect(page.getByTestId("status-bar")).toBeVisible();
-    await expect(page.getByText(/84 mm · 12 U/)).toBeVisible();
+    await expect(page.getByTestId("height-readout")).toHaveText(/84 mm · 12 U/);
 
     const scoop = page.getByTestId("toggle-scoop");
     await expect(scoop).toHaveAttribute("aria-checked", "true");

@@ -25,3 +25,8 @@ frontend/.vercel/
 # misc
 .DS_Store
 /tmp/
+.vercel
+.env*
+
+# design review screenshots (local only)
+frontend/.impeccable/

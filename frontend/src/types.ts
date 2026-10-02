@@ -37,6 +37,15 @@ export interface Bin {
   source?: { title: string; url: string; license: string };
 }
 
+/** The physical drawer the grid was sized for (all inner dimensions, mm). */
+export interface DrawerSpec {
+  widthMm: number;
+  depthMm: number;
+  heightMm: number | null; // inner height, when known — limits bin height
+  presetId: string | null; // a common drawer from src/drawers, if one was picked
+  label: string | null;
+}
+
 export interface Grid {
   cols: number;
   rows: number;

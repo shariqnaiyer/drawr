@@ -1,291 +1,349 @@
-import { Copy, Trash2, Tag, Utensils, Magnet, CircleDot, MousePointerClick, ExternalLink, Package, Square, Sparkles } from "lucide-react";
+import type { CSSProperties, ReactNode } from "react";
+import {
+  Copy, Trash2, Tag, Magnet, CircleDot, ExternalLink, Package, Square, Sparkles, X,
+  Minus, Plus, MousePointerClick, Waves,
+} from "lucide-react";
 import { useStore } from "../store";
 import { GRID_UNIT, HEIGHT_UNIT } from "../types";
 import type { Bin } from "../types";
 import { licenseInfo } from "../catalog";
+import { filament as getFilament } from "../lib/filament";
+import { FootprintGlyph, Segmented, Switch } from "./ui";
+import { maxBinU, MIN_BIN_U, MAX_BIN_U } from "../lib/fit";
 
 const HEIGHT_PRESETS = [3, 6, 12];
+const mm = (u: number) => u * GRID_UNIT - 0.5; // bin footprint is 0.5 mm under pitch
 
 export function Inspector() {
-  const { bins, selectedId, updateBin, resizeBin, deleteBin, duplicateBin, applyToAll } = useStore();
+  const { bins, selectedId, select } = useStore();
   const bin = bins.find((b) => b.id === selectedId) || null;
 
-  if (bin && bin.kind === "model" && bin.model) {
-    return <ModelInspector key={bin.id} bin={bin} />;
-  }
+  return (
+    <aside className={`inspector${bin ? " open" : ""}`} aria-label="Inspector">
+      {bin?.kind === "model" && bin.model ? (
+        <ModelInspector key={bin.id} bin={bin} onClose={() => select(null)} />
+      ) : bin ? (
+        <BinInspector key={bin.id} bin={bin} onClose={() => select(null)} />
+      ) : (
+        <LayoutSummary />
+      )}
+    </aside>
+  );
+}
 
-  if (!bin) {
-    return (
-      <Panel>
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 12, color: "var(--muted-2)", padding: 24, textAlign: "center" }}>
-          <MousePointerClick size={28} style={{ opacity: 0.5 }} />
-          <div style={{ fontSize: 13, fontWeight: 600, color: "var(--muted)" }}>No bin selected</div>
-          <div style={{ fontSize: 12 }}>Pick a footprint from the palette and click the grid to place a bin, then select it to edit.</div>
+// ---- nothing selected: document info + shortcuts ------------------------------
+
+function LayoutSummary() {
+  const { grid, bins, drawer } = useStore();
+  const filled = bins.reduce((n, b) => n + b.w * b.d, 0);
+  const maxU = maxBinU(drawer?.heightMm);
+  const unique = new Set(
+    bins.filter((b) => b.kind !== "model").map((b) => JSON.stringify([b.w, b.d, b.heightU, b.comp, b.label, b.scoop, b.magnetHoles, b.screwHoles, !!b.solid])),
+  ).size;
+  return (
+    <>
+      <div className="insp-body">
+        <div className="empty-insp">
+          <MousePointerClick size={30} strokeWidth={1.5} style={{ color: "var(--ink-4)" }} />
+          <h3>No bin selected</h3>
+          <p>Select a bin to change its size, height, dividers and features.</p>
         </div>
-      </Panel>
-    );
-  }
+        <Section title="Layout">
+          <dl className="dl">
+            {drawer?.label && <><dt>Drawer</dt><dd style={{ maxWidth: 170 }}>{drawer.label}</dd></>}
+            {drawer && <><dt>Inside</dt><dd className="num">{Math.round(drawer.widthMm)} × {Math.round(drawer.depthMm)}{drawer.heightMm ? ` × ${Math.round(drawer.heightMm)}` : ""} mm</dd></>}
+            <dt>Grid</dt><dd className="num">{grid.cols} × {grid.rows} units</dd>
+            <dt>Baseplate</dt><dd className="num">{grid.cols * GRID_UNIT} × {grid.rows * GRID_UNIT} mm</dd>
+            <dt>Cells filled</dt><dd className="num">{filled} of {grid.cols * grid.rows}</dd>
+            <dt>Bins</dt><dd className="num">{bins.length}</dd>
+            <dt>Unique parts</dt><dd className="num">{unique}</dd>
+            {maxU !== null && <><dt>Tallest bin</dt><dd className="num">{maxU} U</dd></>}
+          </dl>
+        </Section>
+        <Section title="Shortcuts">
+          <div className="keys">
+            <span>Select</span><kbd><span>V</span></kbd>
+            <span>Draw</span><kbd><span>B</span></kbd>
+            <span>Pan</span><kbd><span>H</span></kbd>
+            <span>Delete</span><kbd><span>⌫</span></kbd>
+            <span>Undo</span><kbd><span>⌘</span><span>Z</span></kbd>
+            <span>Redo</span><kbd><span>⇧</span><span>⌘</span><span>Z</span></kbd>
+            <span>Deselect</span><kbd><span>esc</span></kbd>
+          </div>
+        </Section>
+      </div>
+    </>
+  );
+}
 
-  const sameSize = bins.filter(
-    (b) => b.w === bin.w && b.d === bin.d && b.heightU === bin.heightU,
-  ).length;
+// ---- a generated bin -------------------------------------------------------------
+
+function BinInspector({ bin, onClose }: { bin: Bin; onClose: () => void }) {
+  const { bins, filament, drawer, updateBin, resizeBin, deleteBin, duplicateBin, applyToAll } = useStore();
+  const fil = getFilament(filament);
+  const sameSize = bins.filter((b) => b.w === bin.w && b.d === bin.d && b.heightU === bin.heightU).length;
+  const pct = ((bin.heightU - MIN_BIN_U) / (MAX_BIN_U - MIN_BIN_U)) * 100;
+  const maxU = maxBinU(drawer?.heightMm);
 
   return (
-    <Panel>
-      {/* header */}
-      <div style={{ padding: "14px 16px 12px", borderBottom: "1px solid var(--hairline-2)", display: "flex", flexDirection: "column", gap: 11 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,7px)", gridTemplateRows: "repeat(2,7px)", gap: 2, padding: 5, background: "var(--accent-soft)", borderRadius: 7 }}>
-            {Array.from({ length: 6 }).map((_, i) => (
-              <span key={i} style={{ width: 7, height: 7, background: "var(--accent)", borderRadius: 1.5 }} />
-            ))}
-          </div>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontSize: 14, fontWeight: 600 }}>Bin · {bin.w}×{bin.d}</div>
-            <div className="mono" style={{ fontSize: 11, color: "var(--muted-2)" }}>
-              {bin.w * GRID_UNIT - 0.5} × {bin.d * GRID_UNIT - 0.5} mm footprint
-            </div>
-          </div>
-          <div style={{ display: "flex", gap: 4 }}>
-            <IconBtn testid="inspector-duplicate" onClick={() => duplicateBin(bin.id)}><Copy size={15} /></IconBtn>
-            <IconBtn testid="inspector-delete" danger onClick={() => deleteBin(bin.id)}><Trash2 size={15} /></IconBtn>
-          </div>
-        </div>
-      </div>
+    <>
+      <Header
+        thumb={<FootprintGlyph w={bin.w} d={bin.d} color={fil.face} cell={bin.w > 3 || bin.d > 3 ? 4 : 7} gap={1.5} />}
+        title={`Bin · ${bin.w}×${bin.d}`}
+        sub={<span className="num">{mm(bin.w)} × {mm(bin.d)} mm footprint</span>}
+        onDuplicate={() => duplicateBin(bin.id)}
+        onDelete={() => deleteBin(bin.id)}
+        onClose={onClose}
+      />
 
-      <div style={{ flex: 1, overflow: "auto", padding: "4px 0" }}>
-        {/* generator provenance — this is a real bin we generated, attributed
-            to the community generator it was discovered from */}
+      <div className="insp-body">
         {bin.source && (
-          <div style={{ margin: "8px 16px 0", padding: "8px 10px", background: "#e6f3ec", border: "1px solid #bfe3cf", borderRadius: 8, fontSize: 12, color: "#1f7a4d", display: "flex", alignItems: "center", gap: 7 }}>
-            <Sparkles size={14} />
-            <span style={{ flex: 1 }}>Generated · inspired by {bin.source.title}</span>
-            <a href={bin.source.url} target="_blank" rel="noreferrer" data-testid="bin-source" style={{ color: "#1f7a4d" }}><ExternalLink size={13} /></a>
+          <div className="callout ok">
+            <Sparkles size={15} style={{ flexShrink: 0, marginTop: 1 }} />
+            <span style={{ flex: 1 }}>
+              Generated by drawr, based on{" "}
+              <a href={bin.source.url} target="_blank" rel="noreferrer" data-testid="bin-source">
+                {bin.source.title}
+              </a>{" "}
+              ({bin.source.license}).
+            </span>
           </div>
         )}
-        {/* footprint */}
-        <Section title="Footprint" right={`${bin.w * GRID_UNIT - 0.5} × ${bin.d * GRID_UNIT - 0.5} mm`}>
-          <div style={{ display: "flex", gap: 8 }}>
-            <Stepper testid="footprint-w" label="Width (U)" value={bin.w} onChange={(v) => resizeBin(bin.id, v, bin.d)} />
-            <Stepper testid="footprint-d" label="Depth (U)" value={bin.d} onChange={(v) => resizeBin(bin.id, bin.w, v)} />
+
+        <Section title="Footprint" meta={<span className="num">{bin.w} × {bin.d} U</span>}>
+          <div style={{ display: "flex", gap: 10 }}>
+            <Stepper testid="footprint-w" label="Width" value={bin.w} onChange={(v) => resizeBin(bin.id, v, bin.d)} />
+            <Stepper testid="footprint-d" label="Depth" value={bin.d} onChange={(v) => resizeBin(bin.id, bin.w, v)} />
           </div>
         </Section>
 
-        {/* height */}
-        <Section title="Height" right={`${bin.heightU * HEIGHT_UNIT} mm · ${bin.heightU} U`}>
-          <div style={{ display: "flex", gap: 5 }}>
-            {HEIGHT_PRESETS.map((u) => (
-              <HeightChip key={u} active={bin.heightU === u} onClick={() => updateBin(bin.id, { heightU: u })}>
-                {u}U
-              </HeightChip>
-            ))}
-            <HeightChip active={!HEIGHT_PRESETS.includes(bin.heightU)} onClick={() => {}}>
-              Custom
-            </HeightChip>
+        <Section title="Height">
+          <div className="height-readout" data-testid="height-readout">
+            <b className="num">{bin.heightU * HEIGHT_UNIT}</b>
+            <span> mm</span>
+            <span className="num" style={{ marginLeft: "auto" }}><span className="sr-only"> · </span>{bin.heightU} U</span>
           </div>
-          <input
-            type="range" min={2} max={20} value={bin.heightU} data-testid="height-slider"
-            onChange={(e) => updateBin(bin.id, { heightU: Number(e.target.value) })}
-            style={{ width: "100%", marginTop: 12, accentColor: "var(--accent)" }}
+          <Segmented
+            label="Height presets"
+            size="sm"
+            value={HEIGHT_PRESETS.includes(bin.heightU) ? String(bin.heightU) : "custom"}
+            onChange={(v) => v !== "custom" && updateBin(bin.id, { heightU: Number(v) })}
+            options={[
+              ...HEIGHT_PRESETS.map((u) => ({ value: String(u), label: <span className="num">{u}U</span> })),
+              { value: "custom", label: "Custom" },
+            ]}
           />
+          <input
+            type="range" className="range" min={2} max={20} value={bin.heightU} data-testid="height-slider"
+            aria-label="Height in units"
+            onChange={(e) => updateBin(bin.id, { heightU: Number(e.target.value) })}
+            style={{ marginTop: 12, ["--pct" as string]: `${pct}%`, ...limitVar(maxU) }}
+          />
+          <HeightLimit heightU={bin.heightU} maxU={maxU} drawerMm={drawer?.heightMm ?? null} onFit={(u) => updateBin(bin.id, { heightU: u })} />
         </Section>
 
-        {/* compartments */}
-        <Section title="Compartments" right={`${bin.comp.cols} × ${bin.comp.rows}`}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ display: "flex", gap: 3, width: 96, height: 40, padding: 4, background: "var(--surface)", border: "1px solid #e8ebee", borderRadius: 7 }}>
-              {Array.from({ length: bin.comp.cols }).map((_, c) => (
-                <div key={c} style={{ flex: 1, display: "flex", flexDirection: "column", gap: 3 }}>
-                  {Array.from({ length: bin.comp.rows }).map((_, r) => (
-                    <div key={r} style={{ flex: 1, background: "#fff", border: "1px solid #dde1e5", borderRadius: 3 }} />
-                  ))}
-                </div>
-              ))}
+        <Section title="Compartments" meta={<span className="num">{bin.comp.cols} × {bin.comp.rows}</span>}>
+          <div style={{ display: "flex", alignItems: "flex-end", gap: 12 }}>
+            <div
+              className="comp-preview"
+              aria-hidden
+              style={{ gridTemplateColumns: `repeat(${bin.comp.cols}, 1fr)`, gridTemplateRows: `repeat(${bin.comp.rows}, 1fr)`, opacity: bin.solid ? 0.4 : 1 }}
+            >
+              {Array.from({ length: Math.min(bin.comp.cols * bin.comp.rows, 64) }).map((_, i) => <span key={i} />)}
             </div>
-            <div style={{ flex: 1, display: "flex", gap: 6 }}>
-              <Stepper testid="comp-cols" label="Cols" value={bin.comp.cols} min={1}
+            <div style={{ flex: 1, display: "flex", gap: 8 }}>
+              <Stepper testid="comp-cols" label="Across" value={bin.comp.cols}
                 onChange={(v) => updateBin(bin.id, { comp: { ...bin.comp, cols: v } })} />
-              <Stepper testid="comp-rows" label="Rows" value={bin.comp.rows} min={1}
+              <Stepper testid="comp-rows" label="Down" value={bin.comp.rows}
                 onChange={(v) => updateBin(bin.id, { comp: { ...bin.comp, rows: v } })} />
             </div>
           </div>
         </Section>
 
-        {/* features */}
-        <div style={{ padding: "13px 16px" }}>
-          <div className="section-label" style={{ marginBottom: 10 }}>Features</div>
-          <Toggle testid="toggle-solid" icon={<Square size={16} />} label="Solid (lid / spacer)" value={!!bin.solid} onChange={(v) => updateBin(bin.id, { solid: v })} />
-          <Toggle testid="toggle-label" icon={<Tag size={16} />} label="Label tab" value={bin.label} onChange={(v) => updateBin(bin.id, { label: v })} />
-          <Toggle testid="toggle-scoop" icon={<Utensils size={16} />} label="Scoop ramp" value={bin.scoop} onChange={(v) => updateBin(bin.id, { scoop: v })} />
-          <Toggle testid="toggle-magnet" icon={<Magnet size={16} />} label="Magnet holes" value={bin.magnetHoles} onChange={(v) => updateBin(bin.id, { magnetHoles: v })} />
-          <Toggle testid="toggle-screw" icon={<CircleDot size={16} />} label="Screw holes" value={bin.screwHoles} onChange={(v) => updateBin(bin.id, { screwHoles: v })} />
-        </div>
+        <Section title="Features">
+          <div className="rows">
+            <FeatureRow testid="toggle-solid" icon={<Square size={17} />} label="Solid" desc="Lid or spacer, no cavity"
+              value={!!bin.solid} onChange={(v) => updateBin(bin.id, { solid: v })} />
+            <FeatureRow testid="toggle-label" icon={<Tag size={17} />} label="Label tab"
+              value={bin.label} onChange={(v) => updateBin(bin.id, { label: v })} />
+            <FeatureRow testid="toggle-scoop" icon={<Waves size={17} />} label="Scoop" desc="Curved front for easy picking"
+              value={bin.scoop} onChange={(v) => updateBin(bin.id, { scoop: v })} />
+            <FeatureRow testid="toggle-magnet" icon={<Magnet size={17} />} label="Magnet holes" desc="Ø6 × 2 mm"
+              value={bin.magnetHoles} onChange={(v) => updateBin(bin.id, { magnetHoles: v })} />
+            <FeatureRow testid="toggle-screw" icon={<CircleDot size={17} />} label="Screw holes" desc="M3"
+              value={bin.screwHoles} onChange={(v) => updateBin(bin.id, { screwHoles: v })} />
+          </div>
+        </Section>
       </div>
 
-      {/* footer */}
-      <div style={{ padding: "11px 16px", borderTop: "1px solid var(--hairline-2)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <span style={{ fontSize: 11, color: "#9097a0" }}>{sameSize} bin{sameSize !== 1 ? "s" : ""} share this size</span>
-        <span data-testid="apply-to-all" onClick={() => applyToAll(bin.id)} style={{ fontSize: 12, fontWeight: 600, color: "var(--accent)", cursor: "pointer" }}>
+      <div className="insp-foot">
+        <span>{sameSize === 1 ? "No other bins share this size" : `${sameSize} bins share this size`}</span>
+        <button type="button" className="btn btn-plain" data-testid="apply-to-all" onClick={() => applyToAll(bin.id)}
+          title="Copy height, compartments and features to every bin">
           Apply to all
-        </span>
+        </button>
       </div>
-    </Panel>
+    </>
   );
 }
 
-const MODEL_TONE: Record<string, string> = {
-  ok: "#1f7a4d", attribution: "var(--accent-ink)", noncommercial: "#9a6a16", restricted: "#b4322f",
-};
+// ---- an imported community model ----------------------------------------------------
 
-function ModelInspector({ bin }: { bin: Bin }) {
-  const { resizeBin, updateBin, duplicateBin, deleteBin } = useStore();
+function ModelInspector({ bin, onClose }: { bin: Bin; onClose: () => void }) {
+  const { resizeBin, updateBin, duplicateBin, deleteBin, drawer } = useStore();
+  const maxU = maxBinU(drawer?.heightMm);
   const model = bin.model!;
   const lic = licenseInfo(model.license);
-  return (
-    <Panel>
-      <div style={{ padding: "14px 16px 12px", borderBottom: "1px solid var(--hairline-2)", display: "flex", flexDirection: "column", gap: 11 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 34, height: 34, background: "#e9eefb", borderRadius: 8 }}>
-            <Package size={18} style={{ color: "var(--accent)" }} />
-          </div>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontSize: 13, fontWeight: 600, lineHeight: 1.25 }}>{model.title}</div>
-            <div style={{ fontSize: 11, color: "var(--muted-2)" }}>by {model.author}</div>
-          </div>
-          <div style={{ display: "flex", gap: 4 }}>
-            <IconBtn testid="inspector-duplicate" onClick={() => duplicateBin(bin.id)}><Copy size={15} /></IconBtn>
-            <IconBtn testid="inspector-delete" danger onClick={() => deleteBin(bin.id)}><Trash2 size={15} /></IconBtn>
-          </div>
-        </div>
-      </div>
+  const tone = lic.tone === "ok" ? "ok" : lic.tone === "attribution" ? "accent" : lic.tone === "noncommercial" ? "warn" : "bad";
+  const pct = ((bin.heightU - 2) / 18) * 100;
+  const sourceName = model.source.charAt(0).toUpperCase() + model.source.slice(1);
 
-      <div style={{ flex: 1, overflow: "auto", padding: "4px 0" }}>
-        {/* editable footprint — community models rarely publish their exact grid
-            size, so set it to match the part you'll print */}
-        <Section title="Footprint" right={`${bin.w * GRID_UNIT - 0.5} × ${bin.d * GRID_UNIT - 0.5} mm`}>
-          <div style={{ display: "flex", gap: 8 }}>
-            <Stepper testid="footprint-w" label="Width (U)" value={bin.w} onChange={(v) => resizeBin(bin.id, v, bin.d)} />
-            <Stepper testid="footprint-d" label="Depth (U)" value={bin.d} onChange={(v) => resizeBin(bin.id, bin.w, v)} />
+  return (
+    <>
+      <Header
+        thumb={model.thumbnail ? <img src={model.thumbnail} alt="" referrerPolicy="no-referrer" /> : <Package size={20} style={{ color: "var(--ink-3)" }} />}
+        title={model.title}
+        sub={<>by {model.author}</>}
+        onDuplicate={() => duplicateBin(bin.id)}
+        onDelete={() => deleteBin(bin.id)}
+        onClose={onClose}
+      />
+      <div className="insp-body">
+        <Section title="Footprint" meta={<span className="num">{mm(bin.w)} × {mm(bin.d)} mm</span>}>
+          <div style={{ display: "flex", gap: 10 }}>
+            <Stepper testid="footprint-w" label="Width" value={bin.w} onChange={(v) => resizeBin(bin.id, v, bin.d)} />
+            <Stepper testid="footprint-d" label="Depth" value={bin.d} onChange={(v) => resizeBin(bin.id, bin.w, v)} />
           </div>
+          <p style={{ fontSize: 12, color: "var(--ink-3)", marginTop: 8 }}>
+            Match this to the size of the part you'll print.
+          </p>
         </Section>
-        <Section title="Height" right={`${bin.heightU * HEIGHT_UNIT} mm · ${bin.heightU} U`}>
+        <Section title="Height" meta={<span className="num">{bin.heightU * HEIGHT_UNIT} mm · {bin.heightU} U</span>}>
           <input
-            type="range" min={2} max={20} value={bin.heightU} data-testid="height-slider"
+            type="range" className="range" min={2} max={20} value={bin.heightU} data-testid="height-slider"
+            aria-label="Height in units"
             onChange={(e) => updateBin(bin.id, { heightU: Number(e.target.value) })}
-            style={{ width: "100%", accentColor: "var(--accent)" }}
+            style={{ ["--pct" as string]: `${pct}%`, ...limitVar(maxU) }}
           />
+          <HeightLimit heightU={bin.heightU} maxU={maxU} drawerMm={drawer?.heightMm ?? null} onFit={(u) => updateBin(bin.id, { heightU: u })} />
         </Section>
         <Section title="License">
           <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-            <span style={{ fontSize: 12, fontWeight: 600, padding: "3px 9px", borderRadius: 6, background: "var(--surface)", border: "1px solid var(--hairline)", color: MODEL_TONE[lic.tone] }}>
-              {lic.label}
-            </span>
-            {lic.nonCommercial && (
-              <span style={{ fontSize: 12, padding: "3px 9px", borderRadius: 6, background: "#fdf1dd", border: "1px solid #f0dcae", color: "#9a6a16" }}>
-                Non-commercial
-              </span>
-            )}
+            <span className={`badge ${tone}`}>{lic.label}</span>
+            {lic.nonCommercial && <span className="badge warn">Non-commercial</span>}
           </div>
         </Section>
-        <div style={{ padding: "13px 16px" }}>
-          <a href={model.sourceUrl} target="_blank" rel="noreferrer" className="btn-ghost" data-testid="model-source"
-            style={{ width: "100%", justifyContent: "center", textDecoration: "none" }}>
-            <ExternalLink size={15} /> Download from {model.source}
+        <Section title="Get the file">
+          <a href={model.sourceUrl} target="_blank" rel="noreferrer" className="btn btn-secondary" data-testid="model-source"
+            style={{ width: "100%", height: 36 }}>
+            <ExternalLink size={15} /> Download from {sourceName}
           </a>
-          <div style={{ fontSize: 12, color: "var(--muted-2)", marginTop: 10, lineHeight: 1.5 }}>
-            This community model isn't generated by Studio. It reserves grid space and is
-            credited on export — download the file from the source and follow its license.
-          </div>
-        </div>
+          <p style={{ fontSize: 12, color: "var(--ink-3)", marginTop: 10, lineHeight: 1.5 }}>
+            drawr doesn't generate community models. This one reserves space on your grid and is
+            credited in your export. Download it from the source and follow its license.
+          </p>
+        </Section>
       </div>
-    </Panel>
+    </>
   );
 }
 
-function Panel({ children }: { children: React.ReactNode }) {
+// ---- building blocks ------------------------------------------------------------------
+
+/** CSS var that shades the slider track beyond the drawer's height limit. */
+function limitVar(maxU: number | null): CSSProperties {
+  if (maxU === null || maxU >= MAX_BIN_U) return {};
+  const p = Math.max(0, ((maxU - MIN_BIN_U) / (MAX_BIN_U - MIN_BIN_U)) * 100);
+  return { ["--limit" as string]: `${p}%` };
+}
+
+function HeightLimit({ heightU, maxU, drawerMm, onFit }: { heightU: number; maxU: number | null; drawerMm: number | null; onFit: (u: number) => void }) {
+  if (maxU === null || drawerMm === null) return null;
+  if (maxU < MIN_BIN_U) {
+    return <p className="height-limit bad" role="status">This drawer is too shallow for any bin ({Math.round(drawerMm)} mm inside).</p>;
+  }
+  if (heightU > maxU) {
+    return (
+      <p className="height-limit bad" role="status" data-testid="height-too-tall">
+        Too tall for your drawer. The tallest bin that fits is {maxU} U.{" "}
+        <button type="button" className="btn btn-plain" onClick={() => onFit(maxU)}>Set to {maxU} U</button>
+      </p>
+    );
+  }
+  return <p className="height-limit">Fits under your drawer's {Math.round(drawerMm)} mm. Up to {maxU} U.</p>;
+}
+
+
+function Header({
+  thumb, title, sub, onDuplicate, onDelete, onClose,
+}: {
+  thumb: ReactNode; title: string; sub: ReactNode;
+  onDuplicate: () => void; onDelete: () => void; onClose: () => void;
+}) {
   return (
-    <div style={{ width: 304, flexShrink: 0, background: "var(--panel)", borderLeft: "1px solid var(--hairline)", display: "flex", flexDirection: "column", minHeight: 0 }}>
-      {children}
+    <div className="insp-head">
+      <div className="insp-thumb">{thumb}</div>
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div className="insp-title">{title}</div>
+        <div className="insp-sub">{sub}</div>
+      </div>
+      <div style={{ display: "flex", gap: 2 }}>
+        <button type="button" className="btn btn-icon" data-testid="inspector-duplicate" aria-label="Duplicate" title="Duplicate" onClick={onDuplicate}>
+          <Copy size={16} />
+        </button>
+        <button type="button" className="btn btn-icon danger" data-testid="inspector-delete" aria-label="Delete" title="Delete" onClick={onDelete}>
+          <Trash2 size={16} />
+        </button>
+        <button type="button" className="btn btn-icon insp-close" aria-label="Close inspector" onClick={onClose}>
+          <X size={17} />
+        </button>
+      </div>
     </div>
   );
 }
 
-function Section({ title, right, children }: { title: string; right?: string; children: React.ReactNode }) {
+function Section({ title, meta, children }: { title: string; meta?: ReactNode; children: ReactNode }) {
   return (
-    <div style={{ padding: "13px 16px", borderBottom: "1px solid #f1f3f5" }}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 9 }}>
-        <span className="section-label">{title}</span>
-        {right && <span className="mono" style={{ fontSize: 11, color: "var(--muted)" }}>{right}</span>}
+    <section className="insp-sec">
+      <div className="insp-sec-head">
+        <h3 className="insp-sec-title">{title}</h3>
+        {meta && <span className="insp-sec-meta">{meta}</span>}
       </div>
       {children}
-    </div>
+    </section>
   );
 }
 
 function Stepper({ label, value, onChange, min = 1, testid }: { label: string; value: number; onChange: (v: number) => void; min?: number; testid?: string }) {
   return (
-    <div style={{ flex: 1 }} data-testid={testid}>
-      <div style={{ fontSize: 11, color: "var(--muted-2)", marginBottom: 4 }}>{label}</div>
-      <div style={{ display: "flex", alignItems: "center", border: "1px solid #e1e4e8", borderRadius: 7, overflow: "hidden", height: 30 }}>
-        <button aria-label={`${label} decrease`} data-testid={testid ? `${testid}-dec` : undefined} onClick={() => onChange(Math.max(min, value - 1))} style={stepBtn}>−</button>
-        <div className="mono" data-testid={testid ? `${testid}-value` : undefined} style={{ flex: 1, textAlign: "center", fontSize: 13, fontWeight: 500 }}>{value}</div>
-        <button aria-label={`${label} increase`} data-testid={testid ? `${testid}-inc` : undefined} onClick={() => onChange(value + 1)} style={{ ...stepBtn, borderLeft: "1px solid #e8ebee", borderRight: "none" }}>+</button>
-      </div>
-    </div>
-  );
-}
-const stepBtn: React.CSSProperties = {
-  width: 28, height: "100%", display: "flex", alignItems: "center", justifyContent: "center",
-  background: "#f4f6f8", color: "var(--muted)", border: "none", borderRight: "1px solid #e8ebee", fontSize: 14,
-};
-
-function HeightChip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
-  return (
-    <button
-      onClick={onClick}
-      className="mono"
-      style={{
-        flex: 1, height: 28, borderRadius: 7, fontSize: 12, fontWeight: active ? 600 : 500,
-        color: active ? "#fff" : "var(--muted)", background: active ? "var(--accent)" : "#f4f6f8",
-        border: `1px solid ${active ? "var(--accent)" : "#e8ebee"}`,
-      }}
-    >
-      {children}
-    </button>
-  );
-}
-
-function Toggle({ icon, label, value, onChange, testid }: { icon: React.ReactNode; label: string; value: boolean; onChange: (v: boolean) => void; testid?: string }) {
-  return (
-    <div style={{ display: "flex", alignItems: "center", gap: 10, height: 34 }}>
-      <span style={{ color: value ? "var(--muted)" : "#9097a0" }}>{icon}</span>
-      <span style={{ flex: 1, fontSize: 13, color: value ? "#3a4047" : "var(--muted)" }}>{label}</span>
-      <div
-        data-testid={testid}
-        role="switch"
-        aria-label={label}
-        aria-checked={value}
-        onClick={() => onChange(!value)}
-        style={{ width: 32, height: 18, borderRadius: 9, background: value ? "var(--accent)" : "#d2d7dc", position: "relative", cursor: "pointer", transition: "background .15s" }}
-      >
-        <div style={{ position: "absolute", top: 2, left: value ? 16 : 2, width: 14, height: 14, borderRadius: "50%", background: "#fff", boxShadow: "0 1px 2px rgba(0,0,0,.3)", transition: "left .15s" }} />
+    <div style={{ flex: 1, minWidth: 0 }} data-testid={testid}>
+      <div className="stepper-label">{label}</div>
+      <div className="stepper">
+        <button type="button" aria-label={`${label} decrease`} data-testid={testid ? `${testid}-dec` : undefined}
+          disabled={value <= min} onClick={() => onChange(Math.max(min, value - 1))}>
+          <Minus size={14} />
+        </button>
+        <div className="val num" data-testid={testid ? `${testid}-value` : undefined} aria-live="polite">{value}</div>
+        <button type="button" aria-label={`${label} increase`} data-testid={testid ? `${testid}-inc` : undefined}
+          onClick={() => onChange(value + 1)}>
+          <Plus size={14} />
+        </button>
       </div>
     </div>
   );
 }
 
-function IconBtn({ children, onClick, danger, testid }: { children: React.ReactNode; onClick: () => void; danger?: boolean; testid?: string }) {
+function FeatureRow({
+  icon, label, desc, value, onChange, testid,
+}: { icon: ReactNode; label: string; desc?: string; value: boolean; onChange: (v: boolean) => void; testid?: string }) {
   return (
-    <button
-      onClick={onClick}
-      data-testid={testid}
-      style={{
-        display: "flex", alignItems: "center", justifyContent: "center", width: 28, height: 28,
-        border: `1px solid ${danger ? "#f2d9da" : "var(--hairline)"}`, borderRadius: 7,
-        color: danger ? "var(--invalid)" : "var(--muted)", background: "#fff",
-      }}
-    >
-      {children}
-    </button>
+    <div className="row">
+      <span className="row-icon">{icon}</span>
+      <div className="row-text">
+        <div className="row-label">{label}</div>
+        {desc && <div className="row-desc">{desc}</div>}
+      </div>
+      <Switch testid={testid} label={label} checked={value} onChange={onChange} />
+    </div>
   );
 }

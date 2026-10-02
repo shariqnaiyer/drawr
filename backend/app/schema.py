@@ -92,7 +92,7 @@ class CreditModel(BaseModel):
 class DesignSpec(BaseModel):
     """A complete drawer design: one baseplate + its bins."""
 
-    name: str = Field("Gridfinity Design", description="Used to name the ZIP")
+    name: str = Field("drawr design", description="Used to name the ZIP")
     baseplate: BaseplateSpec
     bins: list[BinSpec] = Field(default_factory=list)
     include_baseplate: bool = Field(True, description="Export the baseplate STL")

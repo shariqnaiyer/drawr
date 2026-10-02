@@ -1,0 +1,1879 @@
+[
+  {
+    "id": "ikea-malm-80cm-3-4-drawer",
+    "brand": "IKEA",
+    "model": "MALM",
+    "variant": "80 cm wide chest (3- and 4-drawer), each drawer",
+    "category": "furniture",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 720.0,
+      "depth_mm": 430.0,
+      "height_mm": null
+    },
+    "source_url": "https://www.ikea.com/ma/en/p/malm-chest-of-3-drawers-white-20403562/",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "IKEA lists Width of drawer (inside) 72 cm and Depth (inside) 43 cm; inside height not published. Same figures reported on the 4-drawer 80x100 page by search listing."
+  },
+  {
+    "id": "ikea-helmer-28x65",
+    "brand": "IKEA",
+    "model": "HELMER",
+    "variant": "28x65 cm drawer unit on castors, each drawer",
+    "category": "furniture",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 220.0,
+      "depth_mm": 370.0,
+      "height_mm": null
+    },
+    "source_url": "https://www.ikea.com/sg/en/p/helmer-drawer-unit-on-castors-white-80619903/",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "IKEA lists Width of drawer (inside) 22 cm, Depth (inside) 37 cm; no inside height published."
+  },
+  {
+    "id": "ikea-pax-komplement-50x58",
+    "brand": "IKEA",
+    "model": "PAX KOMPLEMENT",
+    "variant": "Drawer 50x58 cm (for PAX 50x58 frame)",
+    "category": "furniture",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 401.0,
+      "depth_mm": 533.0,
+      "height_mm": null
+    },
+    "source_url": "https://www.ikea.com/gb/en/p/komplement-drawer-white-10246308/",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "IKEA lists Width of drawer (inside) 40.1 cm, Depth (inside) 53.3 cm. The 16.0 cm listed is overall drawer height, not inside height, so left null."
+  },
+  {
+    "id": "ikea-alex-5-drawer",
+    "brand": "IKEA",
+    "model": "ALEX",
+    "variant": "5-drawer unit 36x70 cm (14 1/8x27 1/2 in), each drawer",
+    "category": "furniture",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 294.0,
+      "depth_mm": 520.7,
+      "height_mm": null
+    },
+    "source_url": "https://www.ikea.com/us/en/p/alex-drawer-unit-black-brown-60473548/",
+    "source_kind": "community-measured",
+    "confidence": "medium",
+    "notes": "Inside depth from IKEA (52.1 cm); inside width ~294 mm from several Gridfinity makers (reports range 292–297 mm)."
+  },
+  {
+    "id": "muji-pp-wide-drawer-small",
+    "brand": "MUJI",
+    "model": "Polypropylene Storage Wide Drawer",
+    "variant": "Small (outer H18 cm)",
+    "category": "furniture",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 490.0,
+      "depth_mm": 395.0,
+      "height_mm": 135.0
+    },
+    "source_url": "https://www.muji.us/products/pp-storage-wide-drawer",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "MUJI product page lists Internal dimensions; values converted from cm."
+  },
+  {
+    "id": "muji-pp-wide-drawer-medium",
+    "brand": "MUJI",
+    "model": "Polypropylene Storage Wide Drawer",
+    "variant": "Medium (outer H24 cm)",
+    "category": "furniture",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 490.0,
+      "depth_mm": 395.0,
+      "height_mm": 195.0
+    },
+    "source_url": "https://www.muji.us/products/pp-storage-wide-drawer",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "MUJI product page lists Internal dimensions; values converted from cm."
+  },
+  {
+    "id": "muji-pp-wide-drawer-large",
+    "brand": "MUJI",
+    "model": "Polypropylene Storage Wide Drawer",
+    "variant": "Large (outer H30 cm)",
+    "category": "furniture",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 485.0,
+      "depth_mm": 390.0,
+      "height_mm": 250.0
+    },
+    "source_url": "https://www.muji.us/products/pp-storage-wide-drawer",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "MUJI product page lists Internal dimensions; values converted from cm."
+  },
+  {
+    "id": "muji-pp-drawer-small",
+    "brand": "MUJI",
+    "model": "Polypropylene Storage Drawer",
+    "variant": "Small (outer H18 cm)",
+    "category": "furniture",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 290.0,
+      "depth_mm": 400.0,
+      "height_mm": 135.0
+    },
+    "source_url": "https://www.muji.us/products/pp-storage-drawer",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "MUJI product page lists Internal dimensions; values converted from cm."
+  },
+  {
+    "id": "muji-pp-drawer-medium",
+    "brand": "MUJI",
+    "model": "Polypropylene Storage Drawer",
+    "variant": "Medium (outer H24 cm)",
+    "category": "furniture",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 285.0,
+      "depth_mm": 400.0,
+      "height_mm": 195.0
+    },
+    "source_url": "https://www.muji.us/products/pp-storage-drawer",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "MUJI product page lists Internal dimensions; values converted from cm."
+  },
+  {
+    "id": "muji-pp-drawer-large",
+    "brand": "MUJI",
+    "model": "Polypropylene Storage Drawer",
+    "variant": "Large (outer H30 cm)",
+    "category": "furniture",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 285.0,
+      "depth_mm": 400.0,
+      "height_mm": 255.0
+    },
+    "source_url": "https://www.muji.us/products/pp-storage-drawer",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "MUJI product page lists Internal dimensions; values converted from cm."
+  },
+  {
+    "id": "muji-pp-case-drawer-wide-deep",
+    "brand": "MUJI",
+    "model": "Polypropylene Case Drawer - Wide Deep",
+    "variant": "1 drawer",
+    "category": "furniture",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 330.0,
+      "depth_mm": 225.0,
+      "height_mm": 140.0
+    },
+    "source_url": "https://www.muji.us/products/pp-case-drawer-wide-deep",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "MUJI product page lists Internal dimensions; values converted from cm."
+  },
+  {
+    "id": "muji-pp-case-2-drawer-deep",
+    "brand": "MUJI",
+    "model": "Polypropylene Case 2 Drawer - Deep",
+    "variant": "per drawer (2 drawers)",
+    "category": "furniture",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 105.0,
+      "depth_mm": 335.0,
+      "height_mm": 140.0
+    },
+    "source_url": "https://www.muji.us/products/pp-case-2-drawer-deep",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "MUJI product page lists Internal dimensions; values converted from cm."
+  },
+  {
+    "id": "muji-pp-case-extra-shallow",
+    "brand": "MUJI",
+    "model": "Polypropylene Storage Case Extra Shallow",
+    "variant": "1 drawer",
+    "category": "furniture",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 225.0,
+      "depth_mm": 340.0,
+      "height_mm": 55.0
+    },
+    "source_url": "https://www.muji.us/products/polypropylene-storage-case-extra-shallow",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "MUJI product page lists Internal dimensions; values converted from cm."
+  },
+  {
+    "id": "muji-pp-case-shallow",
+    "brand": "MUJI",
+    "model": "Polypropylene Case Shallow",
+    "variant": "1 drawer",
+    "category": "furniture",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 225.0,
+      "depth_mm": 340.0,
+      "height_mm": 85.0
+    },
+    "source_url": "https://www.muji.us/products/pp-case-shallow-w26xd37xh12cm-kgaa6s",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "MUJI product page lists Internal dimensions; values converted from cm."
+  },
+  {
+    "id": "muji-pp-drawer-shallow",
+    "brand": "MUJI",
+    "model": "Polypropylene Drawer - Shallow",
+    "variant": "1 drawer",
+    "category": "furniture",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 130.0,
+      "depth_mm": 360.0,
+      "height_mm": 70.0
+    },
+    "source_url": "https://www.muji.us/products/polypropylene-drawer-shallow-kga78a6s",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "MUJI product page lists Internal dimensions; values converted from cm."
+  },
+  {
+    "id": "milwaukee-46-18drawer-combo-cab-full-1p8",
+    "brand": "Milwaukee",
+    "model": "46 in. High Capacity 18-Drawer Tool Chest and Cabinet Combo",
+    "variant": "Cabinet full-width drawer 1.8 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 1059.2,
+      "depth_mm": 502.9,
+      "height_mm": 45.7
+    },
+    "source_url": "https://superarbor.io/products/301937094-high-capacity-46-in-18-drawer-tool-chest-and-cabinet-combo",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Home Depot listing text mirrored; depth 19.8 in. for all drawers."
+  },
+  {
+    "id": "milwaukee-46-18drawer-combo-cab-full-4p2",
+    "brand": "Milwaukee",
+    "model": "46 in. High Capacity 18-Drawer Tool Chest and Cabinet Combo",
+    "variant": "Cabinet full-width drawer 4.2 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 1059.2,
+      "depth_mm": 502.9,
+      "height_mm": 106.7
+    },
+    "source_url": "https://superarbor.io/products/301937094-high-capacity-46-in-18-drawer-tool-chest-and-cabinet-combo",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Home Depot listing text mirrored; depth 19.8 in. for all drawers."
+  },
+  {
+    "id": "milwaukee-46-18drawer-combo-cab-left-4p1",
+    "brand": "Milwaukee",
+    "model": "46 in. High Capacity 18-Drawer Tool Chest and Cabinet Combo",
+    "variant": "Cabinet left drawer 4.1 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 652.8,
+      "depth_mm": 502.9,
+      "height_mm": 104.1
+    },
+    "source_url": "https://superarbor.io/products/301937094-high-capacity-46-in-18-drawer-tool-chest-and-cabinet-combo",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Home Depot listing text mirrored; depth 19.8 in. for all drawers."
+  },
+  {
+    "id": "milwaukee-46-18drawer-combo-cab-left-9p5",
+    "brand": "Milwaukee",
+    "model": "46 in. High Capacity 18-Drawer Tool Chest and Cabinet Combo",
+    "variant": "Cabinet left drawer 9.5 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 652.8,
+      "depth_mm": 502.9,
+      "height_mm": 241.3
+    },
+    "source_url": "https://superarbor.io/products/301937094-high-capacity-46-in-18-drawer-tool-chest-and-cabinet-combo",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Home Depot listing text mirrored; depth 19.8 in. for all drawers."
+  },
+  {
+    "id": "milwaukee-46-18drawer-combo-cab-right-4p1",
+    "brand": "Milwaukee",
+    "model": "46 in. High Capacity 18-Drawer Tool Chest and Cabinet Combo",
+    "variant": "Cabinet right drawer 4.1 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 342.9,
+      "depth_mm": 502.9,
+      "height_mm": 104.1
+    },
+    "source_url": "https://superarbor.io/products/301937094-high-capacity-46-in-18-drawer-tool-chest-and-cabinet-combo",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Home Depot listing text mirrored; depth 19.8 in. for all drawers."
+  },
+  {
+    "id": "milwaukee-46-18drawer-combo-cab-right-9p5",
+    "brand": "Milwaukee",
+    "model": "46 in. High Capacity 18-Drawer Tool Chest and Cabinet Combo",
+    "variant": "Cabinet right drawer 9.5 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 342.9,
+      "depth_mm": 502.9,
+      "height_mm": 241.3
+    },
+    "source_url": "https://superarbor.io/products/301937094-high-capacity-46-in-18-drawer-tool-chest-and-cabinet-combo",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Home Depot listing text mirrored; depth 19.8 in. for all drawers."
+  },
+  {
+    "id": "milwaukee-46-18drawer-combo-chest-left-2p0",
+    "brand": "Milwaukee",
+    "model": "46 in. High Capacity 18-Drawer Tool Chest and Cabinet Combo",
+    "variant": "Chest left drawer 2.0 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 654.0,
+      "depth_mm": 502.9,
+      "height_mm": 50.8
+    },
+    "source_url": "https://superarbor.io/products/301937094-high-capacity-46-in-18-drawer-tool-chest-and-cabinet-combo",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Home Depot listing text mirrored; depth 19.8 in. for all drawers."
+  },
+  {
+    "id": "milwaukee-46-18drawer-combo-chest-left-2p9",
+    "brand": "Milwaukee",
+    "model": "46 in. High Capacity 18-Drawer Tool Chest and Cabinet Combo",
+    "variant": "Chest left drawer 2.9 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 654.0,
+      "depth_mm": 502.9,
+      "height_mm": 73.7
+    },
+    "source_url": "https://superarbor.io/products/301937094-high-capacity-46-in-18-drawer-tool-chest-and-cabinet-combo",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Home Depot listing text mirrored; depth 19.8 in. for all drawers."
+  },
+  {
+    "id": "milwaukee-46-18drawer-combo-chest-right-2p0",
+    "brand": "Milwaukee",
+    "model": "46 in. High Capacity 18-Drawer Tool Chest and Cabinet Combo",
+    "variant": "Chest right drawer 2.0 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 342.9,
+      "depth_mm": 502.9,
+      "height_mm": 50.8
+    },
+    "source_url": "https://superarbor.io/products/301937094-high-capacity-46-in-18-drawer-tool-chest-and-cabinet-combo",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Home Depot listing text mirrored; depth 19.8 in. for all drawers."
+  },
+  {
+    "id": "milwaukee-46-18drawer-combo-chest-right-3p1",
+    "brand": "Milwaukee",
+    "model": "46 in. High Capacity 18-Drawer Tool Chest and Cabinet Combo",
+    "variant": "Chest right drawer 3.1 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 342.9,
+      "depth_mm": 502.9,
+      "height_mm": 78.7
+    },
+    "source_url": "https://superarbor.io/products/301937094-high-capacity-46-in-18-drawer-tool-chest-and-cabinet-combo",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Home Depot listing text mirrored; depth 19.8 in. for all drawers."
+  },
+  {
+    "id": "milwaukee-36-12drawer-combo-cab-4p5",
+    "brand": "Milwaukee",
+    "model": "36 in. High Capacity 12-Drawer Tool Chest and Cabinet Combo (48-22-8536)",
+    "variant": "Cabinet top drawer 4.5 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 797.6,
+      "depth_mm": 502.9,
+      "height_mm": 114.3
+    },
+    "source_url": "https://superarbor.io/products/309404633-high-capacity-36-in-12-drawer-tool-chest-and-cabinet-combo",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior)."
+  },
+  {
+    "id": "milwaukee-36-12drawer-combo-cab-2p9",
+    "brand": "Milwaukee",
+    "model": "36 in. High Capacity 12-Drawer Tool Chest and Cabinet Combo (48-22-8536)",
+    "variant": "Cabinet drawer 2.9 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 797.6,
+      "depth_mm": 502.9,
+      "height_mm": 73.7
+    },
+    "source_url": "https://superarbor.io/products/309404633-high-capacity-36-in-12-drawer-tool-chest-and-cabinet-combo",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior)."
+  },
+  {
+    "id": "milwaukee-36-12drawer-combo-cab-9p4",
+    "brand": "Milwaukee",
+    "model": "36 in. High Capacity 12-Drawer Tool Chest and Cabinet Combo (48-22-8536)",
+    "variant": "Cabinet bottom drawer 9.4 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 797.6,
+      "depth_mm": 502.9,
+      "height_mm": 238.8
+    },
+    "source_url": "https://superarbor.io/products/309404633-high-capacity-36-in-12-drawer-tool-chest-and-cabinet-combo",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior)."
+  },
+  {
+    "id": "milwaukee-36-12drawer-combo-chest-14p5-2p9",
+    "brand": "Milwaukee",
+    "model": "36 in. High Capacity 12-Drawer Tool Chest and Cabinet Combo (48-22-8536)",
+    "variant": "Chest narrow drawer 2.9 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 368.3,
+      "depth_mm": 502.9,
+      "height_mm": 73.7
+    },
+    "source_url": "https://superarbor.io/products/309404633-high-capacity-36-in-12-drawer-tool-chest-and-cabinet-combo",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior)."
+  },
+  {
+    "id": "husky-27-5drawer-cabinet-2p5",
+    "brand": "Husky",
+    "model": "27 in. W x 18 in. D 5-Drawer Rolling Tool Cabinet",
+    "variant": "Top drawer 2.5 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 584.2,
+      "depth_mm": 381.0,
+      "height_mm": 63.5
+    },
+    "source_url": "https://superarbor.io/products/husky-27-in-5-drawer-gloss-black-rolling-tool-cabinet-heavy-duty-steel-lockable-1000-lb-capacity",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Width/depth (584.2 x 381 mm) independently match community Gridfinity baseplate (585 x 381 mm, MakerWorld model 959921 / Printables 1009453)."
+  },
+  {
+    "id": "husky-27-5drawer-cabinet-3p3",
+    "brand": "Husky",
+    "model": "27 in. W x 18 in. D 5-Drawer Rolling Tool Cabinet",
+    "variant": "2nd/3rd drawers 3.3 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 584.2,
+      "depth_mm": 381.0,
+      "height_mm": 83.8
+    },
+    "source_url": "https://superarbor.io/products/husky-27-in-5-drawer-gloss-black-rolling-tool-cabinet-heavy-duty-steel-lockable-1000-lb-capacity",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Width/depth (584.2 x 381 mm) independently match community Gridfinity baseplate (585 x 381 mm, MakerWorld model 959921 / Printables 1009453)."
+  },
+  {
+    "id": "husky-27-5drawer-cabinet-6p1",
+    "brand": "Husky",
+    "model": "27 in. W x 18 in. D 5-Drawer Rolling Tool Cabinet",
+    "variant": "4th drawer 6.1 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 584.2,
+      "depth_mm": 381.0,
+      "height_mm": 154.9
+    },
+    "source_url": "https://superarbor.io/products/husky-27-in-5-drawer-gloss-black-rolling-tool-cabinet-heavy-duty-steel-lockable-1000-lb-capacity",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Width/depth (584.2 x 381 mm) independently match community Gridfinity baseplate (585 x 381 mm, MakerWorld model 959921 / Printables 1009453)."
+  },
+  {
+    "id": "husky-27-5drawer-cabinet-9p7",
+    "brand": "Husky",
+    "model": "27 in. W x 18 in. D 5-Drawer Rolling Tool Cabinet",
+    "variant": "Bottom drawer 9.7 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 584.2,
+      "depth_mm": 381.0,
+      "height_mm": 246.4
+    },
+    "source_url": "https://superarbor.io/products/husky-27-in-5-drawer-gloss-black-rolling-tool-cabinet-heavy-duty-steel-lockable-1000-lb-capacity",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Width/depth (584.2 x 381 mm) independently match community Gridfinity baseplate (585 x 381 mm, MakerWorld model 959921 / Printables 1009453)."
+  },
+  {
+    "id": "husky-46-24p5d-9drawer-workbench-top-4p0",
+    "brand": "Husky",
+    "model": "46 in. W x 24.5 in. D Standard Duty 9-Drawer Mobile Workbench",
+    "variant": "Top drawer 4.0 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 1054.1,
+      "depth_mm": 551.2,
+      "height_mm": 101.6
+    },
+    "source_url": "https://superarbor.io/products/husky-46-in-w-x-24-5-in-d-standard-duty-9-drawer-mobile-workbench-tool-chest-with-solid-wood-top-gloss-white",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Same drawer sizes on 18 in.-deep variant except depth (15.4 in.)."
+  },
+  {
+    "id": "husky-46-24p5d-9drawer-workbench-small-3p0",
+    "brand": "Husky",
+    "model": "46 in. W x 24.5 in. D Standard Duty 9-Drawer Mobile Workbench",
+    "variant": "Small drawers 3.0 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 492.8,
+      "depth_mm": 551.2,
+      "height_mm": 76.2
+    },
+    "source_url": "https://superarbor.io/products/husky-46-in-w-x-24-5-in-d-standard-duty-9-drawer-mobile-workbench-tool-chest-with-solid-wood-top-gloss-white",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Same drawer sizes on 18 in.-deep variant except depth (15.4 in.)."
+  },
+  {
+    "id": "husky-46-24p5d-9drawer-workbench-med-3p5",
+    "brand": "Husky",
+    "model": "46 in. W x 24.5 in. D Standard Duty 9-Drawer Mobile Workbench",
+    "variant": "Medium drawers 3.5 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 492.8,
+      "depth_mm": 551.2,
+      "height_mm": 88.9
+    },
+    "source_url": "https://superarbor.io/products/husky-46-in-w-x-24-5-in-d-standard-duty-9-drawer-mobile-workbench-tool-chest-with-solid-wood-top-gloss-white",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Same drawer sizes on 18 in.-deep variant except depth (15.4 in.)."
+  },
+  {
+    "id": "husky-46-24p5d-9drawer-workbench-large-9p4",
+    "brand": "Husky",
+    "model": "46 in. W x 24.5 in. D Standard Duty 9-Drawer Mobile Workbench",
+    "variant": "Large drawers 9.4 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 492.8,
+      "depth_mm": 551.2,
+      "height_mm": 238.8
+    },
+    "source_url": "https://superarbor.io/products/husky-46-in-w-x-24-5-in-d-standard-duty-9-drawer-mobile-workbench-tool-chest-with-solid-wood-top-gloss-white",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Same drawer sizes on 18 in.-deep variant except depth (15.4 in.)."
+  },
+  {
+    "id": "husky-52-18drawer-combo-full-3p6",
+    "brand": "Husky",
+    "model": "52 in. 18-Drawer Tool Chest and Rolling Cabinet Combo",
+    "variant": "Cabinet full-width drawer 3.6 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 1209.0,
+      "depth_mm": 398.8,
+      "height_mm": 91.4
+    },
+    "source_url": "https://toolsinaction.com/husky-52-in-18-drawer-tool-chest-and-cabinet-set/",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Same figures appear on Home Depot Canada / Leaseville listings."
+  },
+  {
+    "id": "husky-52-18drawer-combo-left-2p6",
+    "brand": "Husky",
+    "model": "52 in. 18-Drawer Tool Chest and Rolling Cabinet Combo",
+    "variant": "Left drawers 2.6 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 805.2,
+      "depth_mm": 398.8,
+      "height_mm": 66.0
+    },
+    "source_url": "https://toolsinaction.com/husky-52-in-18-drawer-tool-chest-and-cabinet-set/",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Same figures appear on Home Depot Canada / Leaseville listings."
+  },
+  {
+    "id": "husky-52-18drawer-combo-left-9p0",
+    "brand": "Husky",
+    "model": "52 in. 18-Drawer Tool Chest and Rolling Cabinet Combo",
+    "variant": "Bottom left drawer 9 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 805.2,
+      "depth_mm": 398.8,
+      "height_mm": 228.6
+    },
+    "source_url": "https://toolsinaction.com/husky-52-in-18-drawer-tool-chest-and-cabinet-set/",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Same figures appear on Home Depot Canada / Leaseville listings."
+  },
+  {
+    "id": "husky-52-18drawer-combo-right-2p6",
+    "brand": "Husky",
+    "model": "52 in. 18-Drawer Tool Chest and Rolling Cabinet Combo",
+    "variant": "Right drawers 2.6 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 342.9,
+      "depth_mm": 398.8,
+      "height_mm": 66.0
+    },
+    "source_url": "https://toolsinaction.com/husky-52-in-18-drawer-tool-chest-and-cabinet-set/",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Same figures appear on Home Depot Canada / Leaseville listings."
+  },
+  {
+    "id": "husky-52-18drawer-combo-right-12p2",
+    "brand": "Husky",
+    "model": "52 in. 18-Drawer Tool Chest and Rolling Cabinet Combo",
+    "variant": "Bottom right drawer 12.2 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 342.9,
+      "depth_mm": 398.8,
+      "height_mm": 309.9
+    },
+    "source_url": "https://toolsinaction.com/husky-52-in-18-drawer-tool-chest-and-cabinet-set/",
+    "source_kind": "retailer",
+    "confidence": "high",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Same figures appear on Home Depot Canada / Leaseville listings."
+  },
+  {
+    "id": "husky-industrial-52-15drawer-combo-full-4p4",
+    "brand": "Husky",
+    "model": "Industrial 52 in. W x 21.5 in. D 15-Drawer Tool Chest and Rolling Cabinet Combo",
+    "variant": "Cabinet full-width drawer 4.4 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 1198.9,
+      "depth_mm": 475.0,
+      "height_mm": 111.8
+    },
+    "source_url": "https://superarbor.io/products/husky-industrial-52-in-w-x-21-5-in-d-15-drawer-tool-chest-and-rolling-cabinet-combo-with-led-light-matte-black",
+    "source_kind": "retailer",
+    "confidence": "medium",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Single fetch; a mirror listing page did not show the drawer table."
+  },
+  {
+    "id": "husky-industrial-52-15drawer-combo-wide-2p0",
+    "brand": "Husky",
+    "model": "Industrial 52 in. W x 21.5 in. D 15-Drawer Tool Chest and Rolling Cabinet Combo",
+    "variant": "Chest wide drawers 2.0 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 815.3,
+      "depth_mm": 475.0,
+      "height_mm": 50.8
+    },
+    "source_url": "https://superarbor.io/products/husky-industrial-52-in-w-x-21-5-in-d-15-drawer-tool-chest-and-rolling-cabinet-combo-with-led-light-matte-black",
+    "source_kind": "retailer",
+    "confidence": "medium",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Single fetch; a mirror listing page did not show the drawer table."
+  },
+  {
+    "id": "husky-industrial-52-15drawer-combo-wide-9p7",
+    "brand": "Husky",
+    "model": "Industrial 52 in. W x 21.5 in. D 15-Drawer Tool Chest and Rolling Cabinet Combo",
+    "variant": "Cabinet large wide drawer 9.7 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 815.3,
+      "depth_mm": 475.0,
+      "height_mm": 246.4
+    },
+    "source_url": "https://superarbor.io/products/husky-industrial-52-in-w-x-21-5-in-d-15-drawer-tool-chest-and-rolling-cabinet-combo-with-led-light-matte-black",
+    "source_kind": "retailer",
+    "confidence": "medium",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Single fetch; a mirror listing page did not show the drawer table."
+  },
+  {
+    "id": "husky-industrial-52-15drawer-combo-narrow-2p0",
+    "brand": "Husky",
+    "model": "Industrial 52 in. W x 21.5 in. D 15-Drawer Tool Chest and Rolling Cabinet Combo",
+    "variant": "Chest narrow drawers 2.0 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 325.1,
+      "depth_mm": 475.0,
+      "height_mm": 50.8
+    },
+    "source_url": "https://superarbor.io/products/husky-industrial-52-in-w-x-21-5-in-d-15-drawer-tool-chest-and-rolling-cabinet-combo-with-led-light-matte-black",
+    "source_kind": "retailer",
+    "confidence": "medium",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Single fetch; a mirror listing page did not show the drawer table."
+  },
+  {
+    "id": "husky-61-18drawer-combo-full-3p9",
+    "brand": "Husky",
+    "model": "61 in. W x 18 in. D 18-Drawer Tool Chest and Rolling Cabinet Combo",
+    "variant": "Cabinet full-width drawer 3.9 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 1422.4,
+      "depth_mm": 398.8,
+      "height_mm": 99.1
+    },
+    "source_url": "https://drawertoolcabinet.com/en/husky_tool_chest_rolling_cabinet_combo_61_in_w_x_18_in_d_18_drawer_black.html",
+    "source_kind": "retailer",
+    "confidence": "medium",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Reseller copy of listing has garbled text for some rows; widths cross-checked via search snippet of Home Depot/Leaseville listings."
+  },
+  {
+    "id": "husky-61-18drawer-combo-left-3p0",
+    "brand": "Husky",
+    "model": "61 in. W x 18 in. D 18-Drawer Tool Chest and Rolling Cabinet Combo",
+    "variant": "Left small drawers 3.0 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 762.0,
+      "depth_mm": 398.8,
+      "height_mm": 76.2
+    },
+    "source_url": "https://drawertoolcabinet.com/en/husky_tool_chest_rolling_cabinet_combo_61_in_w_x_18_in_d_18_drawer_black.html",
+    "source_kind": "retailer",
+    "confidence": "medium",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Reseller copy of listing has garbled text for some rows; widths cross-checked via search snippet of Home Depot/Leaseville listings."
+  },
+  {
+    "id": "husky-61-18drawer-combo-left-9p3",
+    "brand": "Husky",
+    "model": "61 in. W x 18 in. D 18-Drawer Tool Chest and Rolling Cabinet Combo",
+    "variant": "Left large drawer 9.3 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 762.0,
+      "depth_mm": 398.8,
+      "height_mm": 236.2
+    },
+    "source_url": "https://drawertoolcabinet.com/en/husky_tool_chest_rolling_cabinet_combo_61_in_w_x_18_in_d_18_drawer_black.html",
+    "source_kind": "retailer",
+    "confidence": "medium",
+    "notes": "Retailer 'Drawer Dimensions' spec table (not explicitly labeled interior). Reseller copy of listing has garbled text for some rows; widths cross-checked via search snippet of Home Depot/Leaseville listings."
+  },
+  {
+    "id": "husky-61-h61ch4tr6p-cabinet-full-3p9",
+    "brand": "Husky",
+    "model": "61 in. Tool Chest and Rolling Cabinet (H61CH4TR6P)",
+    "variant": "Cabinet top long drawer 3.9 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 1440.2,
+      "depth_mm": 401.3,
+      "height_mm": 99.1
+    },
+    "source_url": "https://wiki.hackrva.org/index.php/Husky_Tool_Chest",
+    "source_kind": "retailer",
+    "confidence": "medium",
+    "notes": "Wiki page quoting the retailer drawer-dimension spec for model H61CH4TR6P; not independently measured."
+  },
+  {
+    "id": "husky-61-h61ch4tr6p-cabinet-left-3p0",
+    "brand": "Husky",
+    "model": "61 in. Tool Chest and Rolling Cabinet (H61CH4TR6P)",
+    "variant": "Left small drawers 3.0 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 983.0,
+      "depth_mm": 401.3,
+      "height_mm": 76.2
+    },
+    "source_url": "https://wiki.hackrva.org/index.php/Husky_Tool_Chest",
+    "source_kind": "retailer",
+    "confidence": "medium",
+    "notes": "Wiki page quoting the retailer drawer-dimension spec for model H61CH4TR6P; not independently measured."
+  },
+  {
+    "id": "husky-61-h61ch4tr6p-cabinet-left-9p3",
+    "brand": "Husky",
+    "model": "61 in. Tool Chest and Rolling Cabinet (H61CH4TR6P)",
+    "variant": "Left large drawer 9.3 in.",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 983.0,
+      "depth_mm": 401.3,
+      "height_mm": 236.2
+    },
+    "source_url": "https://wiki.hackrva.org/index.php/Husky_Tool_Chest",
+    "source_kind": "retailer",
+    "confidence": "medium",
+    "notes": "Wiki page quoting the retailer drawer-dimension spec for model H61CH4TR6P; not independently measured."
+  },
+  {
+    "id": "us-general-series3-56-roll-cab-wide-drawer",
+    "brand": "U.S. General",
+    "model": "Series 3 Tool Boxes (56 in. roll cab / chests, wide drawers)",
+    "variant": "Full-depth drawer",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 571.5,
+      "depth_mm": 496.9,
+      "height_mm": null
+    },
+    "source_url": "https://makerworld.com/en/models/596986-gridfinity-base-for-us-general-series-3-tool-boxes",
+    "source_kind": "community-measured",
+    "confidence": "medium",
+    "notes": "Inside drawer 22 15/32 in. x 19 9/16 in. as stated on a MakerWorld Gridfinity base listing (via search result; page not directly fetchable). Height not stated."
+  },
+  {
+    "id": "us-general-series2-26-drawer",
+    "brand": "U.S. General",
+    "model": "26 in. Series 2 Tool Boxes",
+    "variant": "Standard drawer",
+    "category": "tool-chest",
+    "regions": [
+      "US"
+    ],
+    "inner": {
+      "width_mm": 568.0,
+      "depth_mm": 490.0,
+      "height_mm": null
+    },
+    "source_url": "https://www.printables.com/model/861890-ultimate-gridfinity-drawer-for-harbor-freight-us-g",
+    "source_kind": "community-measured",
+    "confidence": "medium",
+    "notes": "Internal space 568 x 490 mm per Printables Gridfinity drawer listing (via search result; page not directly fetchable). Height not stated."
+  },
+  {
+    "id": "bosch-l-boxx-102",
+    "brand": "Bosch / Sortimo",
+    "model": "L-BOXX 102",
+    "variant": "",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 378.0,
+      "depth_mm": 313.0,
+      "height_mm": 63.5
+    },
+    "source_url": "https://sortimo.ch/pub/media/datasheet/Datenblatt%20L-BOXX%20%20%20i-BOXX.pdf",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "Sortimo datasheet (08/2011) gives minimum inner dims; case contour is not a perfect cuboid, usable space can be larger in places."
+  },
+  {
+    "id": "bosch-l-boxx-136",
+    "brand": "Bosch / Sortimo",
+    "model": "L-BOXX 136",
+    "variant": "",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 378.0,
+      "depth_mm": 311.0,
+      "height_mm": 99.5
+    },
+    "source_url": "https://sortimo.ch/pub/media/datasheet/Datenblatt%20L-BOXX%20%20%20i-BOXX.pdf",
+    "source_kind": "manufacturer",
+    "confidence": "medium",
+    "notes": "Sortimo datasheet (08/2011) gives minimum inner dims; case contour is not a perfect cuboid, usable space can be larger in places. l-boxx.com states 378x310x101 for the 136; sources differ slightly."
+  },
+  {
+    "id": "bosch-l-boxx-238",
+    "brand": "Bosch / Sortimo",
+    "model": "L-BOXX 238",
+    "variant": "",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 378.0,
+      "depth_mm": 304.0,
+      "height_mm": 200.5
+    },
+    "source_url": "https://sortimo.ch/pub/media/datasheet/Datenblatt%20L-BOXX%20%20%20i-BOXX.pdf",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "Sortimo datasheet (08/2011) gives minimum inner dims; case contour is not a perfect cuboid, usable space can be larger in places."
+  },
+  {
+    "id": "bosch-l-boxx-374",
+    "brand": "Bosch / Sortimo",
+    "model": "L-BOXX 374",
+    "variant": "",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 378.0,
+      "depth_mm": 294.0,
+      "height_mm": 337.5
+    },
+    "source_url": "https://sortimo.ch/pub/media/datasheet/Datenblatt%20L-BOXX%20%20%20i-BOXX.pdf",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "Sortimo datasheet (08/2011) gives minimum inner dims; case contour is not a perfect cuboid, usable space can be larger in places."
+  },
+  {
+    "id": "bosch-l-boxx-mini",
+    "brand": "Bosch / Sortimo",
+    "model": "L-BOXX Mini",
+    "variant": "",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 221.0,
+      "depth_mm": 138.0,
+      "height_mm": 44.0
+    },
+    "source_url": "https://l-boxx.com/l-boxx-mini/",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "Small-parts box; manufacturer states inner 221x138x44 mm (Bosch lists 138x221x44)."
+  },
+  {
+    "id": "festool-systainer3-m-112",
+    "brand": "Festool / Tanos",
+    "model": "Systainer³ M 112",
+    "variant": "",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 389.5,
+      "depth_mm": 275.0,
+      "height_mm": 71.0
+    },
+    "source_url": "https://www.tanos.de/fileadmin/redakteur/downloads/80002868_DE_TANOS_Katalog_systainer_02-2024.pdf",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "TANOS catalogue 02-2024 Innenmaße (B x T x H). Same Systainer³ footprint sold by Festool."
+  },
+  {
+    "id": "festool-systainer3-m-137",
+    "brand": "Festool / Tanos",
+    "model": "Systainer³ M 137",
+    "variant": "",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 389.5,
+      "depth_mm": 275.0,
+      "height_mm": 96.0
+    },
+    "source_url": "https://www.tanos.de/fileadmin/redakteur/downloads/80002868_DE_TANOS_Katalog_systainer_02-2024.pdf",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "TANOS catalogue 02-2024 Innenmaße (B x T x H). Same Systainer³ footprint sold by Festool."
+  },
+  {
+    "id": "festool-systainer3-m-187",
+    "brand": "Festool / Tanos",
+    "model": "Systainer³ M 187",
+    "variant": "",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 389.7,
+      "depth_mm": 275.2,
+      "height_mm": 146.0
+    },
+    "source_url": "https://www.tanos.de/fileadmin/redakteur/downloads/80002868_DE_TANOS_Katalog_systainer_02-2024.pdf",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "TANOS catalogue 02-2024 Innenmaße (B x T x H). Same Systainer³ footprint sold by Festool."
+  },
+  {
+    "id": "festool-systainer3-m-237",
+    "brand": "Festool / Tanos",
+    "model": "Systainer³ M 237",
+    "variant": "",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 389.7,
+      "depth_mm": 275.2,
+      "height_mm": 196.0
+    },
+    "source_url": "https://www.tanos.de/fileadmin/redakteur/downloads/80002868_DE_TANOS_Katalog_systainer_02-2024.pdf",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "TANOS catalogue 02-2024 Innenmaße (B x T x H). Same Systainer³ footprint sold by Festool."
+  },
+  {
+    "id": "festool-systainer3-m-337",
+    "brand": "Festool / Tanos",
+    "model": "Systainer³ M 337",
+    "variant": "",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 389.7,
+      "depth_mm": 275.2,
+      "height_mm": 296.0
+    },
+    "source_url": "https://www.tanos.de/fileadmin/redakteur/downloads/80002868_DE_TANOS_Katalog_systainer_02-2024.pdf",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "TANOS catalogue 02-2024 Innenmaße (B x T x H). Same Systainer³ footprint sold by Festool."
+  },
+  {
+    "id": "festool-systainer3-m-437",
+    "brand": "Festool / Tanos",
+    "model": "Systainer³ M 437",
+    "variant": "",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 389.7,
+      "depth_mm": 275.2,
+      "height_mm": 394.0
+    },
+    "source_url": "https://www.tanos.de/fileadmin/redakteur/downloads/80002868_DE_TANOS_Katalog_systainer_02-2024.pdf",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "TANOS catalogue 02-2024 Innenmaße (B x T x H). Same Systainer³ footprint sold by Festool."
+  },
+  {
+    "id": "festool-systainer3-l-137",
+    "brand": "Festool / Tanos",
+    "model": "Systainer³ L 137",
+    "variant": "",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 501.5,
+      "depth_mm": 275.2,
+      "height_mm": 94.0
+    },
+    "source_url": "https://www.tanos.de/fileadmin/redakteur/downloads/80002868_DE_TANOS_Katalog_systainer_02-2024.pdf",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "TANOS catalogue 02-2024 Innenmaße (B x T x H). Same Systainer³ footprint sold by Festool."
+  },
+  {
+    "id": "festool-systainer3-l-187",
+    "brand": "Festool / Tanos",
+    "model": "Systainer³ L 187",
+    "variant": "",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 501.7,
+      "depth_mm": 275.2,
+      "height_mm": 144.0
+    },
+    "source_url": "https://www.tanos.de/fileadmin/redakteur/downloads/80002868_DE_TANOS_Katalog_systainer_02-2024.pdf",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "TANOS catalogue 02-2024 Innenmaße (B x T x H). Same Systainer³ footprint sold by Festool."
+  },
+  {
+    "id": "festool-systainer3-l-237",
+    "brand": "Festool / Tanos",
+    "model": "Systainer³ L 237",
+    "variant": "",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 501.7,
+      "depth_mm": 275.2,
+      "height_mm": 194.0
+    },
+    "source_url": "https://www.tanos.de/fileadmin/redakteur/downloads/80002868_DE_TANOS_Katalog_systainer_02-2024.pdf",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "TANOS catalogue 02-2024 Innenmaße (B x T x H). Same Systainer³ footprint sold by Festool."
+  },
+  {
+    "id": "festool-systainer3-s-147",
+    "brand": "Festool / Tanos",
+    "model": "Systainer³ S 147",
+    "variant": "",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 258.0,
+      "depth_mm": 164.0,
+      "height_mm": 138.0
+    },
+    "source_url": "https://www.tanos.de/fileadmin/redakteur/downloads/80002868_DE_TANOS_Katalog_systainer_02-2024.pdf",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "TANOS catalogue 02-2024 Innenmaße; S-size (MINI) Systainer."
+  },
+  {
+    "id": "tanos-systainer-t-loc-i",
+    "brand": "Tanos / Festool",
+    "model": "systainer T-Loc I",
+    "variant": "",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 383.0,
+      "depth_mm": 273.0,
+      "height_mm": 75.0
+    },
+    "source_url": "https://www.hahn-kolb.de/FEIN-Systainer-Sys-1-Kunststoff-Innenmasse-H-75-x-B-383-x-T-273-mm-33901146000/95074507.sku/en/US/EUR/",
+    "source_kind": "retailer",
+    "confidence": "medium",
+    "notes": "Retailer lists inner H75 x W383 x D273 (Fein SYS 1 = T-Loc I). Not cross-checked against Tanos datasheet."
+  },
+  {
+    "id": "tanos-systainer-t-loc-ii",
+    "brand": "Tanos / Festool",
+    "model": "systainer T-Loc II",
+    "variant": "",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 383.0,
+      "depth_mm": 267.0,
+      "height_mm": 127.5
+    },
+    "source_url": "https://systainer.store/products/systainer-t-loc-ii",
+    "source_kind": "retailer",
+    "confidence": "medium",
+    "notes": "Retailer inner H127.5 x B383 x T267; depth differs by ~6 mm from T-Loc I listing, so verify."
+  },
+  {
+    "id": "tanos-systainer-t-loc-iii",
+    "brand": "Tanos / Festool",
+    "model": "systainer T-Loc III",
+    "variant": "",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 382.0,
+      "depth_mm": 266.0,
+      "height_mm": 180.0
+    },
+    "source_url": "https://produktprogramm.tanos.de/index.asp?idart=342",
+    "source_kind": "manufacturer",
+    "confidence": "medium",
+    "notes": "Tanos product programme inner H180 x B382 x T266 (as relayed by search result; page itself not directly re-fetched)."
+  },
+  {
+    "id": "tanos-systainer-t-loc-iv",
+    "brand": "Tanos / Festool",
+    "model": "systainer T-Loc IV",
+    "variant": "",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 382.0,
+      "depth_mm": 266.0,
+      "height_mm": 285.0
+    },
+    "source_url": "https://produktprogramm.tanos.de/index.asp?idart=344",
+    "source_kind": "manufacturer",
+    "confidence": "medium",
+    "notes": "Tanos product programme inner H285 x B382 x T266; Amazon.de listing agrees."
+  },
+  {
+    "id": "tanos-systainer-t-loc-v",
+    "brand": "Tanos / Festool",
+    "model": "systainer T-Loc V",
+    "variant": "",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 381.0,
+      "depth_mm": 265.0,
+      "height_mm": 384.0
+    },
+    "source_url": "https://medprod.de/produkt/systainer-t-loc-v/",
+    "source_kind": "retailer",
+    "confidence": "medium",
+    "notes": "Retailer inner H384 x B381 x T265 (Tanos SKU 80100005)."
+  },
+  {
+    "id": "makita-makpac-type-1",
+    "brand": "Makita",
+    "model": "MAKPAC Type 1",
+    "variant": "821549-5",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 377.0,
+      "depth_mm": 277.0,
+      "height_mm": 72.0
+    },
+    "source_url": "https://www.makita.de/product/821549-5.html",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "Makita.de states Innenmaße LxBxH 377x277x72 mm."
+  },
+  {
+    "id": "makita-makpac-type-2",
+    "brand": "Makita",
+    "model": "MAKPAC Type 2",
+    "variant": "821550-0",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 377.0,
+      "depth_mm": 277.0,
+      "height_mm": 124.0
+    },
+    "source_url": "https://www.makita.de/product/821550-0.html",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "Makita.de states Innenmaße LxBxH 377x277x124 mm."
+  },
+  {
+    "id": "makita-makpac-type-3",
+    "brand": "Makita",
+    "model": "MAKPAC Type 3",
+    "variant": "821551-8",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 377.0,
+      "depth_mm": 277.0,
+      "height_mm": 176.0
+    },
+    "source_url": "https://www.makita.de/product/821551-8.html",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "Makita.de states Innenmaße LxBxH 377x277x176 mm."
+  },
+  {
+    "id": "makita-makpac-type-4",
+    "brand": "Makita",
+    "model": "MAKPAC Type 4",
+    "variant": "821552-6",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 377.0,
+      "depth_mm": 277.0,
+      "height_mm": 281.0
+    },
+    "source_url": "https://www.makita.de/product/821552-6.html",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "Makita.de states Innenmaße LxBxH 377x277x281 mm."
+  },
+  {
+    "id": "dewalt-tstak-dwst17803",
+    "brand": "DeWalt",
+    "model": "TSTAK",
+    "variant": "DWST17803 TSTAK III Deep Drawer Unit",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 345.0,
+      "depth_mm": 254.0,
+      "height_mm": 98.0
+    },
+    "source_url": "https://support.dewalt.com/hc/en-us/articles/360012660578-What-are-the-interior-dimensions-of-DEWALT-Tstak-drawers",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "DeWalt support table, internal L x D x H in mm."
+  },
+  {
+    "id": "dewalt-tstak-dwst17804",
+    "brand": "DeWalt",
+    "model": "TSTAK",
+    "variant": "DWST17804 TSTAK IV Drawer Unit (per drawer)",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 347.0,
+      "depth_mm": 254.0,
+      "height_mm": 45.0
+    },
+    "source_url": "https://support.dewalt.com/hc/en-us/articles/360012660578-What-are-the-interior-dimensions-of-DEWALT-Tstak-drawers",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "DeWalt support table, internal L x D x H in mm."
+  },
+  {
+    "id": "dewalt-tstak-dwst17805",
+    "brand": "DeWalt",
+    "model": "TSTAK",
+    "variant": "DWST17805 TSTAK Organizer Clear Lid",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 335.0,
+      "depth_mm": 245.0,
+      "height_mm": 105.0
+    },
+    "source_url": "https://support.dewalt.com/hc/en-us/articles/360012660578-What-are-the-interior-dimensions-of-DEWALT-Tstak-drawers",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "DeWalt support table, internal L x D x H in mm."
+  },
+  {
+    "id": "dewalt-tstak-dwst17806",
+    "brand": "DeWalt",
+    "model": "TSTAK",
+    "variant": "DWST17806 TSTAK Deep Box Flap Top",
+    "category": "case",
+    "regions": [
+      "global"
+    ],
+    "inner": {
+      "width_mm": 360.0,
+      "depth_mm": 270.0,
+      "height_mm": 240.0
+    },
+    "source_url": "https://support.dewalt.com/hc/en-us/articles/360012660578-What-are-the-interior-dimensions-of-DEWALT-Tstak-drawers",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "DeWalt support table, internal L x D x H in mm."
+  },
+  {
+    "id": "dewalt-tstak-dwst17820",
+    "brand": "DeWalt",
+    "model": "TSTAK",
+    "variant": "DWST17820 Mobile Storage",
+    "category": "case",
+    "regions": [
+      "global",
+      "us"
+    ],
+    "inner": {
+      "width_mm": 439.4,
+      "depth_mm": 309.9,
+      "height_mm": 315.0
+    },
+    "source_url": "https://support.dewalt.com/hc/en-us/articles/360012664358-What-are-the-internal-dimensions-of-the-DEWALT-DWST17820-TSTAK-Mobile-Storage-Box",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "Stated 17.3 x 12.2 x 12.4 in (converted)."
+  },
+  {
+    "id": "dewalt-toughsystem-2-dwst08320",
+    "brand": "DeWalt",
+    "model": "ToughSystem 2.0",
+    "variant": "DWST08320 Two-Drawer Unit (per drawer)",
+    "category": "case",
+    "regions": [
+      "us",
+      "global"
+    ],
+    "inner": {
+      "width_mm": 447.7,
+      "depth_mm": 279.4,
+      "height_mm": 101.6
+    },
+    "source_url": "https://support.dewalt.com/hc/en-us/articles/15840179996045-TOUGHSYSTEM-2-0-boxes-Internal-dimensions",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "DeWalt support article, inside dims in inches (converted x25.4)."
+  },
+  {
+    "id": "dewalt-toughsystem-2-dwst08165",
+    "brand": "DeWalt",
+    "model": "ToughSystem 2.0",
+    "variant": "DWST08165 22in Small Tool Box",
+    "category": "case",
+    "regions": [
+      "us",
+      "global"
+    ],
+    "inner": {
+      "width_mm": 485.1,
+      "depth_mm": 318.8,
+      "height_mm": 115.8
+    },
+    "source_url": "https://support.dewalt.com/hc/en-us/articles/15840179996045-TOUGHSYSTEM-2-0-boxes-Internal-dimensions",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "DeWalt support article, inside dims in inches (converted x25.4)."
+  },
+  {
+    "id": "dewalt-toughsystem-2-dwst08300",
+    "brand": "DeWalt",
+    "model": "ToughSystem 2.0",
+    "variant": "DWST08300 Large Toolbox",
+    "category": "case",
+    "regions": [
+      "us",
+      "global"
+    ],
+    "inner": {
+      "width_mm": 495.3,
+      "depth_mm": 308.4,
+      "height_mm": 247.4
+    },
+    "source_url": "https://support.dewalt.com/hc/en-us/articles/15840179996045-TOUGHSYSTEM-2-0-boxes-Internal-dimensions",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "DeWalt support article, inside dims in inches (converted x25.4)."
+  },
+  {
+    "id": "dewalt-toughsystem-2-dwst08400",
+    "brand": "DeWalt",
+    "model": "ToughSystem 2.0",
+    "variant": "DWST08400 Extra Large Toolbox",
+    "category": "case",
+    "regions": [
+      "us",
+      "global"
+    ],
+    "inner": {
+      "width_mm": 495.3,
+      "depth_mm": 318.8,
+      "height_mm": 346.5
+    },
+    "source_url": "https://support.dewalt.com/hc/en-us/articles/15840179996045-TOUGHSYSTEM-2-0-boxes-Internal-dimensions",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "DeWalt support article, inside dims in inches (converted x25.4)."
+  },
+  {
+    "id": "dewalt-toughsystem-2-dwst08450",
+    "brand": "DeWalt",
+    "model": "ToughSystem 2.0",
+    "variant": "DWST08450 Rolling Toolbox",
+    "category": "case",
+    "regions": [
+      "us",
+      "global"
+    ],
+    "inner": {
+      "width_mm": 480.1,
+      "depth_mm": 318.8,
+      "height_mm": 539.5
+    },
+    "source_url": "https://support.dewalt.com/hc/en-us/articles/15840179996045-TOUGHSYSTEM-2-0-boxes-Internal-dimensions",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "DeWalt support article, inside dims in inches (converted x25.4)."
+  },
+  {
+    "id": "milwaukee-packout-tool-box-48-22-8424",
+    "brand": "Milwaukee",
+    "model": "PACKOUT Tool Box",
+    "variant": "48-22-8424 (22 in)",
+    "category": "case",
+    "regions": [
+      "us",
+      "global"
+    ],
+    "inner": {
+      "width_mm": 500.4,
+      "depth_mm": 335.3,
+      "height_mm": 114.3
+    },
+    "source_url": "https://www.milwaukeetool.com/products/details/packout-tool-box/48-22-8424",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "Manufacturer interior 19.7W x 13.2D x 4.5H in (converted)."
+  },
+  {
+    "id": "milwaukee-packout-compact-organizer-48-22-8435",
+    "brand": "Milwaukee",
+    "model": "PACKOUT Compact Organizer",
+    "variant": "48-22-8435",
+    "category": "case",
+    "regions": [
+      "us",
+      "global"
+    ],
+    "inner": {
+      "width_mm": 304.8,
+      "depth_mm": 203.2,
+      "height_mm": 99.1
+    },
+    "source_url": "https://www.milwaukeetool.com/products/details/packout-compact-organizer/48-22-8435",
+    "source_kind": "manufacturer",
+    "confidence": "medium",
+    "notes": "Manufacturer interior 8.0 x 12.0 x 3.9 in; wall allowance vs exterior (9.8x15.2 in) looks large, so measure before use. Third-party Gridfinity guides report ~390x245 mm only for the 8442/8443 drawer boxes, not this organizer."
+  },
+  {
+    "id": "bisley-multidrawer-a4-83",
+    "brand": "Bisley",
+    "model": "MultiDrawer A4 (12/29/39 series)",
+    "variant": "83 mm drawer: 12-series 3-drawer, 29-series 6-drawer, 39-series 9-drawer",
+    "category": "office",
+    "regions": [
+      "uk",
+      "eu"
+    ],
+    "inner": {
+      "width_mm": 234.0,
+      "depth_mm": 375.0,
+      "height_mm": 83.0
+    },
+    "source_url": "https://www.bisleydirect.co.uk/29-series-multidrawer-6-drawer/",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "Bisley lists 'Drawer Internal Dimensions' 83 x 234 x 375 mm (H x W x D). Verified on 12/29/39 series product pages."
+  },
+  {
+    "id": "bisley-multidrawer-a4-47",
+    "brand": "Bisley",
+    "model": "MultiDrawer A4 (12/29/39 series)",
+    "variant": "47 mm drawer: 12-series 5-drawer, 29-series 10-drawer, 39-series 15-drawer",
+    "category": "office",
+    "regions": [
+      "uk",
+      "eu"
+    ],
+    "inner": {
+      "width_mm": 234.0,
+      "depth_mm": 375.0,
+      "height_mm": 47.0
+    },
+    "source_url": "https://www.bisleydirect.co.uk/29-series-multidrawer-10-drawer/",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "Bisley lists 47 x 234 x 375 mm (H x W x D); 29-series 10-drawer page fetched directly, 12 and 39 series per Bisley product listings."
+  },
+  {
+    "id": "bisley-multidrawer-a3-83",
+    "brand": "Bisley",
+    "model": "MultiDrawer A3 (BA3)",
+    "variant": "83 mm drawer: 6- and 9-drawer",
+    "category": "office",
+    "regions": [
+      "uk",
+      "eu"
+    ],
+    "inner": {
+      "width_mm": 305.0,
+      "depth_mm": 430.0,
+      "height_mm": 83.0
+    },
+    "source_url": "https://www.bisleydirect.co.uk/a3-series-multidrawer-9-drawer/",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "Bisley lists 83 x 305 x 430 mm (H x W x D)."
+  },
+  {
+    "id": "bisley-multidrawer-a3-47",
+    "brand": "Bisley",
+    "model": "MultiDrawer A3 (BA3)",
+    "variant": "47 mm drawer: 15-drawer",
+    "category": "office",
+    "regions": [
+      "uk",
+      "eu"
+    ],
+    "inner": {
+      "width_mm": 305.0,
+      "depth_mm": 430.0,
+      "height_mm": 47.0
+    },
+    "source_url": "https://www.bisleydirect.co.uk/a3-series-multidrawer-15-drawer/",
+    "source_kind": "manufacturer",
+    "confidence": "high",
+    "notes": "Bisley lists 47 x 305 x 430 mm (H x W x D)."
+  },
+  {
+    "id": "raaco-drawer-150-03",
+    "brand": "Raaco",
+    "model": "Drawer 150-03",
+    "variant": "fits 600/900/1200 cabinets",
+    "category": "office",
+    "regions": [
+      "eu"
+    ],
+    "inner": {
+      "width_mm": 279.0,
+      "depth_mm": 155.0,
+      "height_mm": 64.0
+    },
+    "source_url": "https://raaco-direct.eu/detail.asp?Lang=3&Prod=111439",
+    "source_kind": "retailer",
+    "confidence": "medium",
+    "notes": "Retailer lists internal 64 H x 279 W x 155 D mm. Small-parts drawer."
+  },
+  {
+    "id": "ikea-maximera-40x60-bottom",
+    "brand": "IKEA",
+    "model": "MAXIMERA drawer 40x60 cm",
+    "variant": "interior at drawer bottom (sloped sides)",
+    "category": "kitchen",
+    "regions": [
+      "eu",
+      "global"
+    ],
+    "inner": {
+      "width_mm": 280.0,
+      "depth_mm": 504.0,
+      "height_mm": null
+    },
+    "source_url": "https://www.itsdesign.se/en/blog/post/measurement-guide-for-ikea-maximera-drawers",
+    "source_kind": "retailer",
+    "confidence": "medium",
+    "notes": "Third-party accessory maker's measurement of internal bottom width/depth (28.0 x 50.4 cm); sides slope so width is larger higher up. Height not stated. IKEA's own listing gives only outer drawer sizes."
+  },
+  {
+    "id": "ikea-maximera-60x60-bottom",
+    "brand": "IKEA",
+    "model": "MAXIMERA drawer 60x60 cm",
+    "variant": "interior at drawer bottom (sloped sides)",
+    "category": "kitchen",
+    "regions": [
+      "eu",
+      "global"
+    ],
+    "inner": {
+      "width_mm": 480.0,
+      "depth_mm": 504.0,
+      "height_mm": null
+    },
+    "source_url": "https://www.itsdesign.se/en/blog/post/measurement-guide-for-ikea-maximera-drawers",
+    "source_kind": "retailer",
+    "confidence": "medium",
+    "notes": "Third-party accessory maker's measurement of internal bottom width/depth (48.0 x 50.4 cm); sides slope so width is larger higher up. Height not stated. IKEA's own listing gives only outer drawer sizes."
+  },
+  {
+    "id": "ikea-maximera-80x60-bottom",
+    "brand": "IKEA",
+    "model": "MAXIMERA drawer 80x60 cm",
+    "variant": "interior at drawer bottom (sloped sides)",
+    "category": "kitchen",
+    "regions": [
+      "eu",
+      "global"
+    ],
+    "inner": {
+      "width_mm": 680.0,
+      "depth_mm": 504.0,
+      "height_mm": null
+    },
+    "source_url": "https://www.itsdesign.se/en/blog/post/measurement-guide-for-ikea-maximera-drawers",
+    "source_kind": "retailer",
+    "confidence": "medium",
+    "notes": "Third-party accessory maker's measurement of internal bottom width/depth (68.0 x 50.4 cm); sides slope so width is larger higher up. Height not stated. IKEA's own listing gives only outer drawer sizes."
+  }
+]

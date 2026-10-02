@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Inspector } from "../components/Inspector";
-import { Palette } from "../components/Palette";
+import { Dock } from "../components/Dock";
 import { useStore } from "../store";
 import type { Bin } from "../types";
 
@@ -51,11 +51,11 @@ describe("Inspector", () => {
   });
 });
 
-describe("Palette", () => {
+describe("Dock", () => {
   beforeEach(() => useStore.setState({ tool: "select", pendingFootprint: { w: 1, d: 1 } }));
 
   it("selecting a footprint switches to the add tool and sets the size", () => {
-    render(<Palette />);
+    render(<Dock />);
     fireEvent.click(screen.getByTestId("fp-2x1"));
     expect(s().tool).toBe("add");
     expect(s().pendingFootprint).toEqual({ w: 2, d: 1 });

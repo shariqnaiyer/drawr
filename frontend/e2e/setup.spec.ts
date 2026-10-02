@@ -8,10 +8,10 @@ test.describe("Setup", () => {
   });
 
   test("computes a grid from the default drawer dimensions", async ({ page }) => {
-    await expect(page.getByText(/Set up your grid/i)).toBeVisible();
+    await expect(page.getByRole("heading", { name: /What size is your drawer/i })).toBeVisible();
     // default 300 x 220 mm -> 7 x 5 units
     await expect(page.getByText("7 × 5")).toBeVisible();
-    await expect(page.getByText(/294 × 210 mm baseplate/i)).toBeVisible();
+    await expect(page.getByText("294 × 210 mm")).toBeVisible();
   });
 
   test("switching to unit-count mode keeps the result in sync", async ({ page }) => {

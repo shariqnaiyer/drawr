@@ -1,34 +1,72 @@
-import { useRef, useState } from "react";
-import { Plus, AlertTriangle, X, Package, ExternalLink } from "lucide-react";
-import { useStore, canPlace } from "../store";
-import type { Bin } from "../types";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { AlertCircle, Package } from "lucide-react";
+import { useStore, canPlace, inBounds } from "../store";
+import type { Bin, Grid } from "../types";
 import { GRID_UNIT, HEIGHT_UNIT } from "../types";
+import { filament as getFilament, type Filament } from "../lib/filament";
 
-const CELL = 60; // base px per grid unit at 100% zoom
+const CELL = 64; // base px per grid unit at 100% zoom
+// canvas padding that the floating chrome sits in (keep in sync with editor.css)
+const PAD_X = 84 * 2;
+const PAD_Y = 84 + 132;
 
 // A rectangle drawn out by dragging, normalised to top-left + size.
 function rectFrom(ax: number, ay: number, cx: number, cy: number) {
-  return {
-    x: Math.min(ax, cx),
-    y: Math.min(ay, cy),
-    w: Math.abs(cx - ax) + 1,
-    d: Math.abs(cy - ay) + 1,
-  };
+  return { x: Math.min(ax, cx), y: Math.min(ay, cy), w: Math.abs(cx - ax) + 1, d: Math.abs(cy - ay) + 1 };
 }
 
-export function Canvas2D() {
-  const {
-    grid, bins, selectedId, tool, pendingFootprint, zoom,
-    select, addBin, moveBin,
-  } = useStore();
+/** Why a footprint can't go here, in plain words (null when it can). */
+function placementProblem(grid: Grid, bins: Bin[], x: number, y: number, w: number, d: number, ignoreId?: string) {
+  if (!inBounds(grid, x, y, w, d)) return "Doesn't fit inside the grid";
+  if (!canPlace(grid, bins, x, y, w, d, ignoreId)) return "Overlaps another bin";
+  return null;
+}
 
+type Draw = { ax: number; ay: number; cx: number; cy: number; moved: boolean };
+type Drag = { id: string; dx: number; dy: number; x: number; y: number; ox: number; oy: number };
+
+export function Canvas2D() {
+  const { grid, bins, selectedId, tool, pendingFootprint, zoom, filament, select, addBin, moveBin, setZoom } = useStore();
+  const fil = getFilament(filament);
   const cell = CELL * zoom;
+  const scrollRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
 
-  // drawing a brand-new bin (Add tool) — anchor + current cell + whether moved
-  const [draw, setDraw] = useState<{ ax: number; ay: number; cx: number; cy: number; moved: boolean } | null>(null);
-  // moving an existing bin
-  const [drag, setDrag] = useState<{ id: string; dx: number; dy: number; x: number; y: number } | null>(null);
+  const [draw, setDraw] = useState<Draw | null>(null);
+  const [drag, setDrag] = useState<Drag | null>(null);
+  const pan = useRef<{ x: number; y: number; sl: number; st: number } | null>(null);
+
+  // ---- zoom to fit -------------------------------------------------------
+  const fit = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const zx = (el.clientWidth - PAD_X) / (grid.cols * CELL);
+    const zy = (el.clientHeight - PAD_Y) / (grid.rows * CELL);
+    setZoom(Math.min(1.5, Math.max(0.4, Math.floor(Math.min(zx, zy) * 20) / 20)));
+  }, [grid.cols, grid.rows, setZoom]);
+
+  useLayoutEffect(() => {
+    fit();
+  }, [fit]);
+
+  useEffect(() => {
+    window.addEventListener("drawr:fit", fit);
+    return () => window.removeEventListener("drawr:fit", fit);
+  }, [fit]);
+
+  // pinch (trackpad) or ⌘/ctrl + scroll zooms
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      if (!e.ctrlKey && !e.metaKey) return;
+      e.preventDefault();
+      const z = useStore.getState().zoom;
+      setZoom(z * Math.exp(-e.deltaY * 0.01));
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, [setZoom]);
 
   // pointer -> grid cell, clamped to the board so previews never escape it
   const cellAt = (clientX: number, clientY: number) => {
@@ -38,24 +76,43 @@ export function Canvas2D() {
     return { x, y };
   };
 
-  // start drawing a new bin on empty grid (Add tool)
-  const onStageMouseDown = (e: React.MouseEvent) => {
-    if (e.button !== 0 || tool !== "add") return;
-    const { x, y } = cellAt(e.clientX, e.clientY);
-    setDraw({ ax: x, ay: y, cx: x, cy: y, moved: false });
+  // ---- pointer handling (mouse, pen and touch alike) ---------------------
+  const onScrollPointerDown = (e: React.PointerEvent) => {
+    if (tool !== "pan" || e.button !== 0) return;
+    const el = scrollRef.current!;
+    pan.current = { x: e.clientX, y: e.clientY, sl: el.scrollLeft, st: el.scrollTop };
+    el.setPointerCapture(e.pointerId);
   };
 
-  // begin moving an existing bin — works regardless of the active tool, so
-  // placed components are always draggable
-  const startBinDrag = (e: React.MouseEvent, b: Bin) => {
-    if (e.button !== 0) return;
+  const onStagePointerDown = (e: React.PointerEvent) => {
+    if (e.button !== 0 || tool === "pan") return;
+    if (tool === "add") {
+      const { x, y } = cellAt(e.clientX, e.clientY);
+      stageRef.current!.setPointerCapture(e.pointerId);
+      setDraw({ ax: x, ay: y, cx: x, cy: y, moved: false });
+    } else if (e.target === e.currentTarget) {
+      select(null);
+    }
+  };
+
+  // moving an existing bin works with any tool except pan, so placed parts
+  // are always draggable
+  const startBinDrag = (e: React.PointerEvent, b: Bin) => {
+    if (e.button !== 0 || tool === "pan") return;
     e.stopPropagation();
     select(b.id);
     const { x, y } = cellAt(e.clientX, e.clientY);
-    setDrag({ id: b.id, dx: x - b.x, dy: y - b.y, x: b.x, y: b.y });
+    stageRef.current!.setPointerCapture(e.pointerId);
+    setDrag({ id: b.id, dx: x - b.x, dy: y - b.y, x: b.x, y: b.y, ox: b.x, oy: b.y });
   };
 
-  const onMove = (e: React.MouseEvent) => {
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (pan.current) {
+      const el = scrollRef.current!;
+      el.scrollLeft = pan.current.sl - (e.clientX - pan.current.x);
+      el.scrollTop = pan.current.st - (e.clientY - pan.current.y);
+      return;
+    }
     if (drag) {
       const { x, y } = cellAt(e.clientX, e.clientY);
       const nx = x - drag.dx;
@@ -67,14 +124,14 @@ export function Canvas2D() {
     }
   };
 
-  const onUp = () => {
+  const onPointerUp = () => {
+    pan.current = null;
     if (drag) {
-      moveBin(drag.id, drag.x, drag.y);
+      if (drag.x !== drag.ox || drag.y !== drag.oy) moveBin(drag.id, drag.x, drag.y);
       setDrag(null);
     }
     if (draw) {
-      // a plain click (no drag) places the palette footprint; a drag draws a
-      // custom rectangle spanning the cells you swept over
+      // a tap places the preset footprint; a drag draws the cells swept over
       const r = draw.moved
         ? rectFrom(draw.ax, draw.ay, draw.cx, draw.cy)
         : { x: draw.ax, y: draw.ay, w: pendingFootprint.w, d: pendingFootprint.d };
@@ -83,317 +140,214 @@ export function Canvas2D() {
     }
   };
 
-  // background click clears the selection
-  const onStageClick = (e: React.MouseEvent) => {
-    if (tool !== "add" && e.target === e.currentTarget) select(null);
+  const onPointerCancel = () => {
+    pan.current = null;
+    setDrag(null);
+    setDraw(null);
   };
 
-  // --- live previews --------------------------------------------------------
+  // ---- live previews -----------------------------------------------------
   const drawRect = draw
     ? draw.moved
       ? rectFrom(draw.ax, draw.ay, draw.cx, draw.cy)
       : { x: draw.ax, y: draw.ay, w: pendingFootprint.w, d: pendingFootprint.d }
     : null;
-  const drawPreview = drawRect
-    ? { ...drawRect, ok: canPlace(grid, bins, drawRect.x, drawRect.y, drawRect.w, drawRect.d) }
-    : null;
+  const drawProblem = drawRect ? placementProblem(grid, bins, drawRect.x, drawRect.y, drawRect.w, drawRect.d) : null;
 
   const movingBin = drag ? bins.find((b) => b.id === drag.id) : null;
-  const dragPreview =
-    drag && movingBin
-      ? { x: drag.x, y: drag.y, w: movingBin.w, d: movingBin.d,
-          ok: canPlace(grid, bins, drag.x, drag.y, movingBin.w, movingBin.d, drag.id) }
-      : null;
+  const dragRect = drag && movingBin ? { x: drag.x, y: drag.y, w: movingBin.w, d: movingBin.d } : null;
+  const dragProblem = dragRect && drag ? placementProblem(grid, bins, dragRect.x, dragRect.y, dragRect.w, dragRect.d, drag.id) : null;
 
-  const invalid =
-    (drawPreview && !drawPreview.ok) || (dragPreview && !dragPreview.ok);
+  const problem = drawProblem ?? dragProblem;
 
   return (
     <div
-      style={{
-        flex: 1,
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        overflow: "auto",
-        background: "radial-gradient(130% 120% at 50% 28%, #1d232c 0%, #15181d 62%, #111418 100%)",
-        userSelect: "none",
-      }}
-      onMouseMove={onMove}
-      onMouseUp={onUp}
-      onMouseLeave={() => { setDrag(null); setDraw(null); }}
+      ref={scrollRef}
+      className={`canvas-scroll${tool === "pan" ? " panning" : ""}`}
+      onPointerDown={onScrollPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerCancel}
     >
-      {/* subtle backdrop grid */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px)",
-          backgroundSize: "32px 32px",
-          pointerEvents: "none",
-        }}
-      />
+      <div className="canvas-inner">
+        <div className="plate-wrap">
+          <div className="plate" aria-hidden />
 
-      {/* scale chip */}
-      <Chip style={{ top: 14, left: 14 }}>1 U = {GRID_UNIT} mm</Chip>
-
-      {/* stage */}
-      <div style={{ position: "relative", margin: 80 }}>
-        <div
-          style={{
-            position: "absolute",
-            inset: -14,
-            borderRadius: 14,
-            background: "var(--plate)",
-            border: "1px solid #262b33",
-            boxShadow: "0 30px 70px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.03)",
-          }}
-        />
-
-        {/* rulers */}
-        {Array.from({ length: grid.cols }).map((_, i) => (
-          <div key={`c${i}`} className="mono"
-            style={{ position: "absolute", top: -22, left: i * cell + cell / 2, transform: "translateX(-50%)", fontSize: 9, color: "#6b7480" }}>
-            {i}
-          </div>
-        ))}
-        {Array.from({ length: grid.rows }).map((_, j) => (
-          <div key={`r${j}`} className="mono"
-            style={{ position: "absolute", left: -22, top: j * cell + cell / 2, transform: "translateY(-50%)", fontSize: 9, color: "#6b7480" }}>
-            {j}
-          </div>
-        ))}
-
-        <div
-          ref={stageRef}
-          data-testid="canvas-stage"
-          onMouseDown={onStageMouseDown}
-          onClick={onStageClick}
-          style={{
-            position: "relative",
-            width: grid.cols * cell,
-            height: grid.rows * cell,
-            cursor: tool === "add" ? "crosshair" : "default",
-          }}
-        >
-          {/* baseplate cells */}
-          {Array.from({ length: grid.cols * grid.rows }).map((_, idx) => {
-            const i = idx % grid.cols;
-            const j = Math.floor(idx / grid.cols);
-            return (
-              <div key={idx} style={{ position: "absolute", left: i * cell, top: j * cell, width: cell, height: cell, padding: 4, pointerEvents: "none" }}>
-                <div style={{ width: "100%", height: "100%", border: "1px solid var(--gridline)", borderRadius: 7, background: "rgba(255,255,255,.014)", boxShadow: "inset 0 0 0 1px rgba(0,0,0,.18)" }} />
-              </div>
-            );
-          })}
-
-          {/* bins */}
-          {bins.map((b) => {
-            const isDragging = drag?.id === b.id;
-            const bx = isDragging ? drag!.x : b.x;
-            const by = isDragging ? drag!.y : b.y;
-            return (
-              <BinView
-                key={b.id}
-                bin={b}
-                cell={cell}
-                x={bx}
-                y={by}
-                selected={selectedId === b.id}
-                ghost={isDragging}
-                onMouseDown={(e) => startBinDrag(e, b)}
-                onClick={(e) => { e.stopPropagation(); select(b.id); }}
-              />
-            );
-          })}
-
-          {/* new-bin draw preview */}
-          {drawPreview && <PreviewBox cell={cell} {...drawPreview} mode="draw" />}
-
-          {/* moving-bin preview (only when it would be invalid; valid moves show
-              the ghost bin itself) */}
-          {dragPreview && !dragPreview.ok && (
-            <PreviewBox cell={cell} {...dragPreview} mode="move" />
+          {bins.length === 0 && !draw && (
+            <p className="canvas-hint">
+              {tool === "add" ? (
+                <>Click a cell to place a <b className="num">{pendingFootprint.w}×{pendingFootprint.d}</b> bin, or drag across cells to draw any size.</>
+              ) : (
+                <>Choose a size in the dock below, then click the grid.</>
+              )}
+            </p>
           )}
+
+          <Dimension axis="h" mm={grid.cols * GRID_UNIT} />
+          <Dimension axis="v" mm={grid.rows * GRID_UNIT} />
+
+          <div
+            ref={stageRef}
+            className="stage"
+            data-testid="canvas-stage"
+            onPointerDown={onStagePointerDown}
+            style={{
+              width: grid.cols * cell,
+              height: grid.rows * cell,
+              cursor: tool === "add" ? "crosshair" : tool === "pan" ? "inherit" : "default",
+            }}
+          >
+            {Array.from({ length: grid.cols * grid.rows }).map((_, idx) => {
+              const i = idx % grid.cols;
+              const j = Math.floor(idx / grid.cols);
+              return (
+                <div key={idx} className="socket" style={{ left: i * cell, top: j * cell, width: cell, height: cell }}>
+                  <div />
+                </div>
+              );
+            })}
+
+            {bins.map((b) => {
+              const isDragging = drag?.id === b.id;
+              return (
+                <BinView
+                  key={b.id}
+                  bin={b}
+                  fil={fil}
+                  cell={cell}
+                  x={isDragging ? drag!.x : b.x}
+                  y={isDragging ? drag!.y : b.y}
+                  selected={selectedId === b.id && !isDragging}
+                  dragging={isDragging}
+                  onPointerDown={(e) => startBinDrag(e, b)}
+                />
+              );
+            })}
+
+            {drawRect && <Ghost cell={cell} {...drawRect} bad={!!drawProblem} />}
+            {dragRect && dragProblem && <Ghost cell={cell} {...dragRect} bad />}
+          </div>
         </div>
       </div>
 
-      {/* invalid placement badge */}
-      {invalid && (
-        <div style={{ position: "absolute", top: 14, right: 14, display: "flex", alignItems: "center", gap: 5, height: 24, padding: "0 9px", background: "var(--invalid)", color: "#fff", borderRadius: 6, fontSize: 11, fontWeight: 600 }}>
-          <AlertTriangle size={12} /> Invalid placement
+      {problem && (
+        <div className="canvas-toast" role="status">
+          <AlertCircle size={15} /> {problem}
         </div>
       )}
     </div>
   );
 }
 
-function PreviewBox({
-  cell, x, y, w, d, ok, mode,
-}: { cell: number; x: number; y: number; w: number; d: number; ok: boolean; mode: "draw" | "move" }) {
+function Dimension({ axis, mm }: { axis: "h" | "v"; mm: number }) {
+  const cap: React.CSSProperties =
+    axis === "h" ? { top: 0, width: 1, height: 12 } : { left: 0, height: 1, width: 12 };
   return (
-    <div style={{ position: "absolute", left: x * cell, top: y * cell, width: w * cell, height: d * cell, padding: 3, pointerEvents: "none", zIndex: 8 }}>
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "100%",
-          borderRadius: 8,
-          background: ok ? "var(--accent-glow)" : "rgba(229,72,77,.24)",
-          border: `1.5px dashed ${ok ? "var(--accent)" : "var(--invalid)"}`,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {mode === "move" ? (
-          <X size={18} color="var(--invalid)" />
-        ) : (
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 26, height: 26, borderRadius: "50%", background: ok ? "var(--accent)" : "var(--invalid)", color: "#fff" }}>
-            {ok ? <Plus size={16} /> : <X size={16} />}
-          </div>
-        )}
-        {/* size readout while drawing */}
-        <div className="mono" style={{ position: "absolute", top: -22, left: "50%", transform: "translateX(-50%)", background: ok ? "var(--accent)" : "var(--invalid)", color: "#fff", fontSize: 10, fontWeight: 600, padding: "2px 7px", borderRadius: 5, whiteSpace: "nowrap" }}>
-          {w}×{d}
-        </div>
+    <div className={`dim ${axis}`} aria-hidden>
+      <i className="dim-cap" style={{ ...cap, ...(axis === "h" ? { left: 0 } : { top: 0 }) }} />
+      <span className="dim-label num">{mm} mm</span>
+      <i className="dim-cap" style={{ ...cap, ...(axis === "h" ? { right: 0 } : { bottom: 0 }) }} />
+    </div>
+  );
+}
+
+function Ghost({ cell, x, y, w, d, bad }: { cell: number; x: number; y: number; w: number; d: number; bad: boolean }) {
+  return (
+    <div className={`ghost${bad ? " bad" : ""}`} style={{ left: x * cell, top: y * cell, width: w * cell, height: d * cell }}>
+      <div>
+        <span className="ghost-size num">{w}×{d}</span>
       </div>
     </div>
   );
 }
 
 function BinView({
-  bin, cell, x, y, selected, ghost, onMouseDown, onClick,
+  bin, fil, cell, x, y, selected, dragging, onPointerDown,
 }: {
-  bin: Bin; cell: number; x: number; y: number; selected: boolean; ghost: boolean;
-  onMouseDown: (e: React.MouseEvent) => void; onClick: (e: React.MouseEvent) => void;
+  bin: Bin; fil: Filament; cell: number; x: number; y: number; selected: boolean; dragging: boolean;
+  onPointerDown: (e: React.PointerEvent) => void;
 }) {
-  const w = bin.w * cell;
-  const h = bin.d * cell;
-  const lines = bin.comp.cols - 1;
   const isModel = bin.kind === "model";
-  return (
-    <div
-      data-testid="bin"
-      data-bin-id={bin.id}
-      onMouseDown={onMouseDown}
-      onClick={onClick}
-      style={{
-        position: "absolute",
-        left: x * cell,
-        top: y * cell,
-        width: w,
-        height: h,
-        padding: 3,
-        cursor: ghost ? "grabbing" : "grab",
-        opacity: ghost ? 0.5 : 1,
-        zIndex: selected ? 6 : 2,
-      }}
-    >
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "100%",
-          borderRadius: 8,
-          background: isModel
-            ? "linear-gradient(157deg,#324063 0%,#28324d 100%)"
-            : "linear-gradient(157deg,var(--bin-face-a) 0%,var(--bin-face-b) 100%)",
-          border: `1px solid ${isModel ? "#4a5f8c" : "var(--bin-edge)"}`,
-          boxShadow: selected ? "0 12px 26px rgba(0,0,0,.45)" : "0 6px 16px rgba(0,0,0,.34)",
-        }}
-      >
-        {/* top sheen */}
-        <div style={{ position: "absolute", inset: "1px 1px auto 1px", height: 9, borderRadius: "7px 7px 0 0", background: "linear-gradient(rgba(255,255,255,.11),rgba(255,255,255,0))", pointerEvents: "none" }} />
+  const tiny = Math.min(bin.w, bin.d) * cell < 56;
+  const pos: React.CSSProperties = { left: x * cell, top: y * cell, width: bin.w * cell, height: bin.d * cell, zIndex: selected ? 6 : 2 };
+  const cls = `bin${selected ? " selected" : ""}${dragging ? " dragging" : ""}`;
 
-        {/* ---- bin (generated) visuals ---- */}
-        {!isModel && (
-          <>
-            {bin.label && !bin.solid && (
-              <div style={{ position: "absolute", top: -1, left: 9, width: 30, height: 11, background: "#3d4651", border: "1px solid #4b5662", borderBottom: "none", borderRadius: "4px 4px 0 0", clipPath: "polygon(0 0,100% 0,86% 100%,14% 100%)", pointerEvents: "none" }} />
-            )}
-            {bin.scoop && !bin.solid && (
-              <div style={{ position: "absolute", left: 3, right: 3, bottom: 3, height: "42%", borderRadius: "0 0 6px 6px", background: "linear-gradient(to top,rgba(255,255,255,.085),rgba(255,255,255,0))", pointerEvents: "none" }} />
-            )}
-            {!bin.solid && Array.from({ length: lines }).map((_, i) => (
-              <div key={i} style={{ position: "absolute", top: 6, bottom: 6, left: `${((i + 1) / bin.comp.cols) * 100}%`, width: 1, background: "rgba(255,255,255,.13)", pointerEvents: "none" }} />
-            ))}
-            {!bin.solid && Array.from({ length: bin.comp.rows - 1 }).map((_, i) => (
-              <div key={`h${i}`} style={{ position: "absolute", left: 6, right: 6, top: `${((i + 1) / bin.comp.rows) * 100}%`, height: 1, background: "rgba(255,255,255,.13)", pointerEvents: "none" }} />
-            ))}
-            {/* solid lids read as a filled block */}
-            {bin.solid && (
-              <div style={{ position: "absolute", inset: 2, borderRadius: 6, background: "repeating-linear-gradient(45deg,rgba(255,255,255,.05),rgba(255,255,255,.05) 4px,transparent 4px,transparent 8px)", pointerEvents: "none" }} />
-            )}
-            <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 500, color: "rgba(214,220,226,.5)", letterSpacing: ".04em", pointerEvents: "none" }}>
-              {bin.w}×{bin.d}{bin.solid ? " ·lid" : ""}
-            </div>
-          </>
-        )}
-
-        {/* ---- imported community model ---- */}
-        {isModel && bin.model && (
-          <div style={{ position: "absolute", inset: 0, padding: "7px 8px", display: "flex", flexDirection: "column", gap: 4, pointerEvents: "none", overflow: "hidden" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-              <Package size={13} style={{ color: "#8fa6d6" }} />
-              <ExternalLink size={11} style={{ color: "#7f93bd" }} />
-            </div>
-            <div style={{ fontSize: 11, fontWeight: 600, color: "#dfe6f1", lineHeight: 1.2, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
-              {bin.model.title}
-            </div>
-            <div style={{ marginTop: "auto", fontSize: 9, color: "#9fb0cf", fontFamily: "'IBM Plex Mono',monospace" }}>
-              {bin.model.license}
-            </div>
-          </div>
-        )}
-
-        {/* height badge */}
-        <div className="mono" style={{ position: "absolute", left: 5, bottom: 4, fontSize: 10, fontWeight: 500, color: "#aeb6bf", background: "rgba(0,0,0,.32)", padding: "1px 5px", borderRadius: 4, pointerEvents: "none" }}>
-          {bin.heightU}U
-        </div>
-
-        {/* selection chrome */}
-        {selected && (
-          <>
-            <div style={{ position: "absolute", inset: -3, border: "2px solid var(--accent)", borderRadius: 10, boxShadow: "0 0 0 4px var(--accent-glow)", pointerEvents: "none" }} />
-            {[["l", "t"], ["r", "t"], ["l", "b"], ["r", "b"]].map(([hx, hy], i) => (
-              <div key={i} style={{ position: "absolute", [hx === "l" ? "left" : "right"]: -5, [hy === "t" ? "top" : "bottom"]: -5, width: 9, height: 9, background: "#fff", border: "2px solid var(--accent)", borderRadius: 2, pointerEvents: "none" } as React.CSSProperties} />
-            ))}
-            <div className="mono" style={{ position: "absolute", left: "50%", top: -34, transform: "translateX(-50%)", display: "flex", alignItems: "center", gap: 5, background: "var(--accent)", color: "#fff", fontSize: 11, fontWeight: 600, padding: "3px 9px", borderRadius: 6, whiteSpace: "nowrap", boxShadow: "0 4px 12px rgba(0,0,0,.3)", pointerEvents: "none" }}>
-              {bin.w}×{bin.d} U <span style={{ opacity: 0.6 }}>·</span> {bin.heightU * HEIGHT_UNIT} mm
-            </div>
-          </>
-        )}
-      </div>
+  const tip = selected && (
+    <div className="bin-tip num">
+      {bin.w} × {bin.d}
+      <span className="dot">·</span>
+      {bin.heightU * HEIGHT_UNIT} mm tall
     </div>
   );
-}
 
-function Chip({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
+  if (isModel && bin.model) {
+    const m = bin.model;
+    return (
+      <div className={cls} data-testid="bin" data-bin-id={bin.id} style={pos} onPointerDown={onPointerDown}
+        aria-label={`${m.title}, ${bin.w} by ${bin.d}`}>
+        <div className="bin-body model-body" style={{ boxShadow: undefined }}>
+          {m.thumbnail ? (
+            <img src={m.thumbnail} alt="" draggable={false} referrerPolicy="no-referrer" />
+          ) : (
+            <div className="model-hatch" />
+          )}
+          <div className={`model-meta${m.thumbnail ? "" : " plain"}`} style={{ padding: tiny ? "4px 5px" : undefined }}>
+            {!m.thumbnail && <Package size={14} style={{ color: "var(--ink-3)", marginBottom: "auto" }} />}
+            <div className="model-title">{m.title}</div>
+            {!tiny && <div className="model-lic num">{m.license}</div>}
+          </div>
+          {tip}
+        </div>
+      </div>
+    );
+  }
+
+  const shadow = `0 1px 1px rgba(0,0,0,.14), 0 6px 14px -4px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.18)`;
   return (
-    <div
-      className="mono"
-      style={{
-        position: "absolute",
-        display: "flex",
-        alignItems: "center",
-        gap: 6,
-        height: 26,
-        padding: "0 10px",
-        background: "rgba(30,35,43,.7)",
-        border: "1px solid rgba(255,255,255,.07)",
-        borderRadius: 7,
-        fontSize: 10,
-        fontWeight: 500,
-        color: "#9aa3ad",
-        backdropFilter: "blur(4px)",
-        zIndex: 9,
-        ...style,
-      }}
-    >
-      {children}
+    <div className={cls} data-testid="bin" data-bin-id={bin.id} style={pos} onPointerDown={onPointerDown}
+      aria-label={`Bin ${bin.w} by ${bin.d}, ${bin.heightU} U`}>
+      <div
+        className="bin-body"
+        style={{
+          background: `linear-gradient(170deg, ${fil.face}, ${fil.face} 55%, ${fil.side})`,
+          boxShadow: shadow,
+        }}
+      >
+        {!bin.solid && (
+          <div
+            className="bin-cavity"
+            style={{
+              background: `linear-gradient(180deg, ${fil.deep}, ${fil.side})`,
+              boxShadow: `inset 0 2px 5px rgba(0,0,0,.28)`,
+            }}
+          >
+            {/* label tab along the back (top) wall */}
+            {bin.label && (
+              <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: Math.max(5, cell * 0.14), background: fil.face, borderBottom: `1px solid ${fil.side}` }} />
+            )}
+            {/* scoop: a lit ramp along the front (bottom) wall */}
+            {bin.scoop && (
+              <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: "34%", background: `linear-gradient(to top, ${fil.face}, transparent)`, opacity: 0.55 }} />
+            )}
+            {Array.from({ length: bin.comp.cols - 1 }).map((_, i) => (
+              <div key={`c${i}`} style={{ position: "absolute", top: 0, bottom: 0, left: `${((i + 1) / bin.comp.cols) * 100}%`, width: 2, marginLeft: -1, background: fil.face }} />
+            ))}
+            {Array.from({ length: bin.comp.rows - 1 }).map((_, i) => (
+              <div key={`r${i}`} style={{ position: "absolute", left: 0, right: 0, top: `${((i + 1) / bin.comp.rows) * 100}%`, height: 2, marginTop: -1, background: fil.face }} />
+            ))}
+          </div>
+        )}
+        {bin.solid && (
+          <div style={{ position: "absolute", inset: 5, borderRadius: 6, background: `repeating-linear-gradient(-45deg, rgba(255,255,255,.07) 0 5px, transparent 5px 10px)` }} />
+        )}
+        <div className="bin-label num" style={{ color: fil.ink }}>
+          <span className="bin-size" style={{ textShadow: bin.solid ? undefined : "0 1px 2px rgba(0,0,0,.25)" }}>
+            {bin.w}×{bin.d}
+          </span>
+          {!tiny && <span className="bin-h">{bin.solid ? `lid · ${bin.heightU}U` : `${bin.heightU}U`}</span>}
+        </div>
+        {tip}
+      </div>
     </div>
   );
 }

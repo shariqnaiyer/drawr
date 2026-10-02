@@ -1,9 +1,9 @@
-# Render Blueprint for the Gridfinity Studio backend (Docker).
+# Render Blueprint for the drawr backend (Docker).
 # Connect this repo at https://dashboard.render.com → New → Blueprint.
 # Then set ALLOWED_ORIGINS to your Vercel URL(s) and (optionally) SENTRY_DSN.
 services:
   - type: web
-    name: gridfinity-studio-api
+    name: drawr-api
     runtime: docker
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
@@ -12,7 +12,7 @@ services:
     autoDeploy: true
     envVars:
       - key: ALLOWED_ORIGINS
-        sync: false # e.g. https://gridfinity-studio.vercel.app
+        sync: false # e.g. https://drawr.vercel.app
       - key: SENTRY_DSN
         sync: false # optional
       - key: ENVIRONMENT

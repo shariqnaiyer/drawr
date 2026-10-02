@@ -1,5 +1,7 @@
 import { create } from "zustand";
-import type { Bin, Grid, ModelRef, Step, Tool, ViewMode } from "./types";
+import type { Bin, DrawerSpec, Grid, ModelRef, Step, Tool, ViewMode } from "./types";
+import type { FilamentId } from "./lib/filament";
+import { maxBinU, MIN_BIN_U } from "./lib/fit";
 
 let _id = 0;
 const newId = () => `bin_${Date.now().toString(36)}_${_id++}`;
@@ -39,11 +41,15 @@ export function canPlace(
   return inBounds(grid, x, y, w, d) && !overlaps(bins, x, y, w, d, ignoreId);
 }
 
-function makeBin(x: number, y: number, w: number, d: number): Bin {
+const DEFAULT_HEIGHT_U = 6;
+
+function makeBin(x: number, y: number, w: number, d: number, maxU: number | null = null): Bin {
+  // default to 6 U, or the tallest bin the drawer allows if that's lower
+  const heightU = maxU === null ? DEFAULT_HEIGHT_U : Math.max(MIN_BIN_U, Math.min(DEFAULT_HEIGHT_U, maxU));
   return {
     id: newId(),
     x, y, w, d,
-    heightU: 6,
+    heightU,
     comp: { cols: 1, rows: 1 },
     label: true,
     scoop: true,
@@ -55,6 +61,7 @@ function makeBin(x: number, y: number, w: number, d: number): Bin {
 interface State {
   // grid setup
   grid: Grid;
+  drawer: DrawerSpec | null; // null when the grid was sized by unit count
   // layout
   bins: Bin[];
   selectedId: string | null;
@@ -64,17 +71,20 @@ interface State {
   tool: Tool;
   pendingFootprint: { w: number; d: number };
   zoom: number;
+  filament: FilamentId; // preview color only — never exported
   // history
   past: Bin[][];
   future: Bin[][];
 
   // actions
   setGrid: (g: Grid) => void;
+  setDrawer: (d: DrawerSpec | null) => void;
   setStep: (s: Step) => void;
   setView: (v: ViewMode) => void;
   setTool: (t: Tool) => void;
   setPendingFootprint: (w: number, d: number) => void;
   setZoom: (z: number) => void;
+  setFilament: (f: FilamentId) => void;
   select: (id: string | null) => void;
   addBin: (x: number, y: number, w: number, d: number) => void;
   addModel: (x: number, y: number, w: number, d: number, model: ModelRef, heightU: number) => void;
@@ -97,6 +107,7 @@ export const useStore = create<State>((set, get) => {
 
   return {
     grid: { cols: 7, rows: 5 },
+    drawer: null,
     bins: [],
     selectedId: null,
     step: "setup",
@@ -104,22 +115,25 @@ export const useStore = create<State>((set, get) => {
     tool: "select",
     pendingFootprint: { w: 1, d: 1 },
     zoom: 1,
+    filament: "graphite",
     past: [],
     future: [],
 
     setGrid: (g) => set({ grid: g }),
+    setDrawer: (drawer) => set({ drawer }),
     setStep: (step) => set({ step }),
     setView: (view) => set({ view }),
     setTool: (tool) => set({ tool }),
     setPendingFootprint: (w, d) => set({ pendingFootprint: { w, d }, tool: "add" }),
     setZoom: (zoom) => set({ zoom: Math.max(0.4, Math.min(2.5, zoom)) }),
+    setFilament: (filament) => set({ filament }),
     select: (selectedId) => set({ selectedId }),
 
     addBin: (x, y, w, d) => {
       const { grid, bins } = get();
       if (!canPlace(grid, bins, x, y, w, d)) return;
       snapshot();
-      const b = makeBin(x, y, w, d);
+      const b = makeBin(x, y, w, d, maxBinU(get().drawer?.heightMm));
       set((s) => ({ bins: [...s.bins, b], selectedId: b.id }));
     },
 
@@ -136,7 +150,7 @@ export const useStore = create<State>((set, get) => {
       const { grid, bins } = get();
       if (!canPlace(grid, bins, x, y, w, d)) return;
       snapshot();
-      const b: Bin = { ...makeBin(x, y, w, d), source };
+      const b: Bin = { ...makeBin(x, y, w, d, maxBinU(get().drawer?.heightMm)), source };
       set((s) => ({ bins: [...s.bins, b], selectedId: b.id }));
     },
 

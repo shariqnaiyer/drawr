@@ -1,4 +1,4 @@
-# Gridfinity Studio backend — FastAPI + build123d (OpenCascade).
+# drawr backend — FastAPI + build123d (OpenCascade).
 # OCP is a large native library, so this image is necessarily ~1GB; it runs on a
 # container host (Render/Fly/Cloud Run), not on serverless functions.
 FROM python:3.12-slim
